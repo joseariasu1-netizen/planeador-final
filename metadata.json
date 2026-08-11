@@ -1,0 +1,6 @@
+{
+  "name": "Planeador y Evaluador Malla Curricular - IE Rafael Uribe Uribe",
+  "description": "Sistema de planeación de clases DUA, malla curricular y evaluación ICFES Saber para Matemáticas y Estadística en la IE Rafael Uribe Uribe (Medellín).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
