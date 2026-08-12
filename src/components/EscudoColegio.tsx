@@ -158,14 +158,6 @@ export const EscudoColegio: React.FC<EscudoColegioProps> = ({
             </button>
           )}
         </div>
-      ) : !imgError ? (
-        <img
-          src="/escudo.svg"
-          alt="Escudo Institución Educativa Rafael Uribe Uribe"
-          referrerPolicy="no-referrer"
-          className="w-full h-full object-contain drop-shadow-md"
-          onError={() => setImgError(true)}
-        />
       ) : (
         SvgShield
       )}

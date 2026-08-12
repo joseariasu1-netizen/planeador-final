@@ -228,19 +228,19 @@ Escribe la respuesta directamente en HTML limpio listo para renderizar usando cl
           <button
             onClick={() => onOpenModal('taller', semana, true)}
             className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-3.5 py-2.5 bg-indigo-900 hover:bg-indigo-800 text-indigo-100 font-bold text-xs rounded-xl border border-indigo-700 shadow-lg transition"
-            title="Generar e imprimir un taller práctico inédito con IA Gemini"
+            title="Generar e imprimir un taller práctico inédito con IA Gemini en tamaño Oficio exportable a Word"
           >
             <Sparkles className="w-4 h-4 text-amber-400" />
-            <span>✨ IA Gemini: Taller Práctico (A4)</span>
+            <span>✨ Taller Práctico IA (Oficio/Word)</span>
           </button>
 
           <button
             onClick={() => onOpenModal('taller', semana, false)}
             className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-3.5 py-2.5 bg-red-900 hover:bg-red-800 text-white font-bold text-xs rounded-xl border border-red-700 shadow-lg transition"
-            title="Ver taller estándar en formato imprimible A4"
+            title="Ver taller estándar en formato imprimible Tamaño Oficio"
           >
             <FileText className="w-4 h-4 text-amber-400" />
-            <span>Taller Estándar (A4)</span>
+            <span>Taller Estándar (Oficio)</span>
           </button>
         </div>
       </div>

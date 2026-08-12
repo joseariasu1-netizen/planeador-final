@@ -41,8 +41,8 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
         </div>
 
         <div className="bg-amber-950/60 border border-amber-800/60 px-4 py-2.5 rounded-xl shrink-0 text-center sm:text-right">
-          <div className="text-xs font-bold text-amber-300">Formato Estándar A4</div>
-          <div className="text-[11px] text-amber-200/80">Impresión Nativa Limpia</div>
+          <div className="text-xs font-bold text-amber-300">Formato Oficial Oficio</div>
+          <div className="text-[11px] text-amber-200/80">Exportable a Word (.doc)</div>
         </div>
       </div>
 
@@ -87,13 +87,13 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
               className="w-full py-2.5 bg-purple-900 hover:bg-purple-800 text-purple-100 font-bold text-xs rounded-xl border border-purple-700 shadow-lg flex items-center justify-center gap-2 transition"
             >
               <Sparkles className="w-4 h-4 text-amber-400" />
-              <span>✨ Generar con IA Gemini (A4)</span>
+              <span>✨ Generar con IA (Oficio/Word)</span>
             </button>
             <button
               onClick={() => onOpenModal('evaluacion_seg1', 4, false)}
               className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-2 transition"
             >
-              <span>Ver Formato Estándar</span>
+              <span>Ver Formato Oficio</span>
               <ChevronRight className="w-4 h-4 text-slate-400" />
             </button>
           </div>
@@ -138,13 +138,13 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
               className="w-full py-2.5 bg-purple-900 hover:bg-purple-800 text-purple-100 font-bold text-xs rounded-xl border border-purple-700 shadow-lg flex items-center justify-center gap-2 transition"
             >
               <Sparkles className="w-4 h-4 text-amber-400" />
-              <span>✨ Generar con IA Gemini (A4)</span>
+              <span>✨ Generar con IA (Oficio/Word)</span>
             </button>
             <button
               onClick={() => onOpenModal('evaluacion_seg2', 8, false)}
               className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-2 transition"
             >
-              <span>Ver Formato Estándar</span>
+              <span>Ver Formato Oficio</span>
               <ChevronRight className="w-4 h-4 text-slate-400" />
             </button>
           </div>
@@ -168,7 +168,7 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
               Prueba Final Tipo ICFES Saber
             </h3>
             <p className="text-xs text-slate-200 leading-relaxed mb-4">
-              Examen acumulativo integral del Periodo {periodo} diseñado estrictamente según los lineamientos de evaluación del ICFES Saber 11.
+              Examen acumulativo integral del Periodo {periodo} diseñado strictly según los lineamientos de evaluación del ICFES Saber 11.
             </p>
 
             <ul className="text-xs text-slate-300 space-y-2 mb-6">
@@ -193,13 +193,13 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
               className="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs rounded-xl border border-amber-300 shadow-xl flex items-center justify-center gap-2 transition"
             >
               <Sparkles className="w-4 h-4 text-slate-950" />
-              <span>✨ Generar Prueba Final con IA (A4)</span>
+              <span>✨ Generar Prueba Final con IA (Oficio/Word)</span>
             </button>
             <button
               onClick={() => onOpenModal('evaluacion_final', 13, false)}
               className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-2 transition"
             >
-              <span>Ver Formato Estándar</span>
+              <span>Ver Formato Oficio</span>
               <ChevronRight className="w-4 h-4 text-slate-400" />
             </button>
           </div>

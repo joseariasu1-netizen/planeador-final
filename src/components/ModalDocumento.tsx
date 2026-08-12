@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { DocumentoEscolar } from '../types';
 import { 
-  Printer, Eye, EyeOff, Sparkles, X, School, Calendar, CheckCircle, RefreshCw, AlertCircle 
+  Printer, Eye, EyeOff, Sparkles, X, School, Calendar, CheckCircle, RefreshCw, AlertCircle, FileText, Download 
 } from 'lucide-react';
+import { saveAs } from 'file-saver';
 import { EscudoColegio } from './EscudoColegio';
 import { callGemini } from '../lib/gemini';
 
@@ -169,10 +170,179 @@ Responde ÚNICAMENTE en JSON válido con el siguiente esquema:
     }
   };
 
+  const handleDownloadWord = () => {
+    const isTaller = docActual.tipo === 'taller';
+    
+    const preguntasHtml = docActual.preguntas.map((preg, idx) => {
+      let opcionesHtml = '';
+      if (preg.tipo === 'seleccion_multiple' && preg.opciones) {
+        opcionesHtml = `
+          <table style="width:100%; border:none; margin-top:4pt;">
+            ${preg.opciones.map(opc => {
+              const esCorrecta = esModoDocente && preg.respuestaCorrecta === opc.key;
+              return `
+                <tr>
+                  <td style="border:none; padding:3pt 6pt; width:50%; font-size:10.5pt; ${esCorrecta ? 'background-color:#d1fae5; font-weight:bold; color:#065f46;' : ''}">
+                    <b>${opc.key})</b> ${opc.texto} ${esCorrecta ? ' <i>(Correcta)</i>' : ''}
+                  </td>
+                </tr>
+              `;
+            }).join('')}
+          </table>
+        `;
+      } else if (preg.tipo === 'desarrollo') {
+        opcionesHtml = `
+          <div style="border:1px dashed #94a3b8; background-color:#f8fafc; padding:20pt; margin-top:6pt; text-align:center; color:#64748b; font-size:9pt;">
+            [ Espacio para la resolución escrita y procedimiento del estudiante ]
+          </div>
+        `;
+      }
+
+      let docenteHtml = '';
+      if (esModoDocente && preg.justificacionPedagogica) {
+        docenteHtml = `
+          <div style="background-color:#f1f5f9; border-left:4px solid #4f46e5; padding:6pt 8pt; margin-top:6pt; font-size:9.5pt;">
+            <b style="color:#3730a3;">Justificación Pedagógica:</b> ${preg.justificacionPedagogica}<br/>
+            <small style="color:#475569;">Competencia: ${preg.competenciaICFES || 'N/A'} | Proceso: ${preg.procesoMatematico || 'N/A'} | Bloom: ${preg.nivelBloom || 'N/A'}</small>
+          </div>
+        `;
+      }
+
+      return `
+        <div style="margin-bottom:14pt; page-break-inside:avoid;">
+          <p style="font-size:11pt; margin-bottom:4pt;">
+            <b>${idx + 1}.</b> <span style="background-color:#f1f5f9; padding:2pt 4pt; font-style:italic; font-size:9.5pt;">[${preg.contexto}]</span> <b>${preg.enunciado}</b>
+          </p>
+          ${opcionesHtml}
+          ${docenteHtml}
+        </div>
+      `;
+    }).join('');
+
+    let tablaEspecHtml = '';
+    if (esModoDocente && docActual.tablaEspecificaciones) {
+      tablaEspecHtml = `
+        <div style="margin-top:20pt; page-break-before:always;">
+          <h3 style="font-size:11pt; text-transform:uppercase; border-bottom:2px solid #0f172a; padding-bottom:4pt; color:#0f172a;">
+            Tabla de Especificaciones Pedagógicas (Uso Docente)
+          </h3>
+          <table style="width:100%; border-collapse:collapse; margin-top:8pt;">
+            <thead>
+              <tr style="background-color:#0f172a; color:#ffffff; font-size:9.5pt; text-align:center;">
+                <th style="padding:6pt; border:1px solid #0f172a;">Total Ítems</th>
+                <th style="padding:6pt; border:1px solid #0f172a;">Interpretación</th>
+                <th style="padding:6pt; border:1px solid #0f172a;">Formulación</th>
+                <th style="padding:6pt; border:1px solid #0f172a;">Argumentación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="text-align:center; font-size:11pt; font-weight:bold;">
+                <td style="padding:6pt; border:1px solid #0f172a;">${docActual.tablaEspecificaciones.totalPreguntas}</td>
+                <td style="padding:6pt; border:1px solid #0f172a;">${docActual.tablaEspecificaciones.interpretacionCount}</td>
+                <td style="padding:6pt; border:1px solid #0f172a;">${docActual.tablaEspecificaciones.formulacionCount}</td>
+                <td style="padding:6pt; border:1px solid #0f172a;">${docActual.tablaEspecificaciones.argumentacionCount}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    const wordHtml = `
+      <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+      <head>
+        <meta charset='utf-8'>
+        <title>${docActual.titulo}</title>
+        <!--[if gte mso 9]>
+        <xml>
+          <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>100</w:Zoom>
+            <w:DoNotOptimizeForCustomXSL/>
+          </w:WordDocument>
+        </xml>
+        <![endif]-->
+        <style>
+          @page WordSection1 {
+            size: 216mm 330mm; /* Tamaño Oficio / Legal */
+            margin: 1.5cm 1.5cm 1.5cm 1.5cm;
+            mso-header-margin: 35.4pt;
+            mso-footer-margin: 35.4pt;
+            mso-paper-source: 0;
+          }
+          div.WordSection1 { page: WordSection1; }
+          body { font-family: 'Calibri', 'Arial', sans-serif; font-size: 11pt; color: #0f172a; line-height: 1.4; }
+          table.membrete { width: 100%; border-collapse: collapse; margin-bottom: 12pt; border: 2px solid #0f172a; }
+          table.membrete td { border: 1px solid #0f172a; padding: 6pt; font-size: 10pt; }
+          .inst-title { font-size: 13pt; font-weight: bold; text-align: center; text-transform: uppercase; color: #0f172a; }
+          .inst-sub { font-size: 9pt; text-align: center; color: #334155; }
+          .doc-title { font-size: 11pt; font-weight: bold; text-align: center; color: #7f1d1d; text-transform: uppercase; margin-top: 4pt; }
+        </style>
+      </head>
+      <body>
+        <div class="WordSection1">
+          <table class="membrete">
+            <tr>
+              <td style="width:80%; text-align:center;">
+                <div class="inst-title">INSTITUCIÓN EDUCATIVA RAFAEL URIBE URIBE</div>
+                <div class="inst-sub">Medellín, Colombia • DANE 105001001880 • NIT 811019283-4</div>
+                <div class="doc-title">${docActual.titulo}</div>
+              </td>
+              <td style="width:20%; font-size:9pt;">
+                <b>AÑO:</b> 2026<br/>
+                <b>PERIODO:</b> ${docActual.periodo}<br/>
+                <b>VALOR:</b> ${docActual.porcentajeEvaluación || 'Formativo'}
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <table style="width:100%; border:none;">
+                  <tr>
+                    <td style="border:none; padding:2pt;"><b>Estudiante:</b> ___________________________</td>
+                    <td style="border:none; padding:2pt;"><b>Grado:</b> ${docActual.grado}</td>
+                    <td style="border:none; padding:2pt;"><b>Asignatura:</b> ${docActual.asignatura}</td>
+                  </tr>
+                  <tr>
+                    <td style="border:none; padding:2pt;"><b>Docente:</b> Lic. Matemáticas IE RUU</td>
+                    <td style="border:none; padding:2pt;"><b>Fecha:</b> ____/____/2026</td>
+                    <td style="border:none; padding:2pt; color:#7f1d1d;"><b>Nota:</b> _____ / 5.0</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+
+          ${esModoDocente ? '<div style="background-color:#d1fae5; border-left:4px solid #059669; padding:6pt; margin-bottom:12pt; font-size:9.5pt; color:#064e3b;"><b>VERSION DOCENTE:</b> Incluye respuestas correctas e indicadores DUA.</div>' : ''}
+
+          <h2 style="font-size:12pt; text-transform:uppercase; border-bottom:1px solid #cbd5e1; padding-bottom:4pt; color:#0f172a;">
+            Cuestionario (${docActual.preguntas.length} Preguntas - Tamaño Oficio)
+          </h2>
+
+          ${preguntasHtml}
+
+          ${tablaEspecHtml}
+
+          <div style="text-align:center; font-size:9pt; color:#64748b; margin-top:20pt; border-top:1px solid #cbd5e1; padding-top:6pt;">
+            IE Rafael Uribe Uribe • Medellín, Colombia • Formato Oficio DUA / Pruebas ICFES
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const blob = new Blob(['\ufeff', wordHtml], { type: 'application/msword' });
+    const nombreLimpio = docActual.titulo.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ_-]/g, '_');
+    saveAs(blob, `${nombreLimpio}_OFICIO.doc`);
+  };
+
   return (
     <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm overflow-y-auto p-2 sm:p-4 md:p-6 flex justify-center items-start print:p-0 print:bg-white print:static print:block">
-      {/* Estilos CSS nativos para impresión limpia @media print */}
+      {/* Estilos CSS nativos para impresión limpia @media print en TAMAÑO OFICIO */}
       <style>{`
+        @page {
+          size: 216mm 330mm; /* Tamaño Oficio / Legal */
+          margin: 15mm;
+        }
         @media print {
           body {
             background: white !important;
@@ -183,7 +353,7 @@ Responde ÚNICAMENTE en JSON válido con el siguiente esquema:
           header, nav, footer, button, .print\\:hidden {
             display: none !important;
           }
-          /* Ajustes de Hoja A4 para la impresión */
+          /* Ajustes de Hoja Oficio para la impresión */
           .printable-paper {
             width: 100% !important;
             max-width: none !important;
@@ -199,7 +369,7 @@ Responde ÚNICAMENTE en JSON válido con el siguiente esquema:
       `}</style>
 
       {/* Contenedor Principal del Modal */}
-      <div className="w-full max-w-4xl bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden print:bg-white print:border-none print:shadow-none print:rounded-none">
+      <div className="w-full max-w-5xl bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden print:bg-white print:border-none print:shadow-none print:rounded-none">
         {/* Barra Superior de Herramientas del Modal (No imprimible) */}
         <div className="bg-slate-950 px-4 py-3 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2 print:hidden">
           <div className="flex items-center gap-2">
@@ -216,14 +386,23 @@ Responde ÚNICAMENTE en JSON válido con el siguiente esquema:
             </button>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={handleRegenerarConGemini}
               disabled={loadingAi}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-purple-900 hover:bg-purple-800 text-purple-100 text-xs font-bold rounded-lg border border-purple-700 shadow transition disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-900 hover:bg-purple-800 text-purple-100 text-xs font-bold rounded-lg border border-purple-700 shadow transition disabled:opacity-50"
             >
               {loadingAi ? <RefreshCw className="w-3.5 h-3.5 animate-spin text-amber-400" /> : <Sparkles className="w-3.5 h-3.5 text-amber-400" />}
-              <span>{loadingAi ? 'Generando...' : '✨ Generar Nuevo con IA'}</span>
+              <span>{loadingAi ? 'Generando...' : '✨ Generar con IA'}</span>
+            </button>
+
+            <button
+              onClick={handleDownloadWord}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-lg shadow transition"
+              title="Descargar taller/evaluación editable en Microsoft Word (.doc) en tamaño Oficio"
+            >
+              <Download className="w-3.5 h-3.5 text-blue-200" />
+              <span>Descargar Word (.doc Oficio)</span>
             </button>
 
             <button
@@ -231,7 +410,7 @@ Responde ÚNICAMENTE en JSON válido con el siguiente esquema:
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold rounded-lg shadow transition"
             >
               <Printer className="w-3.5 h-3.5" />
-              <span>Imprimir / Guardar PDF</span>
+              <span>Imprimir (Oficio) / PDF</span>
             </button>
 
             <button
