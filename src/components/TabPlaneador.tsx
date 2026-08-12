@@ -16,7 +16,7 @@ interface TabPlaneadorProps {
   onOpenModal: (
     tipo: 'taller' | 'evaluacion_seg1' | 'evaluacion_seg2' | 'evaluacion_final',
     semanaRef: number,
-    contenidoPersonalizado?: any
+    autoGenerarIA?: boolean
   ) => void;
   userApiKey: string;
 }
@@ -218,26 +218,37 @@ Escribe la respuesta directamente en HTML limpio listo para renderizar usando cl
         </div>
 
         {/* Botones de Acción Especial (IA y Modal) */}
-        <div className="w-full md:w-auto flex items-center gap-2.5 shrink-0 justify-end">
+        <div className="w-full md:w-auto flex flex-wrap items-center gap-2 shrink-0 justify-end">
           <button
             onClick={handleGenerarConGemini}
             disabled={loadingAi}
-            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-purple-900 hover:bg-purple-800 text-purple-100 font-bold text-xs rounded-xl border border-purple-700 shadow-lg transition disabled:opacity-50"
+            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-3.5 py-2.5 bg-purple-900 hover:bg-purple-800 text-purple-100 font-bold text-xs rounded-xl border border-purple-700 shadow-lg transition disabled:opacity-50"
+            title="Genera un plan de clase inédito detallado DUA para esta semana con IA Gemini"
           >
             {loadingAi ? (
               <RefreshCw className="w-4 h-4 animate-spin text-amber-400" />
             ) : (
               <Sparkles className="w-4 h-4 text-amber-400" />
             )}
-            <span>{loadingAi ? 'Generando con IA...' : '✨ IA Gemini: Plan Inédito'}</span>
+            <span>{loadingAi ? 'Generando Plan...' : '✨ IA Gemini: Plan Inédito'}</span>
           </button>
 
           <button
-            onClick={() => onOpenModal('taller', semana)}
-            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-red-900 hover:bg-red-800 text-white font-bold text-xs rounded-xl border border-red-700 shadow-lg transition"
+            onClick={() => onOpenModal('taller', semana, true)}
+            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-3.5 py-2.5 bg-indigo-900 hover:bg-indigo-800 text-indigo-100 font-bold text-xs rounded-xl border border-indigo-700 shadow-lg transition"
+            title="Generar e imprimir un taller práctico inédito con IA Gemini"
+          >
+            <Sparkles className="w-4 h-4 text-amber-400" />
+            <span>✨ IA Gemini: Taller Práctico (A4)</span>
+          </button>
+
+          <button
+            onClick={() => onOpenModal('taller', semana, false)}
+            className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-3.5 py-2.5 bg-red-900 hover:bg-red-800 text-white font-bold text-xs rounded-xl border border-red-700 shadow-lg transition"
+            title="Ver taller estándar en formato imprimible A4"
           >
             <FileText className="w-4 h-4 text-amber-400" />
-            <span>Ver Taller Semanal (A4)</span>
+            <span>Taller Estándar (A4)</span>
           </button>
         </div>
       </div>

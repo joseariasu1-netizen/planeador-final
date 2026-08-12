@@ -9,7 +9,8 @@ interface TabEvaluacionesProps {
   semanaActual: number;
   onOpenModal: (
     tipo: 'evaluacion_seg1' | 'evaluacion_seg2' | 'evaluacion_final',
-    semanaRef: number
+    semanaRef: number,
+    autoGenerarIA?: boolean
   ) => void;
 }
 
@@ -35,7 +36,7 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
             Pruebas Tipo ICFES Saber — {asigEfectiva} {grado} (Periodo {periodo})
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            Evaluaciones estructuradas con tabla de especificaciones docente, justificación pedagógica y claves de respuesta.
+            Evaluaciones estructuradas con tabla de especificaciones docente, justificación pedagógica, claves de respuesta e Inteligencia Artificial Gemini.
           </p>
         </div>
 
@@ -80,13 +81,22 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
             </ul>
           </div>
 
-          <button
-            onClick={() => onOpenModal('evaluacion_seg1', 4)}
-            className="w-full py-3 bg-red-900 hover:bg-red-800 text-white font-bold text-xs rounded-xl border border-red-700 shadow-lg flex items-center justify-center gap-2 transition"
-          >
-            <span>Generar Examen Seguimiento 1 (A4)</span>
-            <ChevronRight className="w-4 h-4 text-amber-400" />
-          </button>
+          <div className="space-y-2">
+            <button
+              onClick={() => onOpenModal('evaluacion_seg1', 4, true)}
+              className="w-full py-2.5 bg-purple-900 hover:bg-purple-800 text-purple-100 font-bold text-xs rounded-xl border border-purple-700 shadow-lg flex items-center justify-center gap-2 transition"
+            >
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span>✨ Generar con IA Gemini (A4)</span>
+            </button>
+            <button
+              onClick={() => onOpenModal('evaluacion_seg1', 4, false)}
+              className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-2 transition"
+            >
+              <span>Ver Formato Estándar</span>
+              <ChevronRight className="w-4 h-4 text-slate-400" />
+            </button>
+          </div>
         </div>
 
         {/* Examen 2: Seguimiento 2 (70%) */}
@@ -122,13 +132,22 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
             </ul>
           </div>
 
-          <button
-            onClick={() => onOpenModal('evaluacion_seg2', 8)}
-            className="w-full py-3 bg-red-900 hover:bg-red-800 text-white font-bold text-xs rounded-xl border border-red-700 shadow-lg flex items-center justify-center gap-2 transition"
-          >
-            <span>Generar Examen Seguimiento 2 (A4)</span>
-            <ChevronRight className="w-4 h-4 text-amber-400" />
-          </button>
+          <div className="space-y-2">
+            <button
+              onClick={() => onOpenModal('evaluacion_seg2', 8, true)}
+              className="w-full py-2.5 bg-purple-900 hover:bg-purple-800 text-purple-100 font-bold text-xs rounded-xl border border-purple-700 shadow-lg flex items-center justify-center gap-2 transition"
+            >
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span>✨ Generar con IA Gemini (A4)</span>
+            </button>
+            <button
+              onClick={() => onOpenModal('evaluacion_seg2', 8, false)}
+              className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-2 transition"
+            >
+              <span>Ver Formato Estándar</span>
+              <ChevronRight className="w-4 h-4 text-slate-400" />
+            </button>
+          </div>
         </div>
 
         {/* Examen 3: Prueba Acumulativa Final Tipo ICFES (100%) */}
@@ -168,13 +187,22 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
             </ul>
           </div>
 
-          <button
-            onClick={() => onOpenModal('evaluacion_final', 13)}
-            className="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs rounded-xl border border-amber-300 shadow-xl flex items-center justify-center gap-2 transition"
-          >
-            <Sparkles className="w-4 h-4 text-slate-950" />
-            <span>Generar Prueba Final Saber (A4)</span>
-          </button>
+          <div className="space-y-2">
+            <button
+              onClick={() => onOpenModal('evaluacion_final', 13, true)}
+              className="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs rounded-xl border border-amber-300 shadow-xl flex items-center justify-center gap-2 transition"
+            >
+              <Sparkles className="w-4 h-4 text-slate-950" />
+              <span>✨ Generar Prueba Final con IA (A4)</span>
+            </button>
+            <button
+              onClick={() => onOpenModal('evaluacion_final', 13, false)}
+              className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-2 transition"
+            >
+              <span>Ver Formato Estándar</span>
+              <ChevronRight className="w-4 h-4 text-slate-400" />
+            </button>
+          </div>
         </div>
       </div>
     </div>

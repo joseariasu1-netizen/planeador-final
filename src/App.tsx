@@ -19,7 +19,10 @@ export default function App() {
   const [semana, setSemana] = useState<number>(1);
 
   const [activeTab, setActiveTab] = useState<'planeador' | 'malla' | 'evaluacion'>('planeador');
-  const [modalDoc, setModalDoc] = useState<DocumentoEscolar | null>(null);
+  const [modalConfig, setModalConfig] = useState<{
+    doc: DocumentoEscolar;
+    autoGenerarIA?: boolean;
+  } | null>(null);
 
   // Asegurar que semana esté dentro del rango del periodo (P1: 1..13, P2: 14..26, P3: 27..40)
   useEffect(() => {
@@ -41,10 +44,11 @@ export default function App() {
 
   const handleOpenModal = (
     tipo: 'taller' | 'evaluacion_seg1' | 'evaluacion_seg2' | 'evaluacion_final',
-    semanaRef: number
+    semanaRef: number,
+    autoGenerarIA?: boolean
   ) => {
     const doc = generarDocumentoOffline(tipo, grado, asignatura, periodo, semanaRef);
-    setModalDoc(doc);
+    setModalConfig({ doc, autoGenerarIA });
   };
 
   const handleSelectSemanaForPlan = (semanaNum: number) => {
@@ -107,10 +111,11 @@ export default function App() {
       </main>
 
       {/* Modal de Documentos A4 Imprimibles */}
-      {modalDoc && (
+      {modalConfig && (
         <ModalDocumento
-          documento={modalDoc}
-          onClose={() => setModalDoc(null)}
+          documento={modalConfig.doc}
+          autoGenerarIA={modalConfig.autoGenerarIA}
+          onClose={() => setModalConfig(null)}
           userApiKey={userApiKey}
         />
       )}

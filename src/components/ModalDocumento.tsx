@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DocumentoEscolar } from '../types';
 import { 
   Printer, Eye, EyeOff, Sparkles, X, School, Calendar, CheckCircle, RefreshCw, AlertCircle 
@@ -7,12 +7,14 @@ import { EscudoColegio } from './EscudoColegio';
 
 interface ModalDocumentoProps {
   documento: DocumentoEscolar;
+  autoGenerarIA?: boolean;
   onClose: () => void;
   userApiKey: string;
 }
 
 export const ModalDocumento: React.FC<ModalDocumentoProps> = ({
   documento,
+  autoGenerarIA,
   onClose,
   userApiKey
 }) => {
@@ -20,6 +22,12 @@ export const ModalDocumento: React.FC<ModalDocumentoProps> = ({
   const [docActual, setDocActual] = useState<DocumentoEscolar>(documento);
   const [loadingAi, setLoadingAi] = useState(false);
   const [aiError, setAiError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (autoGenerarIA) {
+      handleRegenerarConGemini();
+    }
+  }, []);
 
   const handlePrint = () => {
     window.print();
@@ -29,29 +37,78 @@ export const ModalDocumento: React.FC<ModalDocumentoProps> = ({
     setLoadingAi(true);
     setAiError(null);
 
-    const esPrueba = docActual.tipo !== 'taller';
+    const esTaller = docActual.tipo === 'taller';
 
-    const promptText = `
+    const promptText = esTaller
+      ? `
+Actúa como un Licenciado en Matemáticas y Experto en DUA (Diseño Universal para el Aprendizaje).
+Genera un TALLER FORMATIVO Y GUÍA PRÁCTICA DUA en JSON para la IE Rafael Uribe Uribe (Medellín, Colombia):
+- Tipo: taller
+- Grado: ${docActual.grado}
+- Asignatura: ${docActual.asignatura}
+- Periodo: ${docActual.periodo}
+- Semana Ref: ${docActual.semanaRef || 1}
+
+REGLAS OBLIGATORIAS:
+- NUNCA utilices notación o expresiones en LaTeX (NO utilices \\frac, \\sqrt, \\begin, $, $$).
+- Escribe todas las fórmulas e igualdades en texto plano comprensible para estudiantes de ${docActual.grado} usando caracteres estándar (ej. a / b, x², √x, ×, ÷, ±, π).
+- Diseña 8 ejercicios o actividades prácticas graduadas por nivel de dificultad (2 Fácil, 4 Intermedio, 2 Desafío) contextualizados en Medellín (Metro, Tranvía de Ayacucho, Comuna 12, EPM, Parques Biblioteca).
+- Incluye 6 preguntas de selección múltiple (A, B, C, D) y 2 de desarrollo abierto con procedimiento guiado.
+
+Responde ÚNICAMENTE en JSON válido con la siguiente estructura:
+{
+  "tipo": "taller",
+  "titulo": "TALLER GUÍA DE APRENDIZAJE DUA - ${docActual.asignatura} ${docActual.grado} (SEMANA ${docActual.semanaRef || 1})",
+  "asignatura": "${docActual.asignatura}",
+  "grado": "${docActual.grado}",
+  "periodo": ${docActual.periodo},
+  "semanaRef": ${docActual.semanaRef || 1},
+  "porcentajeEvaluación": "Formativo (Guía de Ejercitación y Trabajo DUA)",
+  "preguntas": [
+    {
+      "id": 1,
+      "tipo": "seleccion_multiple",
+      "contexto": "Situación práctica real en Medellín...",
+      "enunciado": "Ejercicio o problema claro para ${docActual.grado}...",
+      "opciones": [
+        {"key": "A", "texto": "Opción 1"},
+        {"key": "B", "texto": "Opción 2"},
+        {"key": "C", "texto": "Opción 3"},
+        {"key": "D", "texto": "Opción 4"}
+      ],
+      "respuestaCorrecta": "A",
+      "justificacionPedagogica": "Paso a paso de la resolución...",
+      "competenciaICFES": "Interpretación y Representación",
+      "procesoMatematico": "Resolución de Problemas",
+      "nivelBloom": "Aplicación/Análisis"
+    }
+  ],
+  "tablaEspecificaciones": {
+    "totalPreguntas": 8,
+    "interpretacionCount": 3,
+    "formulacionCount": 3,
+    "argumentacionCount": 2
+  }
+}
+`
+      : `
 Actúa como un Experto en Evaluación Educativa Colombiana del ICFES y Licenciado en Matemáticas.
-Genera un documento escolar completo en JSON para la IE Rafael Uribe Uribe de Medellín:
+Genera una EVALUACIÓN PRUEBA TIPO ICFES SABER completa en JSON para la IE Rafael Uribe Uribe de Medellín:
 - Tipo: ${docActual.tipo}
 - Grado: ${docActual.grado}
 - Asignatura: ${docActual.asignatura}
 - Periodo: ${docActual.periodo}
 - Semana Ref: ${docActual.semanaRef || 1}
 
-REGLA CRÍTICA SOBRE MATEMÁTICAS:
+REGLAS OBLIGATORIAS:
 - NUNCA utilices notación o expresiones en LaTeX (NO utilices \\frac, \\sqrt, \\begin, $, $$).
-- Escribe todas las fórmulas e igualdades en texto plano comprensible para estudiantes usando caracteres estándar (por ejemplo: a / b, x², √x, ×, ÷, ±, π).
-- NUNCA utilices frases meta o referencias genéricas como "Según el tema de...", "Basado en la semana X", "De acuerdo con el título...", ni títulos internos.
-- Presenta SIEMPRE la ecuación, función, fórmula o situación concreta directamente en la pregunta (por ejemplo: "Dada la función f(x) = 3x² - 5x + 2...", "Calcular la derivada dy/dx...", "Un bus del Metro viaja con la función de costo C(x) = ...").
-
-Debe ser un documento completo con 10 preguntas (8 de selección múltiple tipo ICFES y 2 abiertas de desarrollo) contextualizadas en Medellín (Metro, EPM, Comuna 13, Parque Explora, Atanasio Girardot).
+- Escribe todas las fórmulas e igualdades en texto plano comprensible para estudiantes de ${docActual.grado} usando caracteres estándar (ej. a / b, x², √x, ×, ÷, ±, π).
+- Genera 10 preguntas (8 de selección múltiple tipo ICFES con 4 opciones A, B, C, D + 2 abiertas de desarrollo) contextualizadas en Medellín (Metro, EPM, Comuna 13, Parque Explora, Atanasio Girardot).
 
 Responde ÚNICAMENTE en JSON válido con el siguiente esquema:
 {
   "tipo": "${docActual.tipo}",
-  "titulo": "PRUEBA GENERADA CON IA GEMINI - ${docActual.asignatura} ${docActual.grado}",
+  "titulo": "PRUEBA TIPO ICFES SABER - ${docActual.asignatura} ${docActual.grado} (PERIODO ${docActual.periodo})",
   "asignatura": "${docActual.asignatura}",
   "grado": "${docActual.grado}",
   "periodo": ${docActual.periodo},
