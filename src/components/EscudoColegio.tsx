@@ -6,11 +6,10 @@ interface EscudoColegioProps {
 }
 
 export const EscudoColegio: React.FC<EscudoColegioProps> = ({ 
-  className = "w-14 h-14",
+  className = "w-16 h-16",
   allowUpload = false 
 }) => {
   const [customLogo, setCustomLogo] = useState<string | null>(null);
-  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('ruu_custom_logo');
@@ -27,7 +26,6 @@ export const EscudoColegio: React.FC<EscudoColegioProps> = ({
         const result = event.target?.result as string;
         if (result) {
           setCustomLogo(result);
-          setImgError(false);
           localStorage.setItem('ruu_custom_logo', result);
         }
       };
@@ -38,135 +36,109 @@ export const EscudoColegio: React.FC<EscudoColegioProps> = ({
   const handleRemoveCustomLogo = (e: React.MouseEvent) => {
     e.stopPropagation();
     setCustomLogo(null);
-    setImgError(false);
     localStorage.removeItem('ruu_custom_logo');
   };
 
-  // SVG Emblema Institucional Definitivo para I.E. Rafael Uribe Uribe
-  const SvgShield = (
+  // SVG Emblema Institucional Oficial I.E. Rafael Uribe Uribe
+  const OfficialSvgShield = (
     <svg
-      viewBox="0 0 200 240"
-      fill="none"
+      viewBox="0 0 400 440"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full drop-shadow-md"
+      className="w-full h-full object-contain p-0.5"
     >
       <defs>
-        <linearGradient id="shieldGold" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#fef08a" />
-          <stop offset="50%" stopColor="#eab308" />
-          <stop offset="100%" stopColor="#ca8a04" />
-        </linearGradient>
-        <linearGradient id="shieldGreen" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#065f46" />
-          <stop offset="100%" stopColor="#022c22" />
-        </linearGradient>
+        <path id="shieldOutlinePath" d="M 200 14 C 150 0 80 22 45 36 C 68 80 72 120 48 145 C 36 160 30 200 30 230 C 30 320 110 390 200 426 C 290 390 370 320 370 230 C 370 200 364 160 352 145 C 328 120 332 80 355 36 C 320 22 250 0 200 14 Z" />
+        
+        <clipPath id="shieldShapeClip">
+          <use href="#shieldOutlinePath" />
+        </clipPath>
+
+        <path id="mottoArcTextPath" d="M 96 308 A 128 128 0 0 0 304 308" fill="none" />
+        <path id="nameArcTextPath" d="M 58 355 A 165 165 0 0 0 342 355" fill="none" />
       </defs>
 
-      {/* Escudo Cuerpo Principal */}
-      <path
-        d="M 100 12 L 175 35 C 175 130 150 195 100 222 C 50 195 25 130 25 35 Z"
-        fill="url(#shieldGreen)"
-        stroke="url(#shieldGold)"
-        strokeWidth="6"
-      />
+      <use href="#shieldOutlinePath" fill="#E10600" stroke="#000000" strokeWidth="8" strokeLinejoin="round" />
 
-      {/* Borde Interno punteado */}
-      <path
-        d="M 100 20 L 167 41 C 167 125 144 185 100 210 C 56 185 33 125 33 41 Z"
-        fill="none"
-        stroke="#fef08a"
-        strokeWidth="1.5"
-        strokeDasharray="4 2"
-      />
+      <g clipPath="url(#shieldShapeClip)">
+        <rect x="0" y="0" width="400" height="82" fill="#E10600" />
+        <text x="200" y="58" fill="#FFFFFF" fontSize="22" fontWeight="900" fontFamily="'Arial Black', Impact, Arial, sans-serif" textAnchor="middle" letterSpacing="0.8">INSTITUCION EDUCATIVA</text>
+        <line x1="0" y1="82" x2="400" y2="82" stroke="#000000" strokeWidth="5" />
 
-      {/* Franja Superior Roja */}
-      <path d="M 33 41 L 167 41 L 167 68 L 33 68 Z" fill="#991b1b" />
-      <path d="M 33 68 L 167 68 L 167 72 L 33 72 Z" fill="#eab308" />
+        <rect x="0" y="82" width="400" height="24" fill="#FFEA00" />
+        <line x1="0" y1="106" x2="400" y2="106" stroke="#000000" strokeWidth="5" />
 
-      {/* Texto Superior */}
-      <text
-        x="100"
-        y="58"
-        fill="#ffffff"
-        fontSize="10.5"
-        fontWeight="bold"
-        fontFamily="sans-serif"
-        textAnchor="middle"
-        letterSpacing="0.5"
-      >
-        I.E. RAFAEL URIBE URIBE
-      </text>
+        <polygon points="0,106 400,106 400,265 0,265" fill="#FFEA00" />
+        <polygon points="400,106 400,265 0,265" fill="#009EE3" />
+        <line x1="400" y1="106" x2="0" y2="265" stroke="#000000" strokeWidth="5" />
 
-      {/* División de Cuadrantes */}
-      <line x1="100" y1="72" x2="100" y2="180" stroke="#eab308" strokeWidth="2" />
-      <line x1="33" y1="126" x2="167" y2="126" stroke="#eab308" strokeWidth="2" />
+        <g transform="translate(120, 142)">
+          <path d="M 10 5 Q 40 0 78 10 L 78 102 Q 40 94 10 98 Z" fill="#FFFFFF" stroke="#000000" strokeWidth="3" />
+          <path d="M 82 10 Q 120 0 150 5 L 150 98 Q 120 94 82 102 Z" fill="#FFFFFF" stroke="#000000" strokeWidth="3" />
+          <line x1="80" y1="10" x2="80" y2="102" stroke="#000000" strokeWidth="3.5" />
+          <path d="M 20 22 Q 45 18 68 22 M 20 32 Q 45 28 68 32 M 20 42 Q 45 38 68 42 M 20 52 Q 45 48 68 52 M 20 62 Q 45 58 68 62 M 20 72 Q 45 68 68 72 M 20 82 Q 45 78 68 82" stroke="#000000" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+          <path d="M 92 22 Q 115 18 140 22 M 92 32 Q 115 28 140 32 M 92 42 Q 115 38 140 42 M 92 52 Q 115 48 140 52 M 92 62 Q 115 58 140 62 M 92 72 Q 115 68 140 72 M 92 82 Q 115 78 140 82" stroke="#000000" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+        </g>
 
-      {/* C1: Libro Abierto de Sabiduría */}
-      <g transform="translate(42, 78)">
-        <path d="M 5 25 C 15 20 25 22 25 30 C 25 22 35 20 45 25 L 45 10 C 35 5 25 8 25 14 C 25 8 15 5 5 10 Z" fill="#ffffff" stroke="#0f172a" strokeWidth="1" />
-        <path d="M 25 14 L 25 30" stroke="#0f172a" strokeWidth="1.5" />
-        <polygon points="25,2 27,6 31,6 28,9 29,13 25,10 21,13 22,9 19,6 23,6" fill="#eab308" />
+        <g fill="#000000" stroke="#000000">
+          <circle cx="200" cy="112" r="15" fill="#000000" />
+          <circle cx="200" cy="112" r="6.5" fill="#FFEA00" stroke="#000000" strokeWidth="2" />
+          <rect x="122" y="136" width="156" height="15" rx="3" fill="#000000" />
+          <circle cx="122" cy="143.5" r="8" fill="#000000" />
+          <circle cx="278" cy="143.5" r="8" fill="#000000" />
+          <rect x="192" y="120" width="16" height="155" fill="#000000" />
+          <path d="M 130 228 C 130 308 270 308 270 228" fill="none" stroke="#000000" strokeWidth="15" strokeLinecap="round" />
+          <path d="M 130 210 L 112 242 L 144 242 Z" fill="#000000" />
+          <path d="M 270 210 L 256 242 L 288 242 Z" fill="#000000" />
+        </g>
+
+        <path d="M 75 258 C 135 298 265 298 325 258 L 315 298 C 245 338 155 338 85 298 Z" fill="#FFFFFF" stroke="#000000" strokeWidth="4" strokeLinejoin="round" />
+        <text fill="#000000" fontSize="15" fontWeight="900" fontFamily="'Arial Black', Impact, Arial, sans-serif" letterSpacing="0.5">
+          <textPath href="#mottoArcTextPath" startOffset="50%" textAnchor="middle">DIOS, CIENCIA Y LABOR</textPath>
+        </text>
+
+        <path d="M 52 298 C 120 348 280 348 348 298 L 360 350 C 275 410 125 410 40 350 Z" fill="#E10600" stroke="#000000" strokeWidth="3.5" />
+        <text fill="#FFFFFF" fontSize="20" fontWeight="900" fontFamily="'Arial Black', Impact, Arial, sans-serif" letterSpacing="1">
+          <textPath href="#nameArcTextPath" startOffset="50%" textAnchor="middle">RAFAEL URIBE URIBE</textPath>
+        </text>
       </g>
 
-      {/* C2: Antorcha del Conocimiento */}
-      <g transform="translate(112, 78)">
-        <path d="M 25 5 C 32 12 30 20 25 24 C 20 20 18 12 25 5 Z" fill="#dc2626" />
-        <path d="M 25 10 C 29 14 28 19 25 22 C 22 19 21 14 25 10 Z" fill="#f59e0b" />
-        <polygon points="22,24 28,24 26,40 24,40" fill="#eab308" stroke="#78350f" strokeWidth="0.5" />
-      </g>
-
-      {/* C3: Bandera de Medellín */}
-      <g transform="translate(42, 134)">
-        <rect x="6" y="6" width="36" height="15" fill="#ffffff" rx="1" />
-        <rect x="6" y="21" width="36" height="15" fill="#15803d" rx="1" />
-        <rect x="6" y="6" width="36" height="30" fill="none" stroke="#eab308" strokeWidth="1" rx="1" />
-      </g>
-
-      {/* C4: Átomo Ciencia y Matemáticas */}
-      <g transform="translate(112, 134)">
-        <ellipse cx="23" cy="21" rx="16" ry="6" fill="none" stroke="#38bdf8" strokeWidth="1.5" transform="rotate(30 23 21)" />
-        <ellipse cx="23" cy="21" rx="16" ry="6" fill="none" stroke="#38bdf8" strokeWidth="1.5" transform="rotate(-30 23 21)" />
-        <circle cx="23" cy="21" r="3" fill="#f59e0b" />
-      </g>
-
-      {/* Listón Inferior: MEDELLÍN */}
-      <g transform="translate(0, 10)">
-        <path d="M 45 185 L 155 185 L 145 205 L 55 205 Z" fill="#0f172a" stroke="#eab308" strokeWidth="1.5" />
-        <text x="100" y="199" fill="#fef08a" fontSize="10" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle" letterSpacing="1">MEDELLÍN</text>
-      </g>
+      <use href="#shieldOutlinePath" fill="none" stroke="#000000" strokeWidth="8" strokeLinejoin="round" />
     </svg>
   );
 
   return (
     <div className={`relative group inline-flex items-center justify-center shrink-0 ${className}`}>
-      {customLogo ? (
-        <div className="relative w-full h-full flex items-center justify-center">
+      {/* Marco Circular Blanco con borde dorado sofisticado */}
+      <div className="w-full h-full rounded-full bg-white border-2 border-amber-400 p-1 shadow-md flex items-center justify-center overflow-hidden ring-2 ring-amber-500/30">
+        {customLogo ? (
           <img
             src={customLogo}
             alt="Escudo Institucional Personalizado"
             referrerPolicy="no-referrer"
-            className="w-full h-full object-contain rounded-full border-2 border-amber-500 bg-white shadow-md"
+            className="w-full h-full object-contain rounded-full"
             onError={() => setCustomLogo(null)}
           />
-          {allowUpload && (
-            <button
-              onClick={handleRemoveCustomLogo}
-              title="Restaurar escudo por defecto"
-              className="absolute -top-1 -right-1 bg-red-600 hover:bg-red-700 text-white p-0.5 rounded-full text-[10px] shadow z-10 print:hidden"
-            >
-              ✕
-            </button>
-          )}
-        </div>
-      ) : (
-        SvgShield
+        ) : (
+          OfficialSvgShield
+        )}
+      </div>
+
+      {/* Botón para desvincular logo personalizado si existe */}
+      {customLogo && allowUpload && (
+        <button
+          onClick={handleRemoveCustomLogo}
+          title="Restaurar escudo por defecto"
+          className="absolute -top-1 -right-1 bg-red-600 hover:bg-red-700 text-white p-0.5 rounded-full text-[10px] shadow z-20 print:hidden"
+        >
+          ✕
+        </button>
       )}
 
       {/* Botón Flotante para subir logo propio si se permite */}
       {allowUpload && (
         <label
           title="Haz clic para subir un logo oficial PNG/JPG de la institución"
-          className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 flex items-center justify-center text-[9px] font-bold text-amber-300 text-center rounded-full cursor-pointer transition p-1 border border-amber-400 z-10 print:hidden"
+          className="absolute inset-0 bg-slate-950/70 opacity-0 group-hover:opacity-100 flex items-center justify-center text-[9px] font-bold text-amber-300 text-center rounded-full cursor-pointer transition p-1 border border-amber-400 z-10 print:hidden"
         >
           <span>Subir Logo</span>
           <input
@@ -180,3 +152,4 @@ export const EscudoColegio: React.FC<EscudoColegioProps> = ({
     </div>
   );
 };
+
