@@ -258,48 +258,83 @@ export const mallaCurricular: MallaDB = {
           tareaBarrial: 'Encuestar a 5 familiares sobre su plato típico paisa preferido y tabular las respuestas.'
         }
       })),
-      2: Array.from({ length: 13 }, (_, i) => ({
-        semana: i + 14,
-        titulo: `Estadística 6° - P2 Sem ${i + 14}: Medidas de Tendencia Central`,
-        tiempoEstimado: '60 minutos',
-        pensamiento: 'Aleatorio y Sistemas de Datos',
-        dba: 'DBA 5: Aplica medidas de tendencia central para caracterizar un conjunto de datos.',
-        competencia: 'Formulación y Ejecución',
-        evidencia: 'Calcula e interpreta la media, mediana y moda en datos no agrupados.',
-        dua: { representacion: 'Línea numérica con pivotes', expresion: 'Resolución de problemas cotidianos', implicacion: 'Análisis de datos deportivos de la ciudad' },
-        exploracionMedellin: 'Análisis de los goles anotados por el Atlético Nacional e Independiente Medellín en el último torneo.',
-        estructuracionTeorica: {
-          concepto: 'Las medidas de tendencia central (Media, Mediana, Moda) resumen en un solo valor el centro de la distribución.',
-          formulas: ['Media = Σ x / N', 'Moda = Dato con mayor frecuencia'],
-          ejemploPasoAPaso: {
-            enunciado: 'Calcular la media de las edades de 5 estudiantes: 11, 12, 11, 13, 13 años.',
-            pasos: ['Suma: 11+12+11+13+13 = 60', 'Dividir por 5: 60 / 5 = 12'],
-            solucionFinal: 'La edad media es 12 años.'
-          }
-        },
-        ejercitacionYCierre: { colaborativo: 'Calcular la moda del grupo.', tareaBarrial: 'Registrar la cantidad de horas de estudio en casa.' }
-      })),
-      3: Array.from({ length: 14 }, (_, i) => ({
-        semana: i + 27,
-        titulo: `Estadística 6° - P3 Sem ${i + 27}: Probabilidad Cualitativa y Experimentos Aleatorios`,
-        tiempoEstimado: '60 minutos',
-        pensamiento: 'Aleatorio y Sistemas de Datos',
-        dba: 'DBA 6: Anticipa la ocurrencia de eventos en experimentos aleatorios sencillos.',
-        competencia: 'Argumentación',
-        evidencia: 'Clasifica eventos como imposibles, posibles o seguros.',
-        dua: { representacion: 'Juegos de dados y ruletas visuales', expresion: 'Explicación con ejemplos de la vida diaria', implicacion: 'Apreciación del azar en el clima de Medellín' },
-        exploracionMedellin: 'Determinar la probabilidad cualitativa de lluvia durante una tarde de agosto en el Valle de Aburrá.',
-        estructuracionTeorica: {
-          concepto: 'Un experimento aleatorio es aquel cuyo resultado no se puede predecir con certeza antes de realizarlo.',
-          formulas: ['P(Evento) = Casos Favorables / Casos Posibles'],
-          ejemploPasoAPaso: {
-            enunciado: 'Al lanzar un dado común de 6 caras, ¿cuál es la probabilidad de obtener un número par?',
-            pasos: ['Casos favorables: {2, 4, 6} -> 3 casos', 'Casos totales: {1, 2, 3, 4, 5, 6} -> 6 casos', 'Probabilidad = 3 / 6 = 0.5 (50%)'],
-            solucionFinal: 'La probabilidad es del 50%.'
-          }
-        },
-        ejercitacionYCierre: { colaborativo: 'Lanzar una moneda 20 veces y registrar frecuencias.', tareaBarrial: 'Observar 10 vehículos en la vía principal y anotar la proporción de buses.' }
-      }))
+      2: Array.from({ length: 13 }, (_, i) => {
+        const titulosE6P2 = [
+          'Medidas de Tendencia Central: Concepto de Media Aritmética (Promedio)',
+          'Cálculo de la Mediana en Conjuntos de Datos Pares e Impares',
+          'La Moda: Identificación de Datos Unimodales, Bimodales y Multimodales',
+          'Comparación entre Media, Mediana y Moda en Situaciones Reales',
+          'Tablas de Contingencia para Variables Cualitativas Cruzadas',
+          'Análisis de Datos Estadísticos sobre Consumo de Agua en Medellín (EPM)',
+          'Diagramas de Puntos (Dot Plots) y Distribución de Datos',
+          'Diagrama de Tallo y Hojas para Organización de Datos cuantitativos',
+          'Medidas de Posición Básicas: Noción de Cuartiles',
+          'Interpretación de Diagramas de Caja y Bigotes (Boxplot)',
+          'Errores Comunes en la Interpretación de Gráficos Estadísticos',
+          'Taller Integrado de Análisis de Datos de la Comunidad Escolar',
+          'Evaluación Acumulativa P2 Estadística 6°'
+        ];
+        return {
+          semana: i + 14,
+          titulo: titulosE6P2[i],
+          tiempoEstimado: '60 minutos (1 hora académica)',
+          pensamiento: 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 5: Aplica medidas de tendencia central para caracterizar un conjunto de datos.',
+          competencia: 'Formulación y Ejecución',
+          evidencia: 'Calcula e interpreta la media, mediana y moda en datos no agrupados.',
+          dua: { representacion: 'Línea numérica con pivotes de colores', expresion: 'Resolución de problemas cotidianos', implicacion: 'Análisis de datos deportivos de la ciudad' },
+          exploracionMedellin: 'Análisis de las temperaturas medias diarias en el Valle de Aburrá.',
+          estructuracionTeorica: {
+            concepto: 'Las medidas de tendencia central (Media, Mediana, Moda) resumen en un solo valor el centro de la distribución.',
+            formulas: ['Media = Σ x / N', 'Moda = Dato con mayor frecuencia'],
+            ejemploPasoAPaso: {
+              enunciado: 'Calcular la media de las edades de 5 estudiantes: 11, 12, 11, 13, 13 años.',
+              pasos: ['Suma: 11+12+11+13+13 = 60', 'Dividir por 5: 60 / 5 = 12'],
+              solucionFinal: 'La edad media es 12 años.'
+            }
+          },
+          ejercitacionYCierre: { colaborativo: 'Calcular la moda y la mediana del grupo.', tareaBarrial: 'Registrar las horas de estudio en casa durante la semana.' }
+        };
+      }),
+      3: Array.from({ length: 14 }, (_, i) => {
+        const titulosE6P3 = [
+          'Experimentos Aleatorios y Deterministas: Concepto y Diferencias',
+          'Espacio Muestral y Eventos o Sucesos',
+          'Clasificación de Eventos: Evento Seguro, Posible e Imposible',
+          'Probabilidad Cualitativa: Altamente Probable, Poco Probable y Equiprobable',
+          'Introducción a la Regla de Laplace para Eventos Equiprobables',
+          'Lanzamiento de Monedas y Dados: Frecuencia Relativa y Azar',
+          'Probabilidad en Extracción de Canicas/Bolas de Urnas',
+          'Experimentos Aleatorios en el Clima de Medellín (Lluvia/Sol)',
+          'Simulación de Juegos de Azar Justos e Injustos',
+          'Conteo de Resultados Mediante Diagramas de Árbol Sencillos',
+          'Tablas de Frecuencia de Experimentos Repetidos',
+          'Análisis Crítico del Azar en Decisiones Cotidianas',
+          'Taller Práctico de Juegos de Probabilidad',
+          'Evaluación Acumulativa Final P3 Estadística 6°'
+        ];
+        return {
+          semana: i + 27,
+          titulo: titulosE6P3[i],
+          tiempoEstimado: '60 minutos (1 hora académica)',
+          pensamiento: 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 6: Anticipa la ocurrencia de eventos en experimentos aleatorios sencillos.',
+          competencia: 'Argumentación y Análisis de Probabilidades',
+          evidencia: 'Clasifica eventos como imposibles, posibles o seguros y calcula probabilidades simples.',
+          dua: { representacion: 'Juegos de dados y ruletas visuales', expresion: 'Explicación con ejemplos de la vida diaria', implicacion: 'Apreciación del azar en el clima de Medellín' },
+          exploracionMedellin: 'Determinar la probabilidad cualitativa de lluvia durante una tarde de agosto en el Valle de Aburrá.',
+          estructuracionTeorica: {
+            concepto: 'Un experimento aleatorio es aquel cuyo resultado no se puede predecir con certeza antes de realizarlo.',
+            formulas: ['P(Evento) = Casos Favorables / Casos Posibles'],
+            ejemploPasoAPaso: {
+              enunciado: 'Al lanzar un dado común de 6 caras, ¿cuál es la probabilidad de obtener un número par?',
+              pasos: ['Casos favorables: {2, 4, 6} -> 3 casos', 'Casos totales: {1, 2, 3, 4, 5, 6} -> 6 casos', 'Probabilidad = 3 / 6 = 0.5 (50%)'],
+              solucionFinal: 'La probabilidad es del 50%.'
+            }
+          },
+          ejercitacionYCierre: { colaborativo: 'Lanzar una moneda 20 veces y registrar frecuencias.', tareaBarrial: 'Observar 10 vehículos en la vía principal y anotar la proporción de buses.' }
+        };
+      })
     }
   },
   '7°': {
@@ -350,28 +385,83 @@ export const mallaCurricular: MallaDB = {
           tareaBarrial: 'Registrar la variación de saldo ficticio al pagar servicios y compras familiares.'
         }
       })),
-      2: Array.from({ length: 13 }, (_, i) => ({
-        semana: i + 14,
-        titulo: `Matemáticas 7° - P2 Sem ${i + 14}: Conjunto de Números Racionales (Q) y Proporcionalidad Directa/Inversa`,
-        tiempoEstimado: '120 minutos',
-        pensamiento: 'Numérico y Sistemas Numéricos',
-        dba: 'DBA 2: Describe situaciones de variación proporcional utilizando expresiones algebraicas.',
-        competencia: 'Razonamiento y Comunicación',
-        evidencia: 'Resuelve problemas de proporcionalidad directa e inversa con fracciones y decimales.',
-        dua: { representacion: 'Modelos de fracciones sobre mapas urbanos', expresion: 'Explicación argumentada', implicacion: 'Proyectos de eficiencia energética' },
-        exploracionMedellin: 'Optimización de rutas de transporte público en el centro de Medellín.',
-        estructuracionTeorica: {
-          concepto: 'Un número racional es todo número que puede expresarse de la forma a/b con a, b ∈ Z y b ≠ 0.',
-          formulas: ['a/b + c/d = (ad + bc) / bd', 'k = y / x (Constante de proporcionalidad directa)'],
-          ejemploPasoAPaso: {
-            enunciado: 'Tres obreros tardan 12 horas en pintar la fachada de un colegio. ¿Cuántas horas tardarán 6 obreros trabajando al mismo ritmo?',
-            pasos: ['Proporcionalidad inversa: 3 obreros × 12 horas = 6 obreros × X horas', '36 = 6X', 'X = 36 / 6 = 6 horas'],
-            solucionFinal: 'Tardarán 6 horas.'
-          }
-        },
-        ejercitacionYCierre: { colaborativo: 'Taller de proporciones aplicadas a recetas paisas.', tareaBarrial: 'Medición de velocidad y tiempo de caminata hacia la escuela.' }
-      })),
-      3: Array.from({ length: 14 }, orgGen7P3())
+      2: Array.from({ length: 13 }, (_, i) => {
+        const titulosM7P2 = [
+          'El Conjunto de los Números Racionales (Q): Representación en la Recta y Fracciones Equivalentes',
+          'Adición y Sustracción de Números Racionales (Fraccionarios y Decimales)',
+          'Multiplicación y División de Números Racionales',
+          'Potenciación y Radicación en los Números Racionales',
+          'Ecuaciones de Primer Grado con Números Racionales',
+          'Razones y Proporciones: Concepto, Términos y Propiedad Fundamental',
+          'Magnitudes Directamente Proporcionales y Su Constante de Proporcionalidad',
+          'Magnitudes Inversamente Proporcionales y Representación Gráfica',
+          'Regla de Tres Simple Directa en Contextos de Comercio y Transporte',
+          'Regla de Tres Simple Inversa en Tiempos de Trabajo y Velocidad',
+          'Regla de Tres Compuesta y Problemas Multivariables',
+          'Porcentajes, Interés Simple y Aplicaciones Financieras Cotidianas',
+          'Evaluación Acumulativa P2 Matemáticas 7°'
+        ];
+        return {
+          semana: i + 14,
+          titulo: titulosM7P2[i],
+          tiempoEstimado: '120 minutos (3 horas académicas)',
+          pensamiento: i < 5 ? 'Numérico y Sistemas Numéricos' : 'Variacional y Sistemas Algebraicos',
+          dba: 'DBA 2: Describe situaciones de variación proporcional utilizando expresiones algebraicas y numéricas.',
+          competencia: 'Razonamiento y Comunicación',
+          evidencia: 'Resuelve problemas de proporcionalidad directa e inversa con fracciones y decimales.',
+          dua: { representacion: 'Modelos de fracciones sobre mapas urbanos', expresion: 'Explicación argumentada', implicacion: 'Proyectos de eficiencia energética' },
+          exploracionMedellin: 'Optimización de rutas de transporte público en el centro de Medellín.',
+          estructuracionTeorica: {
+            concepto: 'Un número racional es todo número que puede expresarse de la forma a/b con a, b ∈ Z y b ≠ 0.',
+            formulas: ['a/b + c/d = (ad + bc) / bd', 'k = y / x (Constante de proporcionalidad directa)'],
+            ejemploPasoAPaso: {
+              enunciado: 'Tres obreros tardan 12 horas en pintar la fachada de un colegio. ¿Cuántas horas tardarán 6 obreros trabajando al mismo ritmo?',
+              pasos: ['Proporcionalidad inversa: 3 obreros × 12 horas = 6 obreros × X horas', '36 = 6X', 'X = 36 / 6 = 6 horas'],
+              solucionFinal: 'Tardarán 6 horas.'
+            }
+          },
+          ejercitacionYCierre: { colaborativo: 'Taller de proporciones aplicadas a recetas paisas.', tareaBarrial: 'Medición de velocidad y tiempo de caminata hacia la escuela.' }
+        };
+      }),
+      3: Array.from({ length: 14 }, (_, i) => {
+        const titulosM7P3 = [
+          'Concepto de Perímetro y Área en Polígonos Regulares e Irregulares',
+          'Área de Triángulos, Cuadriláteros (Paralelogramos, Trapecios) y Círculos',
+          'Teorema de Pitágoras: Demostración Geométrica e Interpretación',
+          'Cálculo de Hipotenusa y Catetos en Triángulos Rectángulos',
+          'Sólidos Geométricos: Prismas Rectos, Pirámides y Cilindros',
+          'Área Superficial Lateral y Total de Prismas y Cilindros',
+          'Volumen de Prismas Rectos y Cilindros',
+          'Relación Entre Unidades de Volumen (m³, cm³) y Capacidad (Litros)',
+          'Semejanza y Escalas en Dibujo Técnico y Mapas Urbanos de Medellín',
+          'Estadística: Frecuencias Agrupadas e Intervalos de Clase',
+          'Construcción e Interpretación de Histogramas y Polígonos de Frecuencia',
+          'Medidas de Tendencia Central para Datos Agrupados (Media y Moda)',
+          'Probabilidad Simple: Experimentos Aleatorios y Regla de Laplace',
+          'Repaso General y Evaluación Acumulativa Final P3 Matemáticas 7°'
+        ];
+        return {
+          semana: i + 27,
+          titulo: titulosM7P3[i],
+          tiempoEstimado: '120 minutos (3 horas académicas)',
+          pensamiento: i < 9 ? 'Espacial y Sistemas Geométricos' : 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 4: Aplica el Teorema de Pitágoras y fórmulas de volumen para resolver problemas de medición.',
+          competencia: 'Formulación y Ejecución',
+          evidencia: 'Resuelve problemas geométricos calculando longitudes, áreas, volúmenes y probabilidades.',
+          dua: { representacion: 'Demostración con cuadrados sobre lados', expresion: 'Resolución de problemas', implicacion: 'Arquitectura tradicional antioqueña' },
+          exploracionMedellin: 'Calcular la longitud del cable de soporte en una estructura del Metrocable.',
+          estructuracionTeorica: {
+            concepto: 'En todo triángulo rectángulo, la suma de los cuadrados de los catetos es igual al cuadrado de la hipotenusa.',
+            formulas: ['a² + b² = c²', 'V = Base × Altura (Volumen Prismas)'],
+            ejemploPasoAPaso: {
+              enunciado: 'Un cateto mide 6 m y el otro 8 m. Hallar la hipotenusa c.',
+              pasos: ['c² = 6² + 8² = 36 + 64 = 100', 'c = √100 = 10 m'],
+              solucionFinal: 'La hipotenusa mide 10 m.'
+            }
+          },
+          ejercitacionYCierre: { colaborativo: 'Taller de aplicación geométrica.', tareaBarrial: 'Medición de la diagonal de un televisor o ventana.' }
+        };
+      })
     }
   },
   '8°': {
@@ -427,8 +517,113 @@ export const mallaCurricular: MallaDB = {
           tareaBarrial: 'Expresar en forma algebraica el perímetro del frente de su vivienda.'
         }
       })),
-      2: Array.from({ length: 13 }, orgGen8P2()),
-      3: Array.from({ length: 14 }, orgGen8P3())
+      2: Array.from({ length: 13 }, (_, i) => {
+        const titulosM8P2 = [
+          'Trinomio Cuadrado Perfecto: Reconocimiento y Factorización (a² ± 2ab + b²)',
+          'Trinomio Cuadrado Perfecto por Adición y Sustracción',
+          'Trinomio de la Forma x² + bx + c: Método de Factorización',
+          'Trinomio de la Forma ax² + bx + c: Descomposición y Método de Aspa',
+          'Suma y Diferencia de Cubos Perfectos (a³ + b³ y a³ - b³)',
+          'Cubo Perfecto de Binomios (a³ ± 3a²b + 3ab² ± b³)',
+          'Casos Combinados de Factorización y Métodos Mixtos',
+          'Concepto de Fracción Algebraica, Dominio de Definición y Restricciones',
+          'Simplificación de Fracciones Algebraicas Mediante Factorización',
+          'Multiplicación de Fracciones Algebraicas y Simplificación Cruzada',
+          'División de Fracciones Algebraicas y Operaciones Combinadas',
+          'Adición y Sustracción de Fracciones Algebraicas Homogéneas y Heterogéneas (m.c.m)',
+          'Repaso General de Factorización/Fracciones Algebraicas y Evaluación Acumulativa P2'
+        ];
+        return {
+          semana: i + 14,
+          titulo: titulosM8P2[i],
+          tiempoEstimado: '120 minutos (3 horas académicas)',
+          pensamiento: 'Variacional y Sistemas Algebraicos',
+          dba: 'DBA 2: Simplifica expresiones racionales complejas aplicando técnicas avanzadas de factorización.',
+          competencia: 'Razonamiento y Comunicación Algebraica',
+          evidencia: 'Factoriza trinomios de la forma x² + bx + c y ax² + bx + c y simplifica fracciones algebraicas.',
+          dua: { 
+            representacion: 'Modelación algebraica gráfica con bloques y código de colores', 
+            expresion: 'Ejercitación estructurada con mapas de ruta algebraicos', 
+            implicacion: 'Diseño de estructuras modulares en construcciones arquitectónicas' 
+          },
+          exploracionMedellin: 'Cálculo de resistencia de materiales en estructuras del puente de la Madre Laura sobre el río Medellín.',
+          estructuracionTeorica: {
+            concepto: `Factorización avanzada: '${titulosM8P2[i]}'. Permite descomponer trinomios y expresiones compuestas en producto de factores primos.`,
+            formulas: [
+              'a² ± 2ab + b² = (a ± b)²',
+              'x² + (p+q)x + pq = (x+p)(x+q)',
+              'a³ ± b³ = (a ± b)(a² ∓ ab + b²)'
+            ],
+            ejemploPasoAPaso: {
+              enunciado: 'Factorizar el trinomio x² + 7x + 12 que representa el área de un parque rectangular en el barrio Robledo.',
+              pasos: [
+                'Paso 1: Identificar coeficientes: b = 7, c = 12.',
+                'Paso 2: Buscar dos números p y q que sumados den 7 y multiplicados den 12: (3 y 4).',
+                'Paso 3: Escribir como producto de binomios: (x + 3)(x + 4).'
+              ],
+              solucionFinal: 'La expresión factorizada es (x + 3)(x + 4).'
+            }
+          },
+          ejercitacionYCierre: { 
+            colaborativo: 'Resolución de guías de factorización y simplificación en parejas.', 
+            tareaBarrial: 'Comprobar dimensiones de un terreno cuadrangular multiplicando binomios.' 
+          }
+        };
+      }),
+      3: Array.from({ length: 14 }, (_, i) => {
+        const titulosM8P3 = [
+          'Ecuaciones Lineales Enteras con Una Incógnita y Propiedades de la Igualdad',
+          'Ecuaciones Lineales Fraccionarias y Despeje de Variables',
+          'Problemas de Aplicación con Ecuaciones Lineales en la Economía Local',
+          'Concepto de Desigualdad e Inecuaciones Lineales Simples',
+          'Inecuaciones Lineales con Propiedades de Orden e Intervalos en la Recta Real',
+          'Problemas de Aplicación con Inecuaciones Lineales (Límites y Restricciones)',
+          'Concepto de Función: Variable Independiente/Dependiente, Dominio y Rango',
+          'Función Lineal y Función Afín: Pendiente (m) e Intercepto (b)',
+          'Representación Gráfica de Funciones Lineales en el Plano Cartesiano',
+          'Congruencia de Triángulos y Criterios de Semejanza (LLL, LAL, ALA)',
+          'Teorema de Tales y Aplicaciones en Medición Indirecta de Alturas',
+          'Teorema de Pitágoras en Triángulos Rectángulos y Solución de Problemas',
+          'Estadística: Tablas de Frecuencia y Medidas de Tendencia Central para Datos Agrupados',
+          'Repaso General, Muestra de Proyectos y Evaluación Acumulativa Final P3 8°'
+        ];
+        return {
+          semana: i + 27,
+          titulo: titulosM8P3[i],
+          tiempoEstimado: '120 minutos (3 horas académicas)',
+          pensamiento: i < 9 ? 'Variacional y Sistemas Algebraicos' : (i < 12 ? 'Espacial y Sistemas Geométricos' : 'Aleatorio y Sistemas de Datos'),
+          dba: 'DBA 3: Resuelve inecuaciones lineales y modela situaciones de variación lineal en el plano cartesiano.',
+          competencia: 'Argumentación, Modelación y Resolución de Problemas',
+          evidencia: 'Resuelve inecuaciones lineales, grafica funciones lineales e interpreta tablas estadísticas para datos agrupados.',
+          dua: { 
+            representacion: 'Intervalos en la recta real con código de colores e interpretación gráfica en GeoGebra', 
+            expresion: 'Redacción de justificaciones y planteamiento simbólico', 
+            implicacion: 'Análisis de rangos permisibles de contaminación ambiental en el Área Metropolitana' 
+          },
+          exploracionMedellin: 'Monitoreo del índice de calidad del aire (ICA) del Área Metropolitana de Medellín usando rangos numéricos.',
+          estructuracionTeorica: {
+            concepto: `Desarrollo temático de '${titulosM8P3[i]}'. Las ecuaciones e inecuaciones establecen relaciones cuantitativas exactas o de rango.`,
+            formulas: [
+              'y = mx + b (Ecuación de la recta)',
+              'Pendiente m = (y₂ - y₁) / (x₂ - x₁)',
+              'ax + b > c ⇒ ax > c - b'
+            ],
+            ejemploPasoAPaso: {
+              enunciado: 'Resolver la inecuación 2x - 4 > 10 que representa la restricción de presupuesto en una salida pedagógica.',
+              pasos: [
+                'Paso 1: Sumar 4 a ambos lados de la desigualdad: 2x > 10 + 4.',
+                'Paso 2: Simplificar: 2x > 14.',
+                'Paso 3: Dividir entre 2: x > 7.'
+              ],
+              solucionFinal: 'Solución en notación de intervalo: x ∈ (7, +∞).'
+            }
+          },
+          ejercitacionYCierre: { 
+            colaborativo: 'Taller de inecuaciones y funciones lineales en equipos.', 
+            tareaBarrial: 'Representar en la recta el límite de velocidad en la vía principal de su barrio.' 
+          }
+        };
+      })
     }
   },
   '9°': {
@@ -483,8 +678,83 @@ export const mallaCurricular: MallaDB = {
           tareaBarrial: 'Formular un sistema de ecuaciones basado en el costo de dos servicios públicos en el hogar.'
         }
       })),
-      2: Array.from({ length: 13 }, orgGen9P2()),
-      3: Array.from({ length: 14 }, orgGen9P3())
+      2: Array.from({ length: 13 }, (_, i) => {
+        const titulosM9P2 = [
+          'Potenciación y Radicación con Exponentes Racionales',
+          'Función Exponencial: Concepto, Dominio, Rango y Gráfica en GeoGebra',
+          'Crecimiento y Decrecimiento Exponencial en Poblaciones y Finanzas',
+          'Concepto de Logaritmo y Propiedades de los Logaritmos',
+          'Función Logarítmica y su Relación de Inversión con la Exponencial',
+          'Ecuaciones Exponenciales y Logarítmicas Sencillas',
+          'Función Cuadrática: Forma General f(x) = ax² + bx + c y la Parábola',
+          'Vértice, Eje de Simetría e Interceptos con los Ejes Cartesianos',
+          'Solución de Ecuaciones Cuadráticas por Factorización',
+          'Solución de Ecuaciones Cuadráticas por la Fórmula General y Discriminante',
+          'Modelación del Movimiento Parabólico en Físicas Cortas y Deportes',
+          'Sistemas de Ecuaciones No Lineales (Intersección de Recta y Parábola)',
+          'Repaso General y Evaluación Acumulativa P2 Matemáticas 9°'
+        ];
+        return {
+          semana: i + 14,
+          titulo: titulosM9P2[i],
+          tiempoEstimado: '120 minutos (3 horas académicas)',
+          pensamiento: 'Variacional y Sistemas Algebraicos',
+          dba: 'DBA 2: Identifica las características de las funciones exponenciales, logarítmicas y cuadráticas.',
+          competencia: 'Modelación y Razonamiento',
+          evidencia: 'Modela crecimiento poblacional, interés compuesto y movimiento parabólico.',
+          dua: { representacion: 'Gráficas de crecimiento exponencial en GeoGebra', expresion: 'Explicación del comportamiento de curvas', implicacion: 'Proyecciones demográficas de Medellín' },
+          exploracionMedellin: 'Modelado del crecimiento de usuarios de la tarjeta Cívica del Metro de Medellín.',
+          estructuracionTeorica: {
+            concepto: 'Una función exponencial es de la forma f(x) = a^x con a > 0 y a ≠ 1. Su inversa es la función logarítmica.',
+            formulas: ['y = a^x ⇔ log_a(y) = x', 'Interés Compuesto: A = P(1 + r/n)^(nt)', 'Vértice x_v = -b / (2a)'],
+            ejemploPasoAPaso: {
+              enunciado: 'Un capital de $1.000.000 COP se invierte al 10% anual. ¿Cuánto se tendrá en 2 años?',
+              pasos: ['A = 1.000.000 × (1 + 0.10)²', 'A = 1.000.000 × 1.21 = 1.210.000 COP'],
+              solucionFinal: '$1.210.000 COP.'
+            }
+          },
+          ejercitacionYCierre: { colaborativo: 'Ejercicios de logaritmos y parábolas aplicados.', tareaBarrial: 'Consultar la tasa de interés de un microcrédito bancario.' }
+        };
+      }),
+      3: Array.from({ length: 14 }, (_, i) => {
+        const titulosM9P3 = [
+          'Distancia Entre Dos Puntos y Punto Medio en el Plano Cartesiano',
+          'La Recta en el Plano: Pendiente (m) y Ecuación Punto-Pendiente',
+          'Rectas Paralelas y Perpendiculares en Geometría Analítica',
+          'Semejanza de Triángulos y Criterios de Semejanza (AA, LLL, LAL)',
+          'Teorema de Tales y División Proporcional de Segmentos',
+          'Aplicaciones del Teorema de Tales en Medición de Sombras y Edificios',
+          'Razones Trigonométricas Básicas en Triángulos Rectángulos (Seno, Coseno, Tangente)',
+          'Técnicas de Conteo: Principio Multiplicativo y Sumativo',
+          'Factoriales y Permutaciones Sin Repetición',
+          'Combinaciones y Diferencia Entre Permutaciones y Combinaciones',
+          'Probabilidad Condicional e Introducción a Eventos Compuestos',
+          'Análisis de Experimentos Aleatorios en la Ciudad',
+          'Taller Integrado de Geometría y Estadística Tipo ICFES',
+          'Repaso General y Evaluación Acumulativa Final P3 Matemáticas 9°'
+        ];
+        return {
+          semana: i + 27,
+          titulo: titulosM9P3[i],
+          tiempoEstimado: '120 minutos (3 horas académicas)',
+          pensamiento: i < 7 ? 'Espacial y Sistemas Geométricos' : 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 3: Aplica criterios de semejanza, Teorema de Tales y técnicas combinatorias en la resolución de problemas.',
+          competencia: 'Resolución de Problemas y Razonamiento',
+          evidencia: 'Demuestra semejanzas, calcula sombras relativas y resuelve problemas combinatorios y probabilísticos.',
+          dua: { representacion: 'Triángulos semejantes superpuestos en GeoGebra', expresion: 'Cálculo de escalas', implicacion: 'Arquitectura del Tranvía de Ayacucho' },
+          exploracionMedellin: 'Determinar la altura del Museo de Arte Moderno de Medellín (MAMM) mediante la sombra proyectada.',
+          estructuracionTeorica: {
+            concepto: 'Dos triángulos son semejantes si sus ángulos correspondientes son iguales y sus lados homólogos son proporcionales.',
+            formulas: ['a/a\' = b/b\' = c/c\'', 'Permutaciones: P(n, k) = n! / (n-k)!', 'Combinaciones: C(n, k) = n! / (k!(n-k)!)'],
+            ejemploPasoAPaso: {
+              enunciado: 'Un poste de 3 m proyecta una sombra de 2 m. A la misma hora, un edificio proyecta una sombra de 12 m. ¿Cuál es la altura del edificio?',
+              pasos: ['Proporción: 3 / 2 = H / 12', 'H = (3 × 12) / 2 = 36 / 2 = 18 m'],
+              solucionFinal: 'La altura es 18 metros.'
+            }
+          },
+          ejercitacionYCierre: { colaborativo: 'Taller de Teorema de Tales en el patio escolar.', tareaBarrial: 'Medir la sombra de un árbol de su cuadra.' }
+        };
+      })
     }
   },
   '10°': {
@@ -539,408 +809,302 @@ export const mallaCurricular: MallaDB = {
           tareaBarrial: 'Estimar la pendiente de una calle empinada de la comuna calculando el ángulo de inclinación.'
         }
       })),
-      2: Array.from({ length: 13 }, orgGen10P2()),
-      3: Array.from({ length: 14 }, orgGen10P3())
+      2: Array.from({ length: 13 }, (_, i) => {
+        const titulosM10P2 = [
+          'Funciones Trigonométricas Inversas (Arcsen, Arccos, Arctan)',
+          'Ecuaciones Trigonométricas Simples y Métodos de Solución',
+          'Ecuaciones Trigonométricas Cuadráticas en el Intervalo [0, 2π)',
+          'Identidades Trigonométricas para la Suma y Diferencia de Ángulos',
+          'Identidades para el Ángulo Doble y Ángulo Mitad',
+          'Geometría Analítica: La Distancia Entre Puntos y Ecuación de la Recta',
+          'La Circunferencia: Ecuación Canónica con Centro en el Origen (0,0)',
+          'La Circunferencia: Ecuación Ordinaria con Centro (h, k) y Ecuación General',
+          'La Parábola: Definición, Foco, Directriz y Ecuación Canónica (0,0)',
+          'La Parábola con Vértice (h, k) Horizontal y Vertical',
+          'Conversión de Ecuación General a Forma Ordinaria Completando Cuadrados',
+          'Aplicaciones de la Parábola en Antenas Satelitales y Puentes',
+          'Evaluación Acumulativa P2 Trigonometría y Geometría Analítica 10°'
+        ];
+        return {
+          semana: i + 14,
+          titulo: titulosM10P2[i],
+          tiempoEstimado: '120 minutos (3 horas académicas)',
+          pensamiento: 'Espacial y Sistemas Geométricos',
+          dba: 'DBA 2: Identifica los elementos de las secciones cónicas y sus ecuaciones cartesianas.',
+          competencia: 'Interpretación y Representación',
+          evidencia: 'Grafica e identifica centro, radio, foco y directriz en cónicas.',
+          dua: { representacion: 'Simulador dinámico de secciones cónicas en GeoGebra', expresion: 'Representación gráfica y analítica', implicacion: 'Diseño de antenas parabólicas en la ciudad' },
+          exploracionMedellin: 'Análisis de la forma parabólica de los arcos del Estadio Atanasio Girardot.',
+          estructuracionTeorica: {
+            concepto: 'La circunferencia es el lugar geométrico de los puntos que equidistan de un centro. La parábola es el lugar geométrico de los puntos que equidistan de un foco y una directriz.',
+            formulas: ['(x - h)² + (y - k)² = r²', 'Parábola vertical: (x - h)² = 4p(y - k)'],
+            ejemploPasoAPaso: {
+              enunciado: 'Hallar la ecuación de la circunferencia con centro en (2, -3) y radio r = 5.',
+              pasos: ['(x - 2)² + (y - (-3))² = 5²', '(x - 2)² + (y + 3)² = 25'],
+              solucionFinal: '(x - 2)² + (y + 3)² = 25.'
+            }
+          },
+          ejercitacionYCierre: { colaborativo: 'Taller de cónicas en GeoGebra.', tareaBarrial: 'Identificar 2 formas cónicas en construcciones del barrio.' }
+        };
+      }),
+      3: Array.from({ length: 14 }, (_, i) => {
+        const titulosM10P3 = [
+          'La Elipse: Definición, Focos, Eje Mayor y Menor con Centro en (0,0)',
+          'La Elipse con Centro en (h, k) y Conversión de Ecuación General a Ordinaria',
+          'La Hipérbola: Definición, Focos, Asíntotas y Ecuación Canónica',
+          'La Hipérbola con Centro (h, k) y Aplicaciones en Trayectorias',
+          'Identificación y Clasificación de Secciones Cónicas mediante el Discriminante',
+          'Introducción a los Vectores en R²: Magnitud, Dirección y Sentido',
+          'Operaciones con Vectores: Suma, Resta y Producto por un Escalar',
+          'Producto Escalar y Ángulo Entre Dos Vectores',
+          'Estadística: Medidas de Dispersión (Rango, Varianza y Desviación Estándar)',
+          'Coeficiente de Variación y Comparación de Distribuciones',
+          'Diagramas de Dispersión y Correlación Lineal',
+          'Regresión Lineal Simple y Límite de Tendencia',
+          'Taller de Entrenamiento ICFES Saber 11 en Geometría y Estadística',
+          'Evaluación Acumulativa Final P3 Trigonometría y Estadística 10°'
+        ];
+        return {
+          semana: i + 27,
+          titulo: titulosM10P3[i],
+          tiempoEstimado: '120 minutos (3 horas académicas)',
+          pensamiento: i < 8 ? 'Espacial y Sistemas Geométricos' : 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 3: Resuelve problemas de cónicas y aplica análisis de regresión lineal en datos.',
+          competencia: 'Formulación y Ejecución ICFES',
+          evidencia: 'Determina ecuaciones de elipses y calcula medidas de dispersión (Varianza y Desviación Estándar).',
+          dua: { representacion: 'Diagramas de dispersión con línea de tendencia', expresion: 'Interpretación estadística', implicacion: 'Análisis de hábitos de consumo de agua EPM' },
+          exploracionMedellin: 'Análisis de la elipse orbital del Planetario de Medellín.',
+          estructuracionTeorica: {
+            concepto: 'La elipse es el lugar geométrico de los puntos cuya suma de distancias a dos focos es constante.',
+            formulas: ['(x-h)²/a² + (y-k)²/b² = 1', 'Desviación Estándar σ = √(Σ(x_i - x̄)² / N)'],
+            ejemploPasoAPaso: {
+              enunciado: 'Si la varianza de los tiempos de recorrido en bus es 16 min², calcular la desviación estándar.',
+              pasos: ['σ = √16 = 4 minutos'],
+              solucionFinal: 'La desviación estándar es de 4 minutos.'
+            }
+          },
+          ejercitacionYCierre: { colaborativo: 'Cálculo de desviación estándar en notas del curso.', tareaBarrial: 'Graficar tiempo de viaje en la semana.' }
+        };
+      })
     }
   },
   '11°': {
     'Matemáticas': {
-      1: Array.from({ length: 13 }, orgGen11P1()),
-      2: Array.from({ length: 13 }, orgGen11P2()),
-      3: Array.from({ length: 14 }, orgGen11P3())
+      1: Array.from({ length: 13 }, (_, i) => {
+        const semNum = i + 1;
+        const titulosP1 = [
+          'Diagnóstico de Competencias y Análisis de la Estructura de la Prueba SABER 11 (ICFES)',
+          'Conjuntos Numéricos en R, Desigualdades y Propiedades de Orden',
+          'Inecuaciones Lineales y Aplicaciones en Restricciones Financieras y Ambientales',
+          'Inecuaciones Cuadráticas, Fraccionarias y con Valor Absoluto',
+          'Entrenador SABER 11 - Componente Numérico-Variacional: Lectura e Interpretación de Tablas y Gráficos',
+          'Concepto de Función Real: Dominio, Rango y Representaciones Tabulares, Gráficas y Analíticas',
+          'Funciones Polinómicas, Lineales, Cuadráticas y Modelación de Fenómenos Cotidianos',
+          'Entrenador SABER 11 - Componente Geométrico-Métrico: Razonamiento Espacial, Perímetros y Áreas',
+          'Funciones Racionales, Exponenciales y Logarítmicas en Contextos Sociales y Económicos',
+          'Entrenador SABER 11 - Componente Aleatorio: Medidas de Tendencia Central, Diagramas de Caja y Probabilidad',
+          'Taller de Argumentación y Formulación de Problemas Complejos Tipo ICFES Saber 11',
+          'Simulacro Integrado de Razonamiento Cuantitativo SABER 11 y Análisis de Claves de Respuesta',
+          'Evaluación Acumulativa P1: Fundamentos de Funciones y Entrenamiento Intensivo SABER 11'
+        ];
+
+        return {
+          semana: semNum,
+          titulo: `Matemáticas 11° - P1 Sem ${semNum}: ${titulosP1[i]}`,
+          tiempoEstimado: '120 minutos (3 horas académicas)',
+          pensamiento: i % 3 === 0 ? 'Numérico y Sistemas Numéricos' : i % 3 === 1 ? 'Variacional y Sistemas Algebraicos' : 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 1: Interpreta y utiliza conceptos numéricos, variacionales y probabilísticos para resolver situaciones complejas tipo ICFES Saber 11.',
+          competencia: 'Interpretación, Formulación y Argumentación ICFES Saber 11',
+          evidencia: 'Resuelve e interpreta problemas de razonamiento cuantitativo, tablas, funciones e inecuaciones.',
+          dua: {
+            representacion: 'Presentación interactiva con reactivos tipo ICFES y representaciones múltiples de funciones.',
+            expresion: 'Análisis crítico colectivo de claves de respuesta y descarte de distractores.',
+            implicacion: 'Manejo del tiempo y control de la ansiedad en pruebas de estado.'
+          },
+          exploracionMedellin: 'Análisis cuantitativo de los datos de cobertura del sistema de transporte masivo Metro y Metrocable de Medellín.',
+          estructuracionTeorica: {
+            concepto: 'El razonamiento cuantitativo de las Pruebas SABER 11 evalúa tres competencias fundamentales: Interpretación y representación de información, Formulación y ejecución de procedimientos, y Argumentación de soluciones.',
+            formulas: [
+              'Inecuación Lineal: ax + b > c => x > (c - b) / a (si a > 0)',
+              'Dominio de f(x) = g(x)/h(x): Todos los x reales tales que h(x) ≠ 0',
+              'Razón de cambio promedio: Δy / Δx = (f(x2) - f(x1)) / (x2 - x1)'
+            ],
+            ejemploPasoAPaso: {
+              enunciado: 'En una pregunta tipo Saber 11, la tarifa de un servicio de transporte en Medellín es T(x) = 3000 + 1500x, donde x es el número de kilómetros recorridos. Si un usuario dispone de máximo $18.000 COP, ¿cuántos kilómetros como máximo puede recorrer?',
+              pasos: [
+                'Paso 1: Plantear la inecuación: 3000 + 1500x ≤ 18000.',
+                'Paso 2: Restar 3000 a ambos lados: 1500x ≤ 15000.',
+                'Paso 3: Dividir entre 1500: x ≤ 10 kilómetros.'
+              ],
+              solucionFinal: 'El usuario puede recorrer como máximo 10 kilómetros.'
+            }
+          },
+          ejercitacionYCierre: {
+            colaborativo: 'Taller simulacro en parejas analizando 5 preguntas liberadas de la Prueba Saber 11.',
+            tareaBarrial: 'Resolver el módulo semanal del cuadernillo de preparación Saber 11.'
+          }
+        };
+      }),
+      2: Array.from({ length: 13 }, (_, i) => {
+        const semNum = i + 14;
+        const esPrimeraMitadP2 = i < 6;
+
+        if (esPrimeraMitadP2) {
+          const titulosP2a = [
+            'Modelos Funcionales Lineales y Cuadráticos en Contexto Real',
+            'Funciones Exponenciales y Logarítmicas en Fenómenos Cíclicos',
+            'Coordenadas Cartesianas y Objetos Geométricos en 2D y 3D',
+            'Eventos Independientes, Dependientes y Probabilidad Condicional',
+            'Resolución de Problemas Complejos y Simulacro Tipo ICFES Saber 11',
+            'Cierre de Preparación Intensiva y Aplicación Oficial de la Prueba SABER 11'
+          ];
+          return {
+            semana: semNum,
+            titulo: `Matemáticas 11° - P2 Sem ${semNum}: ${titulosP2a[i]}`,
+            tiempoEstimado: '120 minutos (3 horas académicas)',
+            pensamiento: i < 3 ? 'Numérico y Sistemas Numéricos' : 'Aleatorio y Sistemas de Datos',
+            dba: 'DBA 7: Usa propiedades y modelos funcionales para analizar situaciones y relaciones en contextos intraescolares y extraescolares.',
+            competencia: 'Formulación, Ejecución y Argumentación ICFES Saber 11',
+            evidencia: 'Resuelve problemas que involucran modelos funcionales, probabilidades condicionales y razonamiento geométrico.',
+            dua: {
+              representacion: 'Simulación de preguntas con modelos funcionales y tablas de contingencia.',
+              expresion: 'Defensa oral del procedimiento y análisis de la clave de respuesta.',
+              implicacion: 'Estrategias de concentración y manejo del tiempo en la Prueba SABER 11.'
+            },
+            exploracionMedellin: 'Análisis de las probabilidades de flujo de usuarios en el Tranvía de Ayacucho durante horas pico.',
+            estructuracionTeorica: {
+              concepto: 'Las funciones lineales f(x) = mx + b y cuadráticas f(x) = ax² + bx + c permiten modelar costos, trayectorias e ingresos en la economía y la física.',
+              formulas: [
+                'f(x) = mx + b (Pendiente m = (y2 - y1) / (x2 - x1))',
+                'P(A|B) = P(A ∩ B) / P(B) (Probabilidad Condicional)',
+                'Vértice Parábola: x_v = -b / (2a)'
+              ],
+              ejemploPasoAPaso: {
+                enunciado: 'En un sondeo a 100 estudiantes de 11° en Medellín, 60 estudian para la prueba Saber y 40 hacen deporte. Si 30 hacen ambas cosas, ¿cuál es la probabilidad de que un estudiante haga deporte dado que ya estudia para la prueba?',
+                pasos: [
+                  'Paso 1: Identificar P(Estudia) = 60 / 100 = 0.60.',
+                  'Paso 2: Identificar P(Deporte ∩ Estudia) = 30 / 100 = 0.30.',
+                  'Paso 3: Aplicar fórmula condicional: P(Deporte | Estudia) = 0.30 / 0.60 = 0.50 (50%).'
+                ],
+                solucionFinal: 'La probabilidad condicional es del 50%.'
+              }
+            },
+            ejercitacionYCierre: {
+              colaborativo: 'Taller simulacro de lectura e interpretación de gráficos para la Prueba SABER 11.',
+              tareaBarrial: 'Resolver 4 preguntas del cuadernillo oficial de entrenamiento.'
+            }
+          };
+        } else {
+          const titulosP2b = [
+            'Etapa Pos-SABER: Introducción a los Límites de Funciones y Noción Intuitiva de Infinito',
+            'Límites Laterales y Existencia del Límite en un Punto',
+            'Límites Indeterminados de la Forma 0 / 0 y Métodos de Factorización',
+            'Límites Indeterminados con Racionalización y Límites al Infinito',
+            'Asíntotas Verticales y Horizontales en Funciones Racionales',
+            'Continuidad de Funciones en un Punto y en Intervalos Reales',
+            'Evaluación Acumulativa P2: Límites y Continuidad de Funciones'
+          ];
+          const subIdx = i - 6;
+          return {
+            semana: semNum,
+            titulo: `Matemáticas 11° - P2 Sem ${semNum}: ${titulosP2b[subIdx]}`,
+            tiempoEstimado: '120 minutos (3 horas académicas)',
+            pensamiento: 'Variacional y Sistemas Algebraicos',
+            dba: 'DBA 2: Utiliza las técnicas de aproximación y el concepto de límite para estudiar el comportamiento de funciones en procesos infinitos.',
+            competencia: 'Razonamiento y Modelación Matemático-Científica',
+            evidencia: 'Evalúa límites indeterminados y determina la continuidad de funciones en entornos reales.',
+            dua: {
+              representacion: 'Visualización de aproximaciones numéricas de límites y gráficas en GeoGebra.',
+              expresion: 'Resolución de límites mediante álgebra directa y aproximaciones por tablas.',
+              implicacion: 'Modelación de la aproximación de velocidades de vehículos en el Metro de Medellín.'
+            },
+            exploracionMedellin: 'Estudiar el comportamiento límite de la velocidad de un vagón del Metro al aproximarse a la estación de parada.',
+            estructuracionTeorica: {
+              concepto: 'El límite de f(x) cuando x tiende a c es el valor L al que se aproximan sus imágenes: lim_{x->c} f(x) = L. Si f(c) resulta en 0/0, se debe factorizar o racionalizar.',
+              formulas: [
+                'lim_{x->c} f(x) = L',
+                'Asíntota Vertical: lim_{x->c} f(x) = ±∞',
+                'Continuidad: lim_{x->c} f(x) = f(c)'
+              ],
+              ejemploPasoAPaso: {
+                enunciado: 'Calcular el límite de la función f(x) = (x² - 9) / (x - 3) cuando x tiende a 3.',
+                pasos: [
+                  'Paso 1: Evaluar directamente: (3² - 9) / (3 - 3) = 0 / 0 (Indeterminación).',
+                  'Paso 2: Factorizar el numerador como diferencia de cuadrados: (x - 3)(x + 3) / (x - 3).',
+                  'Paso 3: Cancelar el factor común (x - 3) para x ≠ 3: quedándonos f(x) = x + 3.',
+                  'Paso 4: Evaluar el límite resultante: lim_{x->3} (x + 3) = 3 + 3 = 6.'
+                ],
+                solucionFinal: 'El límite de la función cuando x tiende a 3 es igual a 6.'
+              }
+            },
+            ejercitacionYCierre: {
+              colaborativo: 'Resolución en parejas de una guía de límites indeterminados mediante factorización.',
+              tareaBarrial: 'Investigar una aplicación práctica del concepto de continuidad en ingeniería o biología.'
+            }
+          };
+        }
+      }),
+      3: Array.from({ length: 14 }, (_, i) => {
+        const semNum = i + 27;
+        const titulosP3 = [
+          'Noción de Razón de Cambio Instantánea: Secantes y Tangentes a una Curva',
+          'Definición Formal de la Derivada mediante el Límite del Cociente de Diferencias',
+          'Reglas Fundamentales de Derivación: Regla de la Constante, Potencia y Suma',
+          'Derivada del Producto y del Cociente de Funciones',
+          'Regla de la Cadena para Funciones Compuestas',
+          'Derivación Implícita y Derivadas de Funciones Trigonométricas (Seno, Coseno, Tangente)',
+          'Derivadas de Funciones Exponenciales y Logarítmicas',
+          'Aplicaciones de la Derivada: Criterio de la Primera Derivada para Máximos y Mínimos',
+          'Criterio de la Segunda Derivada: Concavidad y Puntos de Inflexión',
+          'Optimización de Funciones en Problemas de Ingeniería, Economía y Negocios',
+          'Introducción al Cálculo Integral: Noción de Antiderivada e Integral Indefinida',
+          'Métodos de Integración: Integración por Sustitución Simple',
+          'Área Bajo la Curva y Teorema Fundamental del Cálculo (Integral Definida)',
+          'Evaluación Acumulativa Final de Cálculo Diferencial e Integral 11°'
+        ];
+
+        return {
+          semana: semNum,
+          titulo: `Matemáticas 11° - P3 Sem ${semNum}: ${titulosP3[i]}`,
+          tiempoEstimado: '120 minutos (3 horas académicas)',
+          pensamiento: i < 11 ? 'Variacional y Sistemas Algebraicos' : 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 3: Utiliza la derivada y la integral definida para resolver problemas de optimización y acumulación en contextos científicos y tecnológicos.',
+          competencia: 'Razonamiento, Modelación y Solución de Problemas de Cálculo',
+          evidencia: 'Aplica reglas de derivación e integración para optimizar recursos y analizar tasas de cambio acumuladas.',
+          dua: {
+            representacion: 'Modelación tridimensional de áreas bajo la curva y gráficos de concavidad.',
+            expresion: 'Construcción analítica y gráfica de soluciones de optimización.',
+            implicacion: 'Proyectos de diseño eficiente para empresas locales de Medellín.'
+          },
+          exploracionMedellin: 'Diseñar un empaque cilíndrico de volumen máximo para productos alimenticios de la comuna usando derivadas de optimización.',
+          estructuracionTeorica: {
+            concepto: 'La derivada f\'(x) representa la razón de cambio instantánea y la pendiente de la recta tangente. La integral definida representa el área acumulada bajo la curva de una función f(x) en el intervalo [a, b].',
+            formulas: [
+              'Definición de Derivada: f\'(x) = lim_{h->0} [f(x + h) - f(x)] / h',
+              'Regla de Potencia: d/dx [x^n] = n × x^(n-1)',
+              'Regla del Producto: d/dx [u × v] = u\'v + uv\'',
+              'Teorema Fundamental del Cálculo: ∫_a^b f(x) dx = F(b) - F(a)'
+            ],
+            ejemploPasoAPaso: {
+              enunciado: 'Hallar los puntos críticos y maximizar la función de ingresos I(x) = -x² + 40x + 100 de un emprendimiento juvenil de Medellín.',
+              pasos: [
+                'Paso 1: Calcular la primera derivada: I\'(x) = -2x + 40.',
+                'Paso 2: Igualar a cero para encontrar el punto crítico: -2x + 40 = 0 => 2x = 40 => x = 20.',
+                'Paso 3: Evaluar la segunda derivada: I\'\'(x) = -2 < 0, lo que confirma un máximo en x = 20 unidades.',
+                'Paso 4: Calcular el ingreso máximo: I(20) = -(20)² + 40(20) + 100 = -400 + 800 + 100 = 500 COP.'
+              ],
+              solucionFinal: 'El ingreso se maximiza al vender 20 unidades, alcanzando un ingreso máximo de $500 COP.'
+            }
+          },
+          ejercitacionYCierre: {
+            colaborativo: 'Desarrollar un taller de optimización de costos y materiales en grupos de 3 estudiantes.',
+            tareaBarrial: 'Consultar cómo se utiliza el cálculo infinitesimal en programas universitarios de ingeniería o administración.'
+          }
+        };
+      })
     }
   }
 };
-
-// Generadores auxiliares para mantener el código conciso pero 100% completo
-function orgGen7P3(): (v: any, i: number) => PlanSemana {
-  return (_, i) => ({
-    semana: i + 27,
-    titulo: `Matemáticas 7° - P3 Sem ${i + 27}: Geometría Teorema de Pitágoras y Estadística Proporcional`,
-    tiempoEstimado: '120 minutos',
-    pensamiento: 'Espacial y Sistemas Geométricos',
-    dba: 'DBA 4: Aplica el Teorema de Pitágoras para calcular longitudes desconocidas.',
-    competencia: 'Formulación y Ejecución',
-    evidencia: 'Resuelve problemas geométricos calculando hipotenusa y catetos en contextos reales.',
-    dua: { representacion: 'Demostración con cuadrados sobre lados', expresion: 'Resolución de problemas', implicacion: 'Arquitectura tradicional antioqueña' },
-    exploracionMedellin: 'Calcular la longitud del cable de soporte en una estructura del Metrocable.',
-    estructuracionTeorica: {
-      concepto: 'En todo triángulo rectángulo, la suma de los cuadrados de los catetos es igual al cuadrado de la hipotenusa.',
-      formulas: ['a² + b² = c²'],
-      ejemploPasoAPaso: {
-        enunciado: 'Un cateto mide 6 m y el otro 8 m. Hallar la hipotenusa c.',
-        pasos: ['c² = 6² + 8² = 36 + 64 = 100', 'c = √100 = 10 m'],
-        solucionFinal: 'La hipotenusa mide 10 m.'
-      }
-    },
-    ejercitacionYCierre: { colaborativo: 'Taller de aplicación geométrica.', tareaBarrial: 'Medición de la diagonal de un televisor o ventana.' }
-  });
-}
-
-function orgGen8P2(): (v: any, i: number) => PlanSemana {
-  return (_, i) => ({
-    semana: i + 14,
-    titulo: `Matemáticas 8° - P2 Sem ${i + 14}: Casos Avanzados de Factorización y Fracciones Algebraicas`,
-    tiempoEstimado: '120 minutos',
-    pensamiento: 'Variacional y Sistemas Algebraicos',
-    dba: 'DBA 2: Simplifica expresiones racionales complejas.',
-    competencia: 'Razonamiento y Comunicación',
-    evidencia: 'Factoriza trinomios de la forma x² + bx + c y ax² + bx + c.',
-    dua: { representacion: 'Modelación algebraica gráfica', expresion: 'Ejercitación estructurada', implicacion: 'Diseño estructural' },
-    exploracionMedellin: 'Cálculo de resistencia de materiales en puentes de la autopista norte.',
-    estructuracionTeorica: {
-      concepto: 'Factorización de trinomios x² + bx + c buscando dos números p y q tales que p+q=b y p*q=c.',
-      formulas: ['x² + (p+q)x + pq = (x+p)(x+q)'],
-      ejemploPasoAPaso: {
-        enunciado: 'Factorizar x² + 7x + 12.',
-        pasos: ['Buscar dos números que sumados den 7 y multiplicados 12 -> 3 y 4', '(x + 3)(x + 4)'],
-        solucionFinal: 'La expresión factorizada es (x + 3)(x + 4).'
-      }
-    },
-    ejercitacionYCierre: { colaborativo: 'Resolución de guías de factorización en parejas.', tareaBarrial: 'Comprobar área multiplicando binomios.' }
-  });
-}
-
-function orgGen8P3(): (v: any, i: number) => PlanSemana {
-  return (_, i) => ({
-    semana: i + 27,
-    titulo: `Matemáticas 8° - P3 Sem ${i + 27}: Ecuaciones e Inecuaciones Lineales y Geometría de Demostración`,
-    tiempoEstimado: '120 minutos',
-    pensamiento: 'Variacional y Sistemas Algebraicos',
-    dba: 'DBA 3: Resuelve inecuaciones lineales expresando la solución en notación de intervalo.',
-    competencia: 'Argumentación',
-    evidencia: 'Resuelve problemas de intervalos y despeje de variables.',
-    dua: { representacion: 'Intervalos en la recta real con código de colores', expresion: 'Redacción de justificaciones', implicacion: 'Análisis de rangos permisibles de contaminación' },
-    exploracionMedellin: 'Monitoreo del índice de calidad del aire (ICA) del Área Metropolitana.',
-    estructuracionTeorica: {
-      concepto: 'Una inecuación es una desigualdad donde se relacionan expresiones algebraicas mediante los signos <, >, ≤, ≥.',
-      formulas: ['ax + b > c => ax > c - b'],
-      ejemploPasoAPaso: {
-        enunciado: 'Resolver 2x - 4 > 10.',
-        pasos: ['2x > 10 + 4', '2x > 14', 'x > 7'],
-        solucionFinal: 'Solución: x ∈ (7, +∞).'
-      }
-    },
-    ejercitacionYCierre: { colaborativo: 'Taller de inecuaciones ambientales.', tareaBarrial: 'Representar en la recta el límite de velocidad en su barrio.' }
-  });
-}
-
-function orgGen9P2(): (v: any, i: number) => PlanSemana {
-  return (_, i) => ({
-    semana: i + 14,
-    titulo: `Matemáticas 9° - P2 Sem ${i + 14}: Función Exponencial, Logarítmica y Geometría Analítica`,
-    tiempoEstimado: '120 minutos',
-    pensamiento: 'Variacional y Sistemas Algebraicos',
-    dba: 'DBA 2: Identifica las características de las funciones exponenciales y logarítmicas.',
-    competencia: 'Modelación',
-    evidencia: 'Modela crecimiento poblacional e interés compuesto.',
-    dua: { representacion: 'Gráficas de crecimiento exponencial en GeoGebra', expresion: 'Explicación del comportamiento de curvas', implicacion: 'Proyecciones demográficas de Medellín' },
-    exploracionMedellin: 'Modelado del crecimiento de usuarios de la tarjeta Cívica del Metro.',
-    estructuracionTeorica: {
-      concepto: 'Una función exponencial es de la forma f(x) = a^x con a > 0 y a ≠ 1.',
-      formulas: ['y = a^x ⇔ log_a(y) = x', 'Interés Compuesto: A = P(1 + r/n)^(nt)'],
-      ejemploPasoAPaso: {
-        enunciado: 'Un capital de $1.000.000 se invierte al 10% anual. ¿Cuánto se tendrá en 2 años?',
-        pasos: ['A = 1.000.000 × (1 + 0.10)²', 'A = 1.000.000 × 1.21 = 1.210.000 COP'],
-        solucionFinal: '$1.210.000 COP.'
-      }
-    },
-    ejercitacionYCierre: { colaborativo: 'Ejercicios de logaritmos aplicados.', tareaBarrial: 'Consultar la tasa de interés de un microcrédito bancario.' }
-  });
-}
-
-function orgGen9P3(): (v: any, i: number) => PlanSemana {
-  return (_, i) => ({
-    semana: i + 27,
-    titulo: `Matemáticas 9° - P3 Sem ${i + 27}: Semejanza de Triángulos, Teorema de Tales y Estadística Combinatoria`,
-    tiempoEstimado: '120 minutos',
-    pensamiento: 'Espacial y Sistemas Geométricos',
-    dba: 'DBA 3: Aplica criterios de semejanza y el Teorema de Tales en la resolución de problemas.',
-    competencia: 'Resolución de Problemas',
-    evidencia: 'Demuestra semejanzas y calcula sombras relativas.',
-    dua: { representacion: 'Triángulos semejantes superpuestos', expresion: 'Cálculo de escalas', implicacion: 'Arquitectura del Tranvía de Ayacucho' },
-    exploracionMedellin: 'Determinar la altura del Museo de Arte Moderno de Medellín (MAMM) mediante la sombra proyectada.',
-    estructuracionTeorica: {
-      concepto: 'Dos triángulos son semejantes si sus ángulos correspondientes son iguales y sus lados homólogos son proporcionales.',
-      formulas: ['a/a\' = b/b\' = c/c\'', 'Permutaciones: P(n) = n!'],
-      ejemploPasoAPaso: {
-        enunciado: 'Un poste de 3 m proyecta una sombra de 2 m. A la misma hora, un edificio proyecta una sombra de 12 m. ¿Cuál es la altura del edificio?',
-        pasos: ['Proporción: 3 / 2 = H / 12', 'H = (3 × 12) / 2 = 36 / 2 = 18 m'],
-        solucionFinal: 'La altura es 18 metros.'
-      }
-    },
-    ejercitacionYCierre: { colaborativo: 'Taller de Teorema de Tales en el patio escolar.', tareaBarrial: 'Medir la sombra de un árbol de su cuadra.' }
-  });
-}
-
-function orgGen10P2(): (v: any, i: number) => PlanSemana {
-  return (_, i) => ({
-    semana: i + 14,
-    titulo: `Matemáticas 10° - P2 Sem ${i + 14}: Geometría Analítica: La Circunferencia y la Parábola`,
-    tiempoEstimado: '120 minutos',
-    pensamiento: 'Espacial y Sistemas Geométricos',
-    dba: 'DBA 2: Identifica los elementos de las secciones cónicas y sus ecuaciones cartesianas.',
-    competencia: 'Interpretación y Representación',
-    evidencia: 'Grafica e identifica centro, radio, foco y directriz en cónicas.',
-    dua: { representacion: 'Simulador dinámico de secciones cónicas', expresion: 'Representación gráfica y analítica', implicacion: 'Diseño de antenas parabólicas en la ciudad' },
-    exploracionMedellin: 'Análisis de la forma parabólica de los arcos del Estadio Atanasio Girardot.',
-    estructuracionTeorica: {
-      concepto: 'La circunferencia es el lugar geométrico de los puntos que equidistan de un punto fijo llamado centro.',
-      formulas: ['(x - h)² + (y - k)² = r²', 'Parábola vertical: (x - h)² = 4p(y - k)'],
-      ejemploPasoAPaso: {
-        enunciado: 'Hallar la ecuación de la circunferencia con centro en (2, -3) y radio r = 5.',
-        pasos: ['(x - 2)² + (y - (-3))² = 5²', '(x - 2)² + (y + 3)² = 25'],
-        solucionFinal: '(x - 2)² + (y + 3)² = 25.'
-      }
-    },
-    ejercitacionYCierre: { colaborativo: 'Taller de cónicas en GeoGebra.', tareaBarrial: 'Identificar 2 formas cónicas en construcciones del barrio.' }
-  });
-}
-
-function orgGen10P3(): (v: any, i: number) => PlanSemana {
-  return (_, i) => ({
-    semana: i + 27,
-    titulo: `Matemáticas 10° - P3 Sem ${i + 27}: La Elipse, la Hipérbola y Estadística Descriptiva Integrada`,
-    tiempoEstimado: '120 minutos',
-    pensamiento: 'Aleatorio y Sistemas de Datos',
-    dba: 'DBA 3: Resuelve problemas de cónicas y aplica análisis de regresión lineal en datos.',
-    competencia: 'Formulación y Ejecución ICFES',
-    evidencia: 'Determina ecuaciones de elipses y calcula medidas de dispersión (Varianza y Desviación Estándar).',
-    dua: { representacion: 'Diagramas de dispersión con línea de tendencia', expresion: 'Interpretación estadística', implicacion: 'Análisis de hábitos de consumo de agua EPM' },
-    exploracionMedellin: 'Análisis de la elipse orbital del Planetario de Medellín.',
-    estructuracionTeorica: {
-      concepto: 'La elipse es el lugar geométrico de los puntos cuya suma de distancias a dos focos es constante.',
-      formulas: ['(x-h)²/a² + (y-k)²/b² = 1', 'Desviación Estándar σ = √(Σ(x_i - x̄)² / N)'],
-      ejemploPasoAPaso: {
-        enunciado: 'Si la varianza de los tiempos de recorrido en bus es 16 min², calcular la desviación estándar.',
-        pasos: ['σ = √16 = 4 minutos'],
-        solucionFinal: 'La desviación estándar es de 4 minutos.'
-      }
-    },
-    ejercitacionYCierre: { colaborativo: 'Cálculo de desviación estándar en notas del curso.', tareaBarrial: 'Graficar tiempo de viaje en la semana.' }
-  });
-}
-
-function orgGen11P1(): (v: any, i: number) => PlanSemana {
-  return (_, i) => {
-    const semNum = i + 1;
-    const titulosP1 = [
-      'Diagnóstico de Competencias y Análisis de la Estructura de la Prueba SABER 11 (ICFES)',
-      'Conjuntos Numéricos en R, Desigualdades y Propiedades de Orden',
-      'Inecuaciones Lineales y Aplicaciones en Restricciones Financieras y Ambientales',
-      'Inecuaciones Cuadráticas, Fraccionarias y con Valor Absoluto',
-      'Entrenador SABER 11 - Componente Numérico-Variacional: Lectura e Interpretación de Tablas y Gráficos',
-      'Concepto de Función Real: Dominio, Rango y Representaciones Tabulares, Gráficas y Analíticas',
-      'Funciones Polinómicas, Lineales, Cuadráticas y Modelación de Fenómenos Cotidianos',
-      'Entrenador SABER 11 - Componente Geométrico-Métrico: Razonamiento Espacial, Perímetros y Áreas',
-      'Funciones Racionales, Exponenciales y Logarítmicas en Contextos Sociales y Económicos',
-      'Entrenador SABER 11 - Componente Aleatorio: Medidas de Tendencia Central, Diagramas de Caja y Probabilidad',
-      'Taller de Argumentación y Formulación de Problemas Complejos Tipo ICFES Saber 11',
-      'Simulacro Integrado de Razonamiento Cuantitativo SABER 11 y Análisis de Claves de Respuesta',
-      'Evaluación Acumulativa P1: Fundamentos de Funciones y Entrenamiento Intensivo SABER 11'
-    ];
-
-    return {
-      semana: semNum,
-      titulo: `Matemáticas 11° - P1 Sem ${semNum}: ${titulosP1[i]}`,
-      tiempoEstimado: '120 minutos (3 horas académicas)',
-      pensamiento: i % 3 === 0 ? 'Numérico y Sistemas Numéricos' : i % 3 === 1 ? 'Variacional y Sistemas Algebraicos' : 'Aleatorio y Sistemas de Datos',
-      dba: 'DBA 1: Interpreta y utiliza conceptos numéricos, variacionales y probabilísticos para resolver situaciones complejas tipo ICFES Saber 11.',
-      competencia: 'Interpretación, Formulación y Argumentación ICFES Saber 11',
-      evidencia: 'Resuelve e interpreta problemas de razonamiento cuantitativo, tablas, funciones e inecuaciones.',
-      dua: {
-        representacion: 'Presentación interactiva con reactivos tipo ICFES y representaciones múltiples de funciones.',
-        expresion: 'Análisis crítico colectivo de claves de respuesta y descarte de distractores.',
-        implicacion: 'Manejo del tiempo y control de la ansiedad en pruebas de estado.'
-      },
-      exploracionMedellin: 'Análisis cuantitativo de los datos de cobertura del sistema de transporte masivo Metro y Metrocable de Medellín.',
-      estructuracionTeorica: {
-        concepto: 'El razonamiento cuantitativo de las Pruebas SABER 11 evalúa tres competencias fundamentales: Interpretación y representación de información, Formulación y ejecución de procedimientos, y Argumentación de soluciones.',
-        formulas: [
-          'Inecuación Lineal: ax + b > c => x > (c - b) / a (si a > 0)',
-          'Dominio de f(x) = g(x)/h(x): Todos los x reales tales que h(x) ≠ 0',
-          'Razón de cambio promedio: Δy / Δx = (f(x2) - f(x1)) / (x2 - x1)'
-        ],
-        ejemploPasoAPaso: {
-          enunciado: 'En una pregunta tipo Saber 11, la tarifa de un servicio de transporte en Medellín es T(x) = 3000 + 1500x, donde x es el número de kilómetros recorridos. Si un usuario dispone de máximo $18.000 COP, ¿cuántos kilómetros como máximo puede recorrer?',
-          pasos: [
-            'Paso 1: Plantear la inecuación: 3000 + 1500x ≤ 18000.',
-            'Paso 2: Restar 3000 a ambos lados: 1500x ≤ 15000.',
-            'Paso 3: Dividir entre 1500: x ≤ 10 kilómetros.'
-          ],
-          solucionFinal: 'El usuario puede recorrer como máximo 10 kilómetros.'
-        }
-      },
-      ejercitacionYCierre: {
-        colaborativo: 'Taller simulacro en parejas analizando 5 preguntas liberadas de la Prueba Saber 11.',
-        tareaBarrial: 'Resolver el módulo semanal del cuadernillo de preparación Saber 11.'
-      }
-    };
-  };
-}
-
-function orgGen11P2(): (v: any, i: number) => PlanSemana {
-  return (_, i) => {
-    const semNum = i + 14;
-    const esPrimeraMitadP2 = i < 6;
-
-    if (esPrimeraMitadP2) {
-      const titulosP2a = [
-        'Modelos Funcionales Lineales y Cuadráticos en Contexto Real',
-        'Funciones Exponenciales y Logarítmicas en Fenómenos Cíclicos',
-        'Coordenadas Cartesianas y Objetos Geométricos en 2D y 3D',
-        'Eventos Independientes, Dependientes y Probabilidad Condicional',
-        'Resolución de Problemas Complejos y Simulacro Tipo ICFES Saber 11',
-        'Cierre de Preparación Intensiva y Aplicación Oficial de la Prueba SABER 11'
-      ];
-      return {
-        semana: semNum,
-        titulo: `Matemáticas 11° - P2 Sem ${semNum}: ${titulosP2a[i]}`,
-        tiempoEstimado: '120 minutos (3 horas académicas)',
-        pensamiento: i < 3 ? 'Numérico y Sistemas Numéricos' : 'Aleatorio y Sistemas de Datos',
-        dba: 'DBA 7: Usa propiedades y modelos funcionales para analizar situaciones y relaciones en contextos intraescolares y extraescolares.',
-        competencia: 'Formulación, Ejecución y Argumentación ICFES Saber 11',
-        evidencia: 'Resuelve problemas que involucran modelos funcionales, probabilidades condicionales y razonamiento geométrico.',
-        dua: {
-          representacion: 'Simulación de preguntas con modelos funcionales y tablas de contingencia.',
-          expresion: 'Defensa oral del procedimiento y análisis de la clave de respuesta.',
-          implicacion: 'Estrategias de concentración y manejo del tiempo en la Prueba SABER 11.'
-        },
-        exploracionMedellin: 'Análisis de las probabilidades de flujo de usuarios en el Tranvía de Ayacucho durante horas pico.',
-        estructuracionTeorica: {
-          concepto: 'Las funciones lineales f(x) = mx + b y cuadráticas f(x) = ax² + bx + c permiten modelar costos, trayectorias e ingresos en la economía y la física.',
-          formulas: [
-            'f(x) = mx + b (Pendiente m = (y2 - y1) / (x2 - x1))',
-            'P(A|B) = P(A ∩ B) / P(B) (Probabilidad Condicional)',
-            'Vértice Parábola: x_v = -b / (2a)'
-          ],
-          ejemploPasoAPaso: {
-            enunciado: 'En un sondeo a 100 estudiantes de 11° en Medellín, 60 estudian para la prueba Saber y 40 hacen deporte. Si 30 hacen ambas cosas, ¿cuál es la probabilidad de que un estudiante haga deporte dado que ya estudia para la prueba?',
-            pasos: [
-              'Paso 1: Identificar P(Estudia) = 60 / 100 = 0.60.',
-              'Paso 2: Identificar P(Deporte ∩ Estudia) = 30 / 100 = 0.30.',
-              'Paso 3: Aplicar fórmula condicional: P(Deporte | Estudia) = 0.30 / 0.60 = 0.50 (50%).'
-            ],
-            solucionFinal: 'La probabilidad condicional es del 50%.'
-          }
-        },
-        ejercitacionYCierre: {
-          colaborativo: 'Taller simulacro de lectura e interpretación de gráficos para la Prueba SABER 11.',
-          tareaBarrial: 'Resolver 4 preguntas del cuadernillo oficial de entrenamiento.'
-        }
-      };
-    } else {
-      const titulosP2b = [
-        'Etapa Pos-SABER: Introducción a los Límites de Funciones y Noción Intuitiva de Infinito',
-        'Límites Laterales y Existencia del Límite en un Punto',
-        'Límites Indeterminados de la Forma 0 / 0 y Métodos de Factorización',
-        'Límites Indeterminados con Racionalización y Límites al Infinito',
-        'Asíntotas Verticales y Horizontales en Funciones Racionales',
-        'Continuidad de Funciones en un Punto y en Intervalos Reales',
-        'Evaluación Acumulativa P2: Límites y Continuidad de Funciones'
-      ];
-      const subIdx = i - 6;
-      return {
-        semana: semNum,
-        titulo: `Matemáticas 11° - P2 Sem ${semNum}: ${titulosP2b[subIdx]}`,
-        tiempoEstimado: '120 minutos (3 horas académicas)',
-        pensamiento: 'Variacional y Sistemas Algebraicos',
-        dba: 'DBA 2: Utiliza las técnicas de aproximación y el concepto de límite para estudiar el comportamiento de funciones en procesos infinitos.',
-        competencia: 'Razonamiento y Modelación Matemático-Científica',
-        evidencia: 'Evalúa límites indeterminados y determina la continuidad de funciones en entornos reales.',
-        dua: {
-          representacion: 'Visualización de aproximaciones numéricas de límites y gráficas en GeoGebra.',
-          expresion: 'Resolución de límites mediante álgebra directa y aproximaciones por tablas.',
-          implicacion: 'Modelación de la aproximación de velocidades de vehículos en el Metro de Medellín.'
-        },
-        exploracionMedellin: 'Estudiar el comportamiento límite de la velocidad de un vagón del Metro al aproximarse a la estación de parada.',
-        estructuracionTeorica: {
-          concepto: 'El límite de f(x) cuando x tiende a c es el valor L al que se aproximan sus imágenes: lim_{x->c} f(x) = L. Si f(c) resulta en 0/0, se debe factorizar o racionalizar.',
-          formulas: [
-            'lim_{x->c} f(x) = L',
-            'Asíntota Vertical: lim_{x->c} f(x) = ±∞',
-            'Continuidad: lim_{x->c} f(x) = f(c)'
-          ],
-          ejemploPasoAPaso: {
-            enunciado: 'Calcular el límite de la función f(x) = (x² - 9) / (x - 3) cuando x tiende a 3.',
-            pasos: [
-              'Paso 1: Evaluar directamente: (3² - 9) / (3 - 3) = 0 / 0 (Indeterminación).',
-              'Paso 2: Factorizar el numerador como diferencia de cuadrados: (x - 3)(x + 3) / (x - 3).',
-              'Paso 3: Cancelar el factor común (x - 3) para x ≠ 3: quedándonos f(x) = x + 3.',
-              'Paso 4: Evaluar el límite resultante: lim_{x->3} (x + 3) = 3 + 3 = 6.'
-            ],
-            solucionFinal: 'El límite de la función cuando x tiende a 3 es igual a 6.'
-          }
-        },
-        ejercitacionYCierre: {
-          colaborativo: 'Resolución en parejas de una guía de límites indeterminados mediante factorización.',
-          tareaBarrial: 'Investigar una aplicación práctica del concepto de continuidad en ingeniería o biología.'
-        }
-      };
-    }
-  };
-}
-
-function orgGen11P3(): (v: any, i: number) => PlanSemana {
-  return (_, i) => {
-    const semNum = i + 27;
-    const titulosP3 = [
-      'Noción de Razón de Cambio Instantánea: Secantes y Tangentes a una Curva',
-      'Definición Formal de la Derivada mediante el Límite del Cociente de Diferencias',
-      'Reglas Fundamentales de Derivación: Regla de la Constante, Potencia y Suma',
-      'Derivada del Producto y del Cociente de Funciones',
-      'Regla de la Cadena para Funciones Compuestas',
-      'Derivación Implícita y Derivadas de Funciones Trigonométricas (Seno, Coseno, Tangente)',
-      'Derivadas de Funciones Exponenciales y Logarítmicas',
-      'Aplicaciones de la Derivada: Criterio de la Primera Derivada para Máximos y Mínimos',
-      'Criterio de la Segunda Derivada: Concavidad y Puntos de Inflexión',
-      'Optimización de Funciones en Problemas de Ingeniería, Economía y Negocios',
-      'Introducción al Cálculo Integral: Noción de Antiderivada e Integral Indefinida',
-      'Métodos de Integración: Integración por Sustitución Simple',
-      'Área Bajo la Curva y Teorema Fundamental del Cálculo (Integral Definida)',
-      'Evaluación Acumulativa Final de Cálculo Diferencial e Integral 11°'
-    ];
-
-    return {
-      semana: semNum,
-      titulo: `Matemáticas 11° - P3 Sem ${semNum}: ${titulosP3[i]}`,
-      tiempoEstimado: '120 minutos (3 horas académicas)',
-      pensamiento: i < 11 ? 'Variacional y Sistemas Algebraicos' : 'Aleatorio y Sistemas de Datos',
-      dba: 'DBA 3: Utiliza la derivada y la integral definida para resolver problemas de optimización y acumulación en contextos científicos y tecnológicos.',
-      competencia: 'Razonamiento, Modelación y Solución de Problemas de Cálculo',
-      evidencia: 'Aplica reglas de derivación e integración para optimizar recursos y analizar tasas de cambio acumuladas.',
-      dua: {
-        representacion: 'Modelación tridimensional de áreas bajo la curva y gráficos de concavidad.',
-        expresion: 'Construcción analítica y gráfica de soluciones de optimización.',
-        implicacion: 'Proyectos de diseño eficiente para empresas locales de Medellín.'
-      },
-      exploracionMedellin: 'Diseñar un empaque cilíndrico de volumen máximo para productos alimenticios de la comuna usando derivadas de optimización.',
-      estructuracionTeorica: {
-        concepto: 'La derivada f\'(x) representa la razón de cambio instantánea y la pendiente de la recta tangente. La integral definida representa el área acumulada bajo la curva de una función f(x) en el intervalo [a, b].',
-        formulas: [
-          'Definición de Derivada: f\'(x) = lim_{h->0} [f(x + h) - f(x)] / h',
-          'Regla de Potencia: d/dx [x^n] = n × x^(n-1)',
-          'Regla del Producto: d/dx [u × v] = u\'v + uv\'',
-          'Teorema Fundamental del Cálculo: ∫_a^b f(x) dx = F(b) - F(a)'
-        ],
-        ejemploPasoAPaso: {
-          enunciado: 'Hallar los puntos críticos y maximizar la función de ingresos I(x) = -x² + 40x + 100 de un emprendimiento juvenil de Medellín.',
-          pasos: [
-            'Paso 1: Calcular la primera derivada: I\'(x) = -2x + 40.',
-            'Paso 2: Igualar a cero para encontrar el punto crítico: -2x + 40 = 0 => 2x = 40 => x = 20.',
-            'Paso 3: Evaluar la segunda derivada: I\'\'(x) = -2 < 0, lo que confirma un máximo en x = 20 unidades.',
-            'Paso 4: Calcular el ingreso máximo: I(20) = -(20)² + 40(20) + 100 = -400 + 800 + 100 = 500 COP.'
-          ],
-          solucionFinal: 'El ingreso se maximiza al vender 20 unidades, alcanzando un ingreso máximo de $500 COP.'
-        }
-      },
-      ejercitacionYCierre: {
-        colaborativo: 'Desarrollar un taller de optimización de costos y materiales en grupos de 3 estudiantes.',
-        tareaBarrial: 'Consultar cómo se utiliza el cálculo infinitesimal en programas universitarios de ingeniería o administración.'
-      }
-    };
-  };
-}
 
 // Función helper para obtener un plan seguro si no se encuentra
 export function getPlanSemana(grado: Grado, asignatura: Asignatura, periodo: PeriodoId, semana: number): PlanSemana {
