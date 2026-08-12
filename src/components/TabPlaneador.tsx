@@ -59,6 +59,8 @@ export const TabPlaneador: React.FC<TabPlaneadorProps> = ({
   };
 
   // Generador dinámico de ejercicios de práctica para el tema si no viniesen explícitos
+  const esPosteriorASaber11 = grado === '11°' && (periodo === 3 || (periodo === 2 && semana >= 20));
+
   const ejerciciosProcesados: EjercicioPractico[] = planActual.estructuracionTeorica.ejerciciosPracticos || [
     {
       numero: 1,
@@ -66,7 +68,7 @@ export const TabPlaneador: React.FC<TabPlaneadorProps> = ({
       enunciado: `Ejercicio de Aplicación Directa: Utilizando los conceptos de '${planActual.titulo}', resuelve y verifica el resultado partiendo de las fórmulas estudiadas.`,
       pistaDUA: 'Identifica los datos conocidos y sustituye directamente en la fórmula principal.',
       pasosExplicativos: [
-        'Paso 1: Identificar los datos iniciales e incólumes del enunciado.',
+        'Paso 1: Identificar los datos iniciales del enunciado.',
         'Paso 2: Seleccionar la fórmula correspondiente del recuadro de propiedades.',
         'Paso 3: Sustituir los valores numéricos de forma ordenada.',
         'Paso 4: Realizar las operaciones aritméticas o algebraicas respetando la jerarquía.'
@@ -88,22 +90,32 @@ export const TabPlaneador: React.FC<TabPlaneadorProps> = ({
     },
     {
       numero: 3,
-      nivel: 'Desafío ICFES',
-      enunciado: `Pregunta de Razonamiento Cuantitativo Saber 11: Un análisis de datos o gráfico requiere determinar la validez de una afirmación referente a '${planActual.titulo}'. Demuestra el procedimiento matemático que refuta o confirma la hipótesis.`,
-      pistaDUA: 'Analiza la tendencia de los datos o reemplaza valores en las opciones para descartar distractores.',
+      nivel: esPosteriorASaber11 ? 'Profundización' : (grado === '11°' ? 'Desafío ICFES' : 'Desafío Avanzado'),
+      enunciado: esPosteriorASaber11 
+        ? `Desafío de Análisis Avanzado: Analiza el comportamiento de '${planActual.titulo}' aplicando el procedimiento matemático o variacional correspondiente para demostrar la hipótesis formulada.`
+        : (grado === '11°'
+          ? `Pregunta de Razonamiento Cuantitativo Saber 11: Un análisis de datos o gráfico requiere determinar la validez de una afirmación referente a '${planActual.titulo}'. Demuestra el procedimiento matemático que refuta o confirma la hipótesis.`
+          : `Problema de Razonamiento Matemático: Aplica los conceptos de '${planActual.titulo}' para demostrar la solución paso a paso.`),
+      pistaDUA: 'Analiza la tendencia de los datos o analiza las condiciones antes de realizar los cálculos.',
       pasosExplicativos: [
-        'Paso 1: Leer atentamente las condiciones del gráfico o tabla.',
-        'Paso 2: Aplicar el razonamiento algebraico o numérico correspondientes al tema.',
-        'Paso 3: Descartar los distractores inconsistentes.',
-        'Paso 4: Concluir con la opción o demostración lógica correcta.'
+        'Paso 1: Leer atentamente las condiciones del problema.',
+        'Paso 2: Aplicar el razonamiento algebraico, geométrico o de cálculo correspondiente.',
+        'Paso 3: Realizar las simplificaciones numéricas o algebraicas paso a paso.',
+        'Paso 4: Concluir con la solución justificada.'
       ],
-      solucionFinal: 'Demostración completada y argumentada conforme a los estándares de la Prueba Saber 11.'
+      solucionFinal: esPosteriorASaber11 
+        ? 'Demostración de Cálculo completada y verificada de forma analítica.'
+        : 'Demostración matemática completada y argumentada paso a paso.'
     }
   ];
 
   const handleGenerarConGemini = async () => {
     setLoadingAi(true);
     setAiError(null);
+
+    const reglaSaber1111 = esPosteriorASaber11
+      ? '- REGLA ESTRICTA GRADO 11°: Las Pruebas SABER 11 ya se presentaron a mitad del segundo periodo. NUNCA menciones Pruebas SABER 11, ICFES ni simulacros en este plan. Enfócate estrictamente en el contenido curricular (Cálculo / Estadística).'
+      : (grado === '11°' ? '- REGLA GRADO 11° PRE-SABER: Incorpora la preparación intensiva y razonamiento cuantitativo para las Pruebas SABER 11 (ICFES).' : '');
 
     const promptText = `
 Actúa como un Licenciado en Matemáticas y Experto en Currículo Colombiano con enfoque DUA.
@@ -112,6 +124,9 @@ Genera un Plan de Clase Inédito y Completo con DESARROLLO DETALLADO PASO A PASO
 - Asignatura: ${asigEfectiva}
 - Periodo: ${periodo}, Semana: ${semana}
 - Tema Principal: ${planActual.titulo}
+- Nivel de Dificultad: INTERMEDIO (adaptado al perfil de los estudiantes de la I.E. Rafael Uribe Uribe, Comuna 12 de Medellín).
+
+${reglaSaber1111}
 
 REGLA OBLIGATORIA SOBRE MATEMÁTICAS:
 - NUNCA uses notación o fórmulas en LaTeX (NO uses \\frac, \\sqrt, \\begin, \\end, $, $$).
@@ -121,9 +136,9 @@ Debes estructurar tu respuesta en HTML limpio con clases de Tailwind CSS (utiliz
 1. Encabezado con Título, Grado y Tiempo estimado (120 min / 3 horas académicas).
 2. Estrategia DUA (Múltiples formas de Representación, Expresión e Implicación).
 3. PASO A PASO 1: Inicio y Motivación Contextualizada en Medellín (Metro, Tranvía, EPM, Comuna 13) con pregunta problematizadora.
-4. PASO A PASO 2: Desarrollo Teórico y Explicación Conceptualmente Exhaustiva con recuadro de fórmulas y propiedades.
+4. PASO A PASO 2: Desarrollo Teórico y Explicación Conceptualmente Exhaustiva de Nivel Intermedio con recuadro de fórmulas y propiedades.
 5. PASO A PASO 3: Ejemplo Resuelto Modelo Paso a Paso (Paso 1, Paso 2, Paso 3, Paso 4 y Solución Comprobada) con números reales.
-6. PASO A PASO 4: Taller de Ejercicios Prácticos de Aplicación en Aula (3 ejercicios resueltos con pistas y solución paso a paso).
+6. PASO A PASO 4: Taller de Ejercicios Prácticos de Aplicación en Aula (3 ejercicios resueltos de nivel intermedio con pistas y solución paso a paso).
 7. PASO A PASO 5: Trabajo Colaborativo, Cierre Formativo y Tarea Barrial.
 
 No agregues marcadores de código markdown tipo \`\`\`html, entrega solo el HTML listo para renderizar.

@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Key, Sparkles, School, Calendar, CheckCircle2, AlertCircle, Phone } from 'lucide-react';
+import { Key, Sparkles, School, Calendar, CheckCircle2 } from 'lucide-react';
 import { EscudoColegio } from './EscudoColegio';
 
 interface HeaderProps {
   userApiKey: string;
   setUserApiKey: (key: string) => void;
-  onOpenCallAssistant?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ userApiKey, setUserApiKey, onOpenCallAssistant }) => {
+export const Header: React.FC<HeaderProps> = ({ userApiKey, setUserApiKey }) => {
   const [showKeyInput, setShowKeyInput] = useState(false);
   const [tempKey, setTempKey] = useState(userApiKey);
 
@@ -42,17 +41,6 @@ export const Header: React.FC<HeaderProps> = ({ userApiKey, setUserApiKey, onOpe
           </div>
 
           <div className="flex items-center gap-2">
-            {onOpenCallAssistant && (
-              <button
-                onClick={onOpenCallAssistant}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded text-xs transition border border-emerald-400 shadow-md animate-pulse"
-                title="Realizar una llamada telefónica con Inteligencia Artificial para resolver dudas"
-              >
-                <Phone className="w-3.5 h-3.5 text-amber-300" />
-                Llamada Asistente IA 📞
-              </button>
-            )}
-
             <button
               onClick={() => setShowKeyInput(!showKeyInput)}
               className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-900 hover:bg-purple-800 text-purple-100 rounded text-xs transition border border-purple-700 shadow-sm"

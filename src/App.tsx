@@ -6,9 +6,7 @@ import { TabPlaneador } from './components/TabPlaneador';
 import { TabMalla } from './components/TabMalla';
 import { TabEvaluaciones } from './components/TabEvaluaciones';
 import { ModalDocumento } from './components/ModalDocumento';
-import { AsistenteLlamada } from './components/AsistenteLlamada';
 import { generarDocumentoOffline } from './data/examenesData';
-import { Phone, Sparkles } from 'lucide-react';
 
 export default function App() {
   const [userApiKey, setUserApiKey] = useState<string>(() => {
@@ -22,7 +20,6 @@ export default function App() {
 
   const [activeTab, setActiveTab] = useState<'planeador' | 'malla' | 'evaluacion'>('planeador');
   const [modalDoc, setModalDoc] = useState<DocumentoEscolar | null>(null);
-  const [isCallAssistantOpen, setIsCallAssistantOpen] = useState<boolean>(false);
 
   // Asegurar que semana esté dentro del rango del periodo (P1: 1..13, P2: 14..26, P3: 27..40)
   useEffect(() => {
@@ -61,7 +58,6 @@ export default function App() {
       <Header 
         userApiKey={userApiKey} 
         setUserApiKey={setUserApiKey} 
-        onOpenCallAssistant={() => setIsCallAssistantOpen(true)}
       />
 
       {/* Panel de Filtros Interactivos y Pestañas */}
@@ -109,28 +105,6 @@ export default function App() {
           />
         )}
       </main>
-
-      {/* Botón Flotante de Llamada Telefónica IA */}
-      <div className="fixed bottom-5 right-5 z-40 print:hidden">
-        <button
-          onClick={() => setIsCallAssistantOpen(true)}
-          className="group relative flex items-center gap-2.5 px-4 py-3 bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-xs sm:text-sm rounded-full shadow-2xl border-2 border-emerald-300/60 transition-all transform hover:scale-105 active:scale-95 ring-4 ring-emerald-500/20"
-        >
-          <span className="relative flex h-3 w-3 shrink-0">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-400"></span>
-          </span>
-          <Phone className="w-5 h-5 text-amber-300 animate-bounce shrink-0" />
-          <span className="tracking-tight">Línea RUU IA 📞</span>
-        </button>
-      </div>
-
-      {/* Modal de Asistente de Llamada Telefónica IA */}
-      <AsistenteLlamada
-        userApiKey={userApiKey}
-        isOpen={isCallAssistantOpen}
-        onClose={() => setIsCallAssistantOpen(false)}
-      />
 
       {/* Modal de Documentos A4 Imprimibles */}
       {modalDoc && (
