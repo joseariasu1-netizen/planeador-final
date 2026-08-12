@@ -96,7 +96,7 @@ export const Header: React.FC<HeaderProps> = ({ userApiKey, setUserApiKey }) => 
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Escudo e Identidad Institucional */}
           <div className="flex items-center gap-4 text-center md:text-left">
-            <EscudoColegio className="w-14 h-14 sm:w-16 sm:h-16" />
+            <EscudoColegio className="w-14 h-14 sm:w-16 sm:h-16" allowUpload={true} />
             <div>
               <div className="flex items-center justify-center md:justify-start gap-2 text-amber-400 text-xs font-bold tracking-widest uppercase mb-0.5">
                 <School className="w-3.5 h-3.5" />

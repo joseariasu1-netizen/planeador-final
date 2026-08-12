@@ -257,7 +257,7 @@ Responde ÚNICAMENTE en JSON válido con el siguiente esquema:
           {/* Membrete Oficial Institucional */}
           <div className="border-2 border-slate-900 p-4 rounded-sm space-y-3">
             <div className="flex items-center justify-between border-b-2 border-slate-900 pb-3">
-              <EscudoColegio className="w-14 h-14 shrink-0" />
+              <EscudoColegio className="w-14 h-14 shrink-0" allowUpload={true} />
 
               <div className="text-center flex-1 px-2">
                 <h1 className="font-black text-base sm:text-lg uppercase tracking-tight leading-tight text-slate-900">
