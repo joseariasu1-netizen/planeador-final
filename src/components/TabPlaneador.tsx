@@ -61,11 +61,13 @@ export const TabPlaneador: React.FC<TabPlaneadorProps> = ({
   // Generador dinámico de ejercicios de práctica para el tema si no viniesen explícitos
   const esPosteriorASaber11 = grado === '11°' && (periodo === 3 || (periodo === 2 && semana >= 20));
 
+  const formulaGuia = planActual.estructuracionTeorica.formulas[0] || 'f(x) = a × x + b';
+
   const ejerciciosProcesados: EjercicioPractico[] = planActual.estructuracionTeorica.ejerciciosPracticos || [
     {
       numero: 1,
       nivel: 'Fácil',
-      enunciado: `Ejercicio de Aplicación Directa: Utilizando los conceptos de '${planActual.titulo}', resuelve y verifica el resultado partiendo de las fórmulas estudiadas.`,
+      enunciado: `Ejercicio de Aplicación Directa: Partiendo de la expresión matemática fundamental ${formulaGuia}, sustituye los valores numéricos indicados y resuelve la igualdad paso a paso.`,
       pistaDUA: 'Identifica los datos conocidos y sustituye directamente en la fórmula principal.',
       pasosExplicativos: [
         'Paso 1: Identificar los datos iniciales del enunciado.',
@@ -73,12 +75,12 @@ export const TabPlaneador: React.FC<TabPlaneadorProps> = ({
         'Paso 3: Sustituir los valores numéricos de forma ordenada.',
         'Paso 4: Realizar las operaciones aritméticas o algebraicas respetando la jerarquía.'
       ],
-      solucionFinal: `Resultado directo comprobado aplicando ${planActual.estructuracionTeorica.formulas[0] || 'la fórmula teórica'}.`
+      solucionFinal: `Resultado directo comprobado mediante la igualdad ${formulaGuia}.`
     },
     {
       numero: 2,
       nivel: 'Intermedio',
-      enunciado: `Problema del Entorno Real (Medellín): En un proyecto del sistema de transporte o comercio barrial en la Comuna 12 de Medellín, se presenta una situación modelada por '${planActual.titulo}'. Calcula el valor solicitado y justifica tu respuesta.`,
+      enunciado: `Problema del Entorno Real (Medellín): Un proyecto comunitario en la Comuna 12 de Medellín requiere calcular el valor de la variable en la igualdad ${formulaGuia}. Halla el resultado concreto y justifica tu procedimiento.`,
       pistaDUA: 'Dibuja un esquema gráfico o tabla de datos antes de plantear la ecuación.',
       pasosExplicativos: [
         'Paso 1: Extraer las variables cuantitativas del contexto.',
@@ -92,10 +94,10 @@ export const TabPlaneador: React.FC<TabPlaneadorProps> = ({
       numero: 3,
       nivel: esPosteriorASaber11 ? 'Profundización' : (grado === '11°' ? 'Desafío ICFES' : 'Desafío Avanzado'),
       enunciado: esPosteriorASaber11 
-        ? `Desafío de Análisis Avanzado: Analiza el comportamiento de '${planActual.titulo}' aplicando el procedimiento matemático o variacional correspondiente para demostrar la hipótesis formulada.`
+        ? `Desafío de Análisis Avanzado: Dada la función o relación algebraica ${formulaGuia}, demuestra el procedimiento matemático para comprobar la solución.`
         : (grado === '11°'
-          ? `Pregunta de Razonamiento Cuantitativo Saber 11: Un análisis de datos o gráfico requiere determinar la validez de una afirmación referente a '${planActual.titulo}'. Demuestra el procedimiento matemático que refuta o confirma la hipótesis.`
-          : `Problema de Razonamiento Matemático: Aplica los conceptos de '${planActual.titulo}' para demostrar la solución paso a paso.`),
+          ? `Pregunta de Razonamiento Cuantitativo Saber 11: Dada la relación matemática ${formulaGuia}, analiza los datos para determinar la validez de la afirmación y demuestra el procedimiento.`
+          : `Problema de Razonamiento Matemático: Aplica la igualdad ${formulaGuia} para demostrar la solución paso a paso.`),
       pistaDUA: 'Analiza la tendencia de los datos o analiza las condiciones antes de realizar los cálculos.',
       pasosExplicativos: [
         'Paso 1: Leer atentamente las condiciones del problema.',
@@ -131,6 +133,7 @@ ${reglaSaber1111}
 REGLA OBLIGATORIA SOBRE MATEMÁTICAS:
 - NUNCA uses notación o fórmulas en LaTeX (NO uses \\frac, \\sqrt, \\begin, \\end, $, $$).
 - Escribe todas las fórmulas en texto plano legible con símbolos Unicode (por ejemplo: x², √x, a / b, ×, ÷, ±, π, =).
+- NUNCA uses frases meta ni referencias genéricas como "Según el tema de...", "De acuerdo con la guía...", ni títulos internos. Plantea siempre la ecuación, función o situación concreta directamente (por ejemplo: "Dada la función f(x) = 2x² + 5x - 3...", "Calcular el área A = b × h...", "En la ecuación de movimiento x(t) = 4t + 10...").
 
 Debes estructurar tu respuesta en HTML limpio con clases de Tailwind CSS (utiliza bg-slate-800/50, text-slate-100, border-slate-700, p-4, rounded-xl) que incluya:
 1. Encabezado con Título, Grado y Tiempo estimado (120 min / 3 horas académicas).

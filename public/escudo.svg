@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 550" width="500" height="550">
+  <!-- Outer Shield Outline -->
+  <defs>
+    <path id="shieldPath" d="M 250 15 C 160 0 80 30 50 45 C 80 100 85 150 55 185 C 40 205 35 250 35 290 C 35 400 140 495 250 535 C 360 495 465 400 465 290 C 465 250 460 205 445 185 C 415 150 420 100 450 45 C 420 30 340 0 250 15 Z" />
+    <clipPath id="shieldClip">
+      <use href="#shieldPath" />
+    </clipPath>
+    <path id="mottoPath" d="M 110 395 A 165 165 0 0 0 390 395" fill="none" />
+    <path id="namePath" d="M 70 455 A 210 210 0 0 0 430 455" fill="none" />
+  </defs>
+
+  <!-- Fill Base -->
+  <use href="#shieldPath" fill="#D3122A" stroke="#000000" stroke-width="8" stroke-linejoin="round" />
+
+  <g clip-path="url(#shieldClip)">
+    <!-- Red Top Section -->
+    <rect x="0" y="0" width="500" height="105" fill="#D3122A" />
+    <text x="250" y="75" fill="#FFFFFF" font-size="27" font-weight="900" font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif" text-anchor="middle" letter-spacing="1">INSTITUCION EDUCATIVA</text>
+    <line x1="0" y1="92" x2="500" y2="92" stroke="#000000" stroke-width="7" />
+
+    <!-- Yellow Horizontal Bar -->
+    <rect x="0" y="92" width="500" height="28" fill="#FFE600" />
+    <line x1="0" y1="120" x2="500" y2="120" stroke="#000000" stroke-width="6" />
+
+    <!-- Diagonal Split Middle Field: Top-Left Yellow, Bottom-Right Cyan Blue -->
+    <polygon points="0,120 500,120 500,320 0,320" fill="#FFE600" />
+    <polygon points="500,120 500,320 0,320" fill="#0099DA" />
+    <line x1="500" y1="120" x2="0" y2="320" stroke="#000000" stroke-width="7" />
+
+    <!-- OPEN BOOK IN CENTER -->
+    <g transform="translate(150, 185)">
+      <!-- Book Pages Base -->
+      <path d="M 30 5 Q 60 0 98 12 L 98 135 Q 60 123 30 128 Z" fill="#FFFFFF" stroke="#000000" stroke-width="3.5" />
+      <path d="M 102 12 Q 140 0 170 5 L 170 128 Q 140 123 102 135 Z" fill="#FFFFFF" stroke="#000000" stroke-width="3.5" />
+      <line x1="100" y1="12" x2="100" y2="135" stroke="#000000" stroke-width="4" />
+
+      <!-- Cursive Script Lines on Pages -->
+      <!-- Left Page -->
+      <path d="M 40 28 Q 65 24 88 28 M 40 42 Q 65 38 88 42 M 40 56 Q 65 52 88 56 M 40 70 Q 65 66 88 70 M 40 84 Q 65 80 88 84 M 40 98 Q 65 94 88 98 M 40 112 Q 65 108 88 112" stroke="#000000" stroke-width="2.5" fill="none" stroke-linecap="round" />
+      <!-- Right Page -->
+      <path d="M 112 28 Q 135 24 160 28 M 112 42 Q 135 38 160 42 M 112 56 Q 135 52 160 56 M 112 70 Q 135 66 160 70 M 112 84 Q 135 80 160 84 M 112 98 Q 135 94 160 98 M 112 112 Q 135 108 160 112" stroke="#000000" stroke-width="2.5" fill="none" stroke-linecap="round" />
+    </g>
+
+    <!-- BLACK ANCHOR-CROSS (CRUZ ANCLA) -->
+    <g fill="#000000" stroke="#000000">
+      <!-- Top Ring -->
+      <circle cx="250" cy="140" r="20" fill="#000000" />
+      <circle cx="250" cy="140" r="9" fill="#FFE600" stroke="#000000" stroke-width="2" />
+
+      <!-- Horizontal Crossbar -->
+      <rect x="178" y="170" width="144" height="18" rx="4" fill="#000000" />
+      <circle cx="180" cy="179" r="10" fill="#000000" />
+      <circle cx="320" cy="179" r="10" fill="#000000" />
+
+      <!-- Vertical Main Shaft -->
+      <rect x="240" y="152" width="20" height="195" fill="#000000" />
+
+      <!-- Bottom Anchor Flukes Curve -->
+      <path d="M 165 290 C 165 370 335 370 335 290" fill="none" stroke="#000000" stroke-width="17" stroke-linecap="round" />
+      <!-- Left Arrowhead -->
+      <path d="M 165 275 L 142 312 L 180 312 Z" fill="#000000" />
+      <!-- Right Arrowhead -->
+      <path d="M 335 275 L 320 312 L 358 312 Z" fill="#000000" />
+    </g>
+
+    <!-- WHITE CURVED BANNER FOR MOTTO -->
+    <path d="M 90 325 C 170 370 330 370 410 325 L 398 375 C 310 420 190 420 102 375 Z" fill="#FFFFFF" stroke="#000000" stroke-width="5" stroke-linejoin="round" />
+    <text fill="#000000" font-size="18" font-weight="900" font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif" letter-spacing="0.5">
+      <textPath href="#mottoPath" startOffset="50%" text-anchor="middle">DIOS, CIENCIA Y LABOR</textPath>
+    </text>
+
+    <!-- LOWER RED BORDER / RIBBON FOR INSTITUTION NAME -->
+    <path d="M 70 380 C 160 440 340 440 430 380 L 445 440 C 340 505 160 505 55 440 Z" fill="#D3122A" stroke="#000000" stroke-width="4.5" />
+    <text fill="#FFFFFF" font-size="24" font-weight="900" font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif" letter-spacing="1">
+      <textPath href="#namePath" startOffset="50%" text-anchor="middle">RAFAEL URIBE URIBE</textPath>
+    </text>
+  </g>
+
+  <!-- Heavy Outer Shield Stroke -->
+  <use href="#shieldPath" fill="none" stroke="#000000" stroke-width="8" stroke-linejoin="round" />
+</svg>

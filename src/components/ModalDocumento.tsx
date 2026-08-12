@@ -43,6 +43,8 @@ Genera un documento escolar completo en JSON para la IE Rafael Uribe Uribe de Me
 REGLA CRÍTICA SOBRE MATEMÁTICAS:
 - NUNCA utilices notación o expresiones en LaTeX (NO utilices \\frac, \\sqrt, \\begin, $, $$).
 - Escribe todas las fórmulas e igualdades en texto plano comprensible para estudiantes usando caracteres estándar (por ejemplo: a / b, x², √x, ×, ÷, ±, π).
+- NUNCA utilices frases meta o referencias genéricas como "Según el tema de...", "Basado en la semana X", "De acuerdo con el título...", ni títulos internos.
+- Presenta SIEMPRE la ecuación, función, fórmula o situación concreta directamente en la pregunta (por ejemplo: "Dada la función f(x) = 3x² - 5x + 2...", "Calcular la derivada dy/dx...", "Un bus del Metro viaja con la función de costo C(x) = ...").
 
 Debe ser un documento completo con 10 preguntas (8 de selección múltiple tipo ICFES y 2 abiertas de desarrollo) contextualizadas en Medellín (Metro, EPM, Comuna 13, Parque Explora, Atanasio Girardot).
 
