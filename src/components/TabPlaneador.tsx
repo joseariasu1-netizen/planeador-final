@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Asignatura, Grado, PeriodoId, PlanSemana, EjercicioPractico } from '../types';
 import { getPlanSemana } from '../data/mallaCurricular';
+import { callGemini } from '../lib/gemini';
 import { 
   Sparkles, FileText, Clock, Compass, BookOpen, Layers, Users, Home, 
   ChevronRight, ChevronDown, Lightbulb, CheckCircle, RefreshCw, AlertCircle,
@@ -167,34 +168,14 @@ Escribe la respuesta directamente en HTML limpio listo para renderizar usando cl
 `;
 
     try {
-      const res = await fetch('/api/gemini/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          prompt: promptText,
-          systemInstruction: 'Eres un tutor experto en matemática escolar colombiana DUA y Pruebas ICFES Saber para la IE Rafael Uribe Uribe de Medellín. NUNCA uses código o etiquetas LaTeX (no usar \\frac, \\sqrt, $, $$). Escribe la matemática en texto claro y legible.',
-          userApiKey: userApiKey || undefined
-        })
+      const text = await callGemini({
+        prompt: promptText,
+        systemInstruction: 'Eres un tutor experto en matemática escolar colombiana DUA y Pruebas ICFES Saber para la IE Rafael Uribe Uribe de Medellín. NUNCA uses código o etiquetas LaTeX (no usar \\frac, \\sqrt, $, $$). Escribe la matemática en texto claro y legible.',
+        userApiKey: userApiKey || undefined,
       });
 
-      const contentType = res.headers.get('content-type') || '';
-      if (!contentType.includes('application/json')) {
-        const errorText = await res.text();
-        console.error("Respuesta no JSON del servidor:", errorText);
-        throw new Error(`El servidor devolvió una respuesta no válida (${res.status}). Por favor, reintenta.`);
-      }
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || 'Error en el servidor de IA');
-      }
-
-      if (!data.text) {
-        throw new Error('La respuesta de Gemini vino vacía.');
-      }
-
       // Limpiar markdown si viniera
-      let cleanedText = data.text.replace(/```html/gi, '').replace(/```/g, '').trim();
+      let cleanedText = text.replace(/```html/gi, '').replace(/```/g, '').trim();
       setAiGeneratedHtml(cleanedText);
     } catch (err: any) {
       console.error(err);

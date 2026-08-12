@@ -4,6 +4,7 @@ import {
   Printer, Eye, EyeOff, Sparkles, X, School, Calendar, CheckCircle, RefreshCw, AlertCircle 
 } from 'lucide-react';
 import { EscudoColegio } from './EscudoColegio';
+import { callGemini } from '../lib/gemini';
 
 interface ModalDocumentoProps {
   documento: DocumentoEscolar;
@@ -143,35 +144,15 @@ Responde ÚNICAMENTE en JSON válido con el siguiente esquema:
 `;
 
     try {
-      const res = await fetch('/api/gemini/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          prompt: promptText,
-          systemInstruction: 'Responde exclusivamente en JSON válido sin marcadores markdown. NUNCA uses fórmulas ni código LaTeX (sin \\frac, \\sqrt, $, $$). Usa texto plano y símbolos estándar.',
-          responseMimeType: 'application/json',
-          userApiKey: userApiKey || undefined
-        })
+      const rawText = await callGemini({
+        prompt: promptText,
+        systemInstruction: 'Responde exclusivamente en JSON válido sin marcadores markdown. NUNCA uses fórmulas ni código LaTeX (sin \\frac, \\sqrt, $, $$). Usa texto plano y símbolos estándar.',
+        responseMimeType: 'application/json',
+        userApiKey: userApiKey || undefined,
       });
 
-      const contentType = res.headers.get('content-type') || '';
-      if (!contentType.includes('application/json')) {
-        const errorText = await res.text();
-        console.error("Respuesta no JSON del servidor:", errorText);
-        throw new Error(`El servidor devolvió una respuesta no válida (${res.status}). Por favor, verifica la conexión o reintenta.`);
-      }
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || 'Error al comunicarse con Gemini AI');
-      }
-
-      if (!data.text) {
-        throw new Error('La respuesta de Gemini vino vacía.');
-      }
-
       // Limpiar y extraer únicamente el bloque JSON entre llaves { ... }
-      let jsonStr = data.text.replace(/```json/gi, '').replace(/```/g, '').trim();
+      let jsonStr = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
       const firstBrace = jsonStr.indexOf('{');
       const lastBrace = jsonStr.lastIndexOf('}');
       if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
