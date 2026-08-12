@@ -120,31 +120,50 @@ export const TabPlaneador: React.FC<TabPlaneadorProps> = ({
       : (grado === '11°' ? '- REGLA GRADO 11° PRE-SABER: Incorpora la preparación intensiva y razonamiento cuantitativo para las Pruebas SABER 11 (ICFES).' : '');
 
     const promptText = `
-Actúa como un Licenciado en Matemáticas y Experto en Currículo Colombiano con enfoque DUA.
-Genera un Plan de Clase Inédito y Completo con DESARROLLO DETALLADO PASO A PASO para:
-- Grado: ${grado}
-- Asignatura: ${asigEfectiva}
-- Periodo: ${periodo}, Semana: ${semana}
-- Tema Principal: ${planActual.titulo}
-- Nivel de Dificultad: INTERMEDIO (adaptado al perfil de los estudiantes de la I.E. Rafael Uribe Uribe, Comuna 12 de Medellín).
+Actúa como un Licenciado en Matemáticas/Estadística y Experto en Currículo Colombiano con enfoque DUA (Diseño Universal para el Aprendizaje).
+Genera una Planeación de Clase Explicita, Detallada e Inspiradora para la Institución Educativa Rafael Uribe Uribe (Medellín, Colombia).
+
+PARÁMETROS OBLIGATORIOS EN EL ENCABEZADO:
+- MATERIA: ${asigEfectiva}
+- TIEMPO: ${planActual.tiempoEstimado || '120 minutos'}
+- GRADO: ${grado}
+- OBJETIVO: ${planActual.evidencia || 'Apropiar de forma significativa los conceptos matemáticos a través del modelo DUA y el entorno real de Medellín.'}
+- ACCIÓN: Desarrolla un plan de clase detallado acompañado de ejemplos creativos centrado en ${asigEfectiva}, para estudiantes de ${grado}. Atendiendo a diferentes estilos de aprendizaje (discusiones interactivas, actividades prácticas y presentaciones multimedia/apoyos visuales).
 
 ${reglaSaber1111}
 
-REGLA OBLIGATORIA SOBRE MATEMÁTICAS:
-- NUNCA uses notación o fórmulas en LaTeX (NO uses \\frac, \\sqrt, \\begin, \\end, $, $$).
-- Escribe todas las fórmulas en texto plano legible con símbolos Unicode (por ejemplo: x², √x, a / b, ×, ÷, ±, π, =).
-- NUNCA uses frases meta ni referencias genéricas como "Según el tema de...", "De acuerdo con la guía...", ni títulos internos. Plantea siempre la ecuación, función o situación concreta directamente (por ejemplo: "Dada la función f(x) = 2x² + 5x - 3...", "Calcular el área A = b × h...", "En la ecuación de movimiento x(t) = 4t + 10...").
+ESTRUCTURA DE SECCIONES EXIGIDA (Sigue estrictamente estos títulos y contenido):
 
-Debes estructurar tu respuesta en HTML limpio con clases de Tailwind CSS (utiliza bg-slate-800/50, text-slate-100, border-slate-700, p-4, rounded-xl) que incluya:
-1. Encabezado con Título, Grado y Tiempo estimado (120 min / 3 horas académicas).
-2. Estrategia DUA (Múltiples formas de Representación, Expresión e Implicación).
-3. PASO A PASO 1: Inicio y Motivación Contextualizada en Medellín (Metro, Tranvía, EPM, Comuna 13) con pregunta problematizadora.
-4. PASO A PASO 2: Desarrollo Teórico y Explicación Conceptualmente Exhaustiva de Nivel Intermedio con recuadro de fórmulas y propiedades.
-5. PASO A PASO 3: Ejemplo Resuelto Modelo Paso a Paso (Paso 1, Paso 2, Paso 3, Paso 4 y Solución Comprobada) con números reales.
-6. PASO A PASO 4: Taller de Ejercicios Prácticos de Aplicación en Aula (3 ejercicios resueltos de nivel intermedio con pistas y solución paso a paso).
-7. PASO A PASO 5: Trabajo Colaborativo, Cierre Formativo y Tarea Barrial.
+1. TÍTULO: DUA
+   - Mención explícita del Principio DUA seleccionado (ej. Principio I: Proporcionar múltiples formas de representación, Principio II: Proporcionar múltiples formas de acción y expresión, o Principio III: Proporcionar múltiples formas de implicación).
+   - Forma explícita y detallada de cómo se evidenciará en la clase el trabajo del DUA.
+   - Citas textuales directas según la página https://www.educadua.es/html/dua/pautasDUA/dua_principios.html (ej. "Proporcionar opciones para la percepción: ofrecer la información a través de diferentes modalidades...", "Proporcionar opciones para la comprensión: activar conocimientos previos y destacar características fundamentales...", "Proporcionar opciones para la expresión y comunicación...").
 
-No agregues marcadores de código markdown tipo \`\`\`html, entrega solo el HTML listo para renderizar.
+2. TÍTULO: LA EXPLORACIÓN
+   - Actividad lúdica, interactiva y motivadora que despierte la curiosidad sobre ${asigEfectiva}.
+   - Contextualización amigable en Medellín (Metro de Medellín, Tranvía de Ayacucho, Parques Biblioteca, Comuna 12, EPM).
+   - Incluye preguntas problematizadoras que conecten con los saberes previos del estudiante.
+
+3. TÍTULO: ESTRUCTURACIÓN
+   - Desarrollo de la teoría necesaria para la apropiación del tema con rigor conceptual e intermedio.
+   - Recuadro de fórmulas y propiedades escritas en texto Unicode claro (SIN LaTeX, NO uses \\frac, \\sqrt, $, $$).
+   - Actividades y preguntas que involucren el pensamiento crítico y la resolución de problemas.
+   - Ayudas visuales explícitas: Descripción detallada de una infografía esquemática visual, diagramas de flujo y propuesta de video/recurso audiovisual interactivo para apoyar a los estudiantes visuales.
+   - Ejemplo modelado por el docente paso a paso con números concretos y solución comprobada.
+
+4. TÍTULO: ACTIVIDADES PRÁCTICAS Y TRABAJO EN EQUIPO
+   - Propuesta de 3 ejercicios o situaciones prácticas graduadas (Fácil, Intermedio, Desafío) con pistas DUA y resolución paso a paso.
+   - Dinámica explícita de colaboración en grupo (roles: Líder de consulta, Verificador numérico, Expositor) para fomentar habilidades de trabajo en equipo.
+
+5. TÍTULO: TAREA Y PROYECTO APLICADO
+   - Concluye con una tarea motivadora que anime a los estudiantes a aplicar lo aprendido (un proyecto de investigación barrial o una presentación creativa sobre ${asigEfectiva} en su entorno de Medellín).
+
+CONTEXTO Y TONO:
+- Tono amigable, cercano e inspirador.
+- Colegio: Institución Educativa Rafael Uribe Uribe de Medellín.
+- RESTRICCIONES: No omitir ni resumir de manera concisa la información. Entrega todos los elementos pedagógicos necesarios para el docente.
+
+Escribe la respuesta directamente en HTML limpio listo para renderizar usando clases de Tailwind CSS (bg-slate-900, text-slate-100, border-slate-800, p-5, rounded-2xl). No agregues bloques de código markdown (\`\`\`html).
 `;
 
     try {
