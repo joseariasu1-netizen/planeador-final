@@ -21,7 +21,7 @@ const getAiClient = (userApiKey?: string) => {
 
 app.post("/api/gemini/generate", async (req, res) => {
   try {
-    const { prompt, systemInstruction, userApiKey } = req.body;
+    const { prompt, systemInstruction, responseMimeType, userApiKey } = req.body;
     const ai = getAiClient(userApiKey);
     if (!ai) {
       return res.status(400).json({
@@ -29,10 +29,14 @@ app.post("/api/gemini/generate", async (req, res) => {
       });
     }
 
+    const config: any = {};
+    if (systemInstruction) config.systemInstruction = systemInstruction;
+    if (responseMimeType) config.responseMimeType = responseMimeType;
+
     const response = await ai.models.generateContent({
       model: "gemini-3.6-flash",
       contents: prompt,
-      config: systemInstruction ? { systemInstruction } : undefined,
+      config: Object.keys(config).length > 0 ? config : undefined,
     });
 
     res.json({ text: response.text });

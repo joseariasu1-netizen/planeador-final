@@ -177,9 +177,20 @@ Escribe la respuesta directamente en HTML limpio listo para renderizar usando cl
         })
       });
 
+      const contentType = res.headers.get('content-type') || '';
+      if (!contentType.includes('application/json')) {
+        const errorText = await res.text();
+        console.error("Respuesta no JSON del servidor:", errorText);
+        throw new Error(`El servidor devolvió una respuesta no válida (${res.status}). Por favor, reintenta.`);
+      }
+
       const data = await res.json();
       if (!res.ok) {
         throw new Error(data.error || 'Error en el servidor de IA');
+      }
+
+      if (!data.text) {
+        throw new Error('La respuesta de Gemini vino vacía.');
       }
 
       // Limpiar markdown si viniera
