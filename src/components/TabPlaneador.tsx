@@ -31,7 +31,7 @@ export const TabPlaneador: React.FC<TabPlaneadorProps> = ({
   onOpenModal,
   userApiKey
 }) => {
-  const asigEfectiva: Asignatura = (grado === '10°' || grado === '11°') ? 'Matemáticas' : asignatura;
+  const asigEfectiva: Asignatura = ['1°', '2°', '3°', '4°', '5°', '10°', '11°'].includes(grado) ? 'Matemáticas' : asignatura;
   const planOriginal = getPlanSemana(grado, asigEfectiva, periodo, semana);
 
   const [planActual, setPlanActual] = useState<PlanSemana>(planOriginal);
@@ -297,17 +297,8 @@ Escribe la respuesta directamente en HTML limpio listo para renderizar usando cl
           </div>
 
           <div className="p-6 space-y-6">
-            {/* Fila 1: DBA, Competencias y Evidencias */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-slate-950/80 p-4 rounded-xl border border-slate-800">
-                <div className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                  <BookOpen className="w-4 h-4" /> Derecho Básico (DBA)
-                </div>
-                <p className="text-xs text-slate-300 leading-relaxed font-medium">
-                  {planActual.dba}
-                </p>
-              </div>
-
+            {/* Fila 1: Competencias y Evidencias */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="bg-slate-950/80 p-4 rounded-xl border border-slate-800">
                 <div className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
                   <Compass className="w-4 h-4" /> Competencia & Pensamiento

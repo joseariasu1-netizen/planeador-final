@@ -1,4 +1,5 @@
 import { Asignatura, Grado, PeriodoId, PlanSemana } from '../types';
+import { mallaPrimaria } from './mallaPrimaria';
 
 export interface MallaDB {
   [grado: string]: {
@@ -9,6 +10,7 @@ export interface MallaDB {
 }
 
 export const mallaCurricular: MallaDB = {
+  ...mallaPrimaria,
   '6°': {
     'Matemáticas': {
       1: Array.from({ length: 13 }, (_, i) => ({
@@ -462,6 +464,172 @@ export const mallaCurricular: MallaDB = {
           ejercitacionYCierre: { colaborativo: 'Taller de aplicación geométrica.', tareaBarrial: 'Medición de la diagonal de un televisor o ventana.' }
         };
       })
+    },
+    'Estadística': {
+      1: Array.from({ length: 13 }, (_, i) => {
+        const titulosE7P1 = [
+          'Población, Muestra Representativa y Variables Cualitativas/Cuantitativas',
+          'Métodos de Muestreo y Prevención de Sesgos en Encuestas Escolares',
+          'Tablas de Frecuencias para Datos No Agrupados (Absoluta, Relativa, Porcentual)',
+          'Frecuencias Acumuladas y Distribución de Respuestas',
+          'Diagramas de Barras Dobles y Comparativas por Sedes o Género',
+          'Histogramas y Polígonos de Frecuencia: Construcción e Interpretación',
+          'Diagramas Circulares (Sectores) y su Relación con Razones y Proporciones',
+          'Interpretación de Gráficos Estadísticos en Medios de Comunicación de Medellín',
+          'Diagramas de Líneas y Análisis de Series Temporales (Consumo EPM)',
+          'Medidas de Tendencia Central: Media Aritmética (Promedio Ponderado)',
+          'Cálculo e Interpretación de la Mediana en Conjuntos Pares e Impares',
+          'La Moda y Comparación Crítica entre Media, Mediana y Moda',
+          'Repaso General y Evaluación Acumulativa P1 Estadística 7°'
+        ];
+        return {
+          semana: i + 1,
+          titulo: titulosE7P1[i],
+          tiempoEstimado: '60 minutos (1 hora académica semanal)',
+          pensamiento: 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 5: Plantea preguntas para realizar estudios estadísticos, selecciona el método de recolección de datos y organiza la información en tablas y gráficos pertinentes.',
+          competencia: 'Interpretación y Representación',
+          evidencia: 'Recolecta, clasifica y representa datos en tablas y gráficos, calculando medidas de tendencia central.',
+          dua: {
+            representacion: 'Tablas dinámicas con código de colores e infografías estadísticas interactivas.',
+            expresion: 'Elaboración de carteleras informativas o exposiciones orales sobre problemáticas barriales.',
+            implicacion: 'Encuestas sobre movilidad y uso del espacio público en la comuna 12 de Medellín.'
+          },
+          exploracionMedellin: `Realizar un sondeo sobre el número de viajes semanales en Metro o Metrocable de las familias de la IE Rafael Uribe Uribe.`,
+          estructuracionTeorica: {
+            concepto: `Fundamentos de estadística descriptiva en '${titulosE7P1[i]}'. Permite sintetizar y extraer conclusiones objetivas de un conjunto de observaciones.`,
+            formulas: [
+              'Frecuencia Relativa: f_r = f_i / N',
+              'Porcentaje: % = f_r × 100',
+              'Media: x̄ = (Σ x_i) / N',
+              'Ángulo Gráfico Circular = f_r × 360°'
+            ],
+            ejemploPasoAPaso: {
+              enunciado: 'Se registran los minutos de traslado diario hacia la escuela de 5 estudiantes: 15, 20, 25, 20, 30 min. Calcular la media, mediana y moda.',
+              pasos: [
+                'Paso 1: Sumar los datos y dividir entre 5 para la media: (15 + 20 + 25 + 20 + 30)/5 = 110/5 = 22 minutos.',
+                'Paso 2: Ordenar los datos de menor a mayor: 15, 20, 20, 25, 30. El valor central es 20 minutos (Mediana).',
+                'Paso 3: El dato con mayor frecuencia es 20 minutos (Moda).'
+              ],
+              solucionFinal: 'Media: 22 min, Mediana: 20 min, Moda: 20 min.'
+            }
+          },
+          ejercitacionYCierre: {
+            colaborativo: 'Diseñar y tabular en parejas una encuesta sobre hábitos de lectura escolar.',
+            tareaBarrial: 'Consultar en casa el consumo de gas natural de los últimos 3 meses y promediarlo.'
+          }
+        };
+      }),
+      2: Array.from({ length: 13 }, (_, i) => {
+        const titulosE7P2 = [
+          'Medidas de Dispersión Básica: Rango o Recorrido de los Datos',
+          'Noción de Variabilidad y Desviación Respecto a la Media',
+          'Medidas de Posición No Central: Noción de Cuartiles (Q1, Q2, Q3)',
+          'Cálculo de Cuartiles y Rango Intercuartílico (RIC)',
+          'Diagramas de Caja y Bigotes (Boxplot): Interpretación Visual',
+          'Comparación de Dos Grupos Mediante Boxplots y Diagramas de Puntos',
+          'Tablas de Doble Entrada y Frecuencias Cruzadas para Variables Cualitativas',
+          'Análisis de Tablas de Contingencia en Contextos Sociales de Medellín',
+          'Gráficos de Dispersión Simples y Asociación Positiva/Negativa',
+          'Análisis de Datos Ambientales: Calidad del Aire (ICA) en el Valle de Aburrá',
+          'Detección de Errores y Manipulación en Gráficos de la Publicidad',
+          'Taller de Proyectos Estadísticos: Análisis de Encuestas Institucionales',
+          'Evaluación Acumulativa P2 Estadística 7°'
+        ];
+        return {
+          semana: i + 14,
+          titulo: titulosE7P2[i],
+          tiempoEstimado: '60 minutos (1 hora académica semanal)',
+          pensamiento: 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 6: Interpreta información que involucra medidas de posición y dispersión para caracterizar poblaciones.',
+          competencia: 'Formulación y Ejecución',
+          evidencia: 'Calcula medidas de dispersión y posición, construyendo e interpretando diagramas de caja y tablas de contingencia.',
+          dua: {
+            representacion: 'Diagramas de caja con segmentos táctiles y esquemas comparativos en pantalla.',
+            expresion: 'Informe de análisis escrito o infografía digital comparativa.',
+            implicacion: 'Análisis de datos de consumo responsable de agua en Medellín (EPM).'
+          },
+          exploracionMedellin: 'Comparación del rango de temperaturas máximas y mínimas registradas en el Valle de Aburrá.',
+          estructuracionTeorica: {
+            concepto: `Estudio temático de '${titulosE7P2[i]}'. Las medidas de dispersión y posición permiten conocer qué tan agrupados o dispersos están los datos alrededor del centro.`,
+            formulas: [
+              'Rango = Valor Máximo - Valor Mínimo',
+              'RIC = Q3 - Q1',
+              'Q2 = Mediana'
+            ],
+            ejemploPasoAPaso: {
+              enunciado: 'En una muestra de 7 lecturas de consumo eléctrico (kWh) ordenadas: 40, 45, 50, 60, 70, 85, 90. Hallar el rango y el rango intercuartílico (RIC).',
+              pasos: [
+                'Paso 1: Rango = 90 - 40 = 50 kWh.',
+                'Paso 2: Mediana (Q2) = 60. Mitad inferior: {40, 45, 50} => Q1 = 45.',
+                'Paso 3: Mitad superior: {70, 85, 90} => Q3 = 85.',
+                'Paso 4: RIC = Q3 - Q1 = 85 - 45 = 40 kWh.'
+              ],
+              solucionFinal: 'Rango: 50 kWh, Q1: 45, Q2: 60, Q3: 85, RIC: 40 kWh.'
+            }
+          },
+          ejercitacionYCierre: {
+            colaborativo: 'Elaborar un diagrama de caja comparativo en papel milimetrado.',
+            tareaBarrial: 'Registrar la cantidad de integrantes por hogar en 5 familias vecinas y calcular el rango.'
+          }
+        };
+      }),
+      3: Array.from({ length: 14 }, (_, i) => {
+        const titulosE7P3 = [
+          'Experimentos Aleatorios y Deterministas: Espacio Muestral (Ω)',
+          'Eventos Simples, Compuestos, Seguros, Posibles e Imposibles',
+          'Técnicas de Conteo: Diagramas de Árbol y Principio Multiplicativo',
+          'Principio Aditivo en Reglas de Conteo para Opciones Excluyentes',
+          'Concepto Clásico de Probabilidad: Regla de Laplace',
+          'Propiedades de la Probabilidad: Valores entre 0 y 1',
+          'Probabilidad del Evento Contrario o Complementario (P(A\') = 1 - P(A))',
+          'Experimentos Aleatorios con Dados, Monedas y Ruletas',
+          'Enfoque Frecuentista de la Probabilidad y Ley de los Grandes Números',
+          'Eventos Mutuamente Excluyentes y Regla de la Suma',
+          'Probabilidad en Situaciones Cotidianas de la Ciudad (Clima y Transporte)',
+          'Análisis Crítico de Juegos de Azar y Rifas Populares',
+          'Taller de Juegos de Azar Justos y Simulaciones Estadísticas',
+          'Repaso General y Evaluación Acumulativa Final P3 Estadística 7°'
+        ];
+        return {
+          semana: i + 27,
+          titulo: titulosE7P3[i],
+          tiempoEstimado: '60 minutos (1 hora académica semanal)',
+          pensamiento: 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 7: Predice la probabilidad de ocurrencia de eventos simples en experimentos aleatorios.',
+          competencia: 'Argumentación y Razonamiento Probabilístico',
+          evidencia: 'Determina el espacio muestral y calcula probabilidades clásicas y frecuentistas de eventos aleatorios.',
+          dua: {
+            representacion: 'Simuladores digitales interactivos de dados, monedas y ruletas de colores.',
+            expresion: 'Construcción de diagramas de árbol ilustrados paso a paso.',
+            implicacion: 'Reflexión ética sobre el impacto social de los juegos de azar en la comunidad.'
+          },
+          exploracionMedellin: 'Calcular la probabilidad clásica de extraer un tiquete premiado en la Feria de las Flores de Medellín.',
+          estructuracionTeorica: {
+            concepto: `Teoría elemental de la probabilidad en '${titulosE7P3[i]}'. Modela matemáticamente el azar y la incertidumbre en la toma de decisiones.`,
+            formulas: [
+              'P(A) = Casos Favorables / Casos Totales',
+              '0 ≤ P(A) ≤ 1',
+              'P(A\') = 1 - P(A)',
+              'P(A ∪ B) = P(A) + P(B) (si son mutuamente excluyentes)'
+            ],
+            ejemploPasoAPaso: {
+              enunciado: 'En una urna hay 12 balotas del Metro: 6 azules, 4 verdes y 2 rojas. ¿Cuál es la probabilidad de extraer una balota que NO sea roja?',
+              pasos: [
+                'Paso 1: Casos totales en la urna: 6 + 4 + 2 = 12 balotas.',
+                'Paso 2: Casos favorables a NO ser roja (azules + verdes): 6 + 4 = 10 balotas.',
+                'Paso 3: Aplicar Regla de Laplace: P = 10 / 12 = 5 / 6 ≈ 0,833 (83,3%).',
+                'Paso 4: Por complemento: P(No Roja) = 1 - P(Roja) = 1 - (2/12) = 10/12.'
+              ],
+              solucionFinal: 'La probabilidad de no sacar una balota roja es de 5/6 (83,3%).'
+            }
+          },
+          ejercitacionYCierre: {
+            colaborativo: 'Experimento en parejas: 30 lanzamientos de dos monedas y cálculo de frecuencia relativa.',
+            tareaBarrial: 'Observar los colores de 15 autos estacionados en la cuadra y estimar la probabilidad empírica de encontrar un auto blanco.'
+          }
+        };
+      })
     }
   },
   '8°': {
@@ -624,6 +792,171 @@ export const mallaCurricular: MallaDB = {
           }
         };
       })
+    },
+    'Estadística': {
+      1: Array.from({ length: 13 }, (_, i) => {
+        const titulosE8P1 = [
+          'Técnicas de Muestreo Probabilístico (Aleatorio Simple, Sistemático, Estratificado)',
+          'Tipos de Variables y Escalas de Medición (Nominal, Ordinal, Intervalo, Razón)',
+          'Organización de Datos Cuantitativos Continuos en Intervalos de Clase',
+          'Regla de Sturges, Amplitud de Intervalo y Marca de Clase (x_i)',
+          'Tabulación Completa para Datos Agrupados: Frecuencias Simples y Acumuladas',
+          'Construcción de Histogramas y Polígonos de Frecuencias para Datos Continuos',
+          'Ojivas Porcentuales (Curvas de Frecuencias Acumuladas) y su Lectura',
+          'Media Aritmética para Datos Agrupados: Cálculo Ponderado con Marcas de Clase',
+          'Mediana para Datos Agrupados: Intervalo Mediano e Interpolación',
+          'Moda para Datos Agrupados: Identificación de la Clase Modal',
+          'Análisis de Sesgo y Asimetría en la Distribución de Datos Escolares',
+          'Uso de Hojas de Cálculo (Excel/Sheets) para Tabulación Estadística de Grupos',
+          'Repaso General y Evaluación Acumulativa P1 Estadística 8°'
+        ];
+        return {
+          semana: i + 1,
+          titulo: titulosE8P1[i],
+          tiempoEstimado: '60 minutos (1 hora académica semanal)',
+          pensamiento: 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 5: Diseña experimentos aleatorios y analiza datos agrupados mediante medidas de tendencia central y gráficos pertinentes.',
+          competencia: 'Interpretación, Modelación y Razonamiento Estadístico',
+          evidencia: 'Agrupa datos continuos en tablas con intervalos, elabora histogramas y calcula media, mediana y moda agrupadas.',
+          dua: {
+            representacion: 'Plantillas de hojas de cálculo con gráficos interactivos y tablas dinámicas paso a paso.',
+            expresion: 'Informe estadístico digital con análisis de frecuencias y conclusiones justificadas.',
+            implicacion: 'Estudio sobre los tiempos de espera y frecuencias en las rutas alimentadoras del Metro de Medellín.'
+          },
+          exploracionMedellin: `Registrar y agrupar en intervalos de 10 minutos los tiempos de viaje de estudiantes que residen en distintas comunas de Medellín hacia la IE Rafael Uribe Uribe.`,
+          estructuracionTeorica: {
+            concepto: `Tratamiento de datos continuos agrupados en intervalos en '${titulosE8P1[i]}'. Facilita el análisis de grandes volúmenes de observaciones numéricas.`,
+            formulas: [
+              'Regla de Sturges: k = 1 + 3.322 × log₁₀(N)',
+              'Amplitud: A = Rango / k',
+              'Marca de Clase: x_i = (L_inf + L_sup) / 2',
+              'Media Agrupada: x̄ = (Σ x_i × f_i) / N'
+            ],
+            ejemploPasoAPaso: {
+              enunciado: 'Para una muestra de 40 estudiantes con estaturas agrupadas, se tiene que la sumatoria Σ(x_i × f_i) = 6400 cm. Hallar la estatura media del grupo.',
+              pasos: [
+                'Paso 1: Identificar la suma de productos marca de clase por frecuencia: Σ(x_i × f_i) = 6400.',
+                'Paso 2: Identificar el tamaño total de la muestra: N = 40.',
+                'Paso 3: Aplicar fórmula de media agrupada: x̄ = 6400 / 40 = 160 cm.'
+              ],
+              solucionFinal: 'La estatura media estimada del grupo es de 160 cm (1,60 m).'
+            }
+          },
+          ejercitacionYCierre: {
+            colaborativo: 'Construir en grupos una tabla de frecuencias agrupadas con 30 datos de pulsaciones cardíacas.',
+            tareaBarrial: 'Recolectar 15 datos del peso aproximado en kg de reciclaje producido por familias vecinas.'
+          }
+        };
+      }),
+      2: Array.from({ length: 13 }, (_, i) => {
+        const titulosE8P2 = [
+          'Medidas de Dispersión para Datos Agrupados: Rango y Desviación Media',
+          'Varianza Muestral (s²) y Poblacional (σ²): Concepto y Cálculo',
+          'Desviación Estándar (s) e Interpretación de la Variabilidad',
+          'Coeficiente de Variación (CV) y Comparación de Homogeneidad',
+          'Medidas de Posición para Datos Agrupados: Cuartiles (Q1, Q2, Q3)',
+          'Deciles y Percentiles: Aplicación en Pruebas Estandarizadas Saber',
+          'Diagramas de Caja y Bigotes para Datos Continuos y Detección de Outliers',
+          'Distribución Bivariada y Tablas de Doble Entrada para Datos Cuantitativos',
+          'Diagrama de Dispersión (Scatter Plot) y Correlación Lineal Intuitiva',
+          'Análisis de Datos Socioeconómicos y Ambientales de la Ciudad de Medellín',
+          'Formularios Digitales y Tratamiento Ético de Datos (Habeas Data Escolar)',
+          'Proyecto de Aula: Investigación Estadística de Hábitos Juveniles',
+          'Evaluación Acumulativa P2 Estadística 8°'
+        ];
+        return {
+          semana: i + 14,
+          titulo: titulosE8P2[i],
+          tiempoEstimado: '60 minutos (1 hora académica semanal)',
+          pensamiento: 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 6: Utiliza medidas de dispersión y posición para comparar conjuntos de datos y extraer conclusiones válidas.',
+          competencia: 'Formulación y Ejecución',
+          evidencia: 'Calcula e interpreta la varianza, desviación estándar, percentiles y coeficientes de correlación en datos escolares.',
+          dua: {
+            representacion: 'Diagramas de dispersión con líneas de tendencia visuales y calculadoras de desviación en pantalla.',
+            expresion: 'Sustentación de póster científico con interpretación de dispersión y cuartiles.',
+            implicacion: 'Análisis de datos de calidad del aire suministrados por el sistema SIATA del Valle de Aburrá.'
+          },
+          exploracionMedellin: 'Comparar la dispersión en los tiempos de recorrido de las líneas A y B del Metro de Medellín mediante el coeficiente de variación.',
+          estructuracionTeorica: {
+            concepto: `Análisis de variabilidad y posición en '${titulosE8P2[i]}'. El coeficiente de variación permite comparar la dispersión relativa de conjuntos con distintas unidades de medida.`,
+            formulas: [
+              'Varianza: s² = Σ [f_i × (x_i - x̄)²] / (N - 1)',
+              'Desviación Estándar: s = √(s²)',
+              'Coeficiente de Variación: CV = (s / x̄) × 100%'
+            ],
+            ejemploPasoAPaso: {
+              enunciado: 'Un grupo escolar tiene un promedio de 80 puntos con desviación estándar de 8 puntos. Hallar su Coeficiente de Variación (CV).',
+              pasos: [
+                'Paso 1: Identificar datos: x̄ = 80, s = 8.',
+                'Paso 2: Aplicar fórmula del CV: CV = (8 / 80) × 100% = 0,10 × 100% = 10%.',
+                'Paso 3: Interpretar: Un CV del 10% indica una distribución altamente homogénea (menor al 15%).'
+              ],
+              solucionFinal: 'El Coeficiente de Variación es del 10% (conjunto de datos homogéneo).'
+            }
+          },
+          ejercitacionYCierre: {
+            colaborativo: 'Calcular la desviación estándar de las notas de un taller evaluativo en equipos de trabajo.',
+            tareaBarrial: 'Consultar el recibo de energía eléctrica y calcular la variación en kWh de los últimos 6 periodos de facturación.'
+          }
+        };
+      }),
+      3: Array.from({ length: 14 }, (_, i) => {
+        const titulosE8P3 = [
+          'Fundamentos de Probabilidad Axiomática y Operaciones con Conjuntos (Unión e Intersección)',
+          'Principios Avanzados de Conteo: Principio Fundamental de Conteo',
+          'Notación Factorial (n!) y Principio de las Casillas',
+          'Permutaciones Lineales Sin Repetición (P_n = n!)',
+          'Permutaciones con Elementos Seleccionados (nPr)',
+          'Combinaciones Simples (nCr) y Diferencias Clave con Permutaciones',
+          'Aplicación de Combinatoria al Cálculo de Probabilidades en Juegos',
+          'Regla General de la Adición: P(A ∪ B) = P(A) + P(B) - P(A ∩ B)',
+          'Concepto de Probabilidad Condicional: P(A|B) = P(A ∩ B) / P(B)',
+          'Eventos Independientes y Regla de la Multiplicación',
+          'Eventos Dependientes y Extracciones Sin Reemplazo',
+          'Tablas de Contingencia para el Cálculo de Probabilidades Cruzadas',
+          'Taller Integrador de Combinatoria y Probabilidad Tipo Saber 8°',
+          'Repaso General y Evaluación Acumulativa Final P3 Estadística 8°'
+        ];
+        return {
+          semana: i + 27,
+          titulo: titulosE8P3[i],
+          tiempoEstimado: '60 minutos (1 hora académica semanal)',
+          pensamiento: 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 7: Reconoce y aplica técnicas de conteo y conceptos de probabilidad condicional e independencia en situaciones problema.',
+          competencia: 'Argumentación y Razonamiento Probabilístico',
+          evidencia: 'Resuelve problemas combinatorios con factoriales, permutaciones y combinaciones, y calcula probabilidades condicionales.',
+          dua: {
+            representacion: 'Diagramas de Venn interactivos, árboles de decisión y cajas combinatorias manipulables.',
+            expresion: 'Planteamiento simbólico justificado de problemas de conteo y probabilidad.',
+            implicacion: 'Evaluación del riesgo en apuestas deportivas y juegos de azar urbanos.'
+          },
+          exploracionMedellin: 'Calcular de cuántas formas distintas se puede conformar el comité estudiantil de 3 personas de la IE Rafael Uribe Uribe a partir de 10 candidatos.',
+          estructuracionTeorica: {
+            concepto: `Cálculo combinatorio y probabilidad condicionada en '${titulosE8P3[i]}'. Permite cuantificar configuraciones y probabilidades bajo condiciones específicas.`,
+            formulas: [
+              'Permutación: P(n, r) = n! / (n - r)!',
+              'Combinación: C(n, r) = n! / [r! × (n - r)!]',
+              'Probabilidad Condicional: P(A|B) = P(A ∩ B) / P(B)',
+              'Regla del Producto: P(A ∩ B) = P(A) × P(B|A)'
+            ],
+            ejemploPasoAPaso: {
+              enunciado: 'En un grupo de 8 deportistas de la institución, ¿de cuántas formas se puede seleccionar un equipo de 3 integrantes para los Juegos Intercolegiados de Medellín?',
+              pasos: [
+                'Paso 1: Determinar si importa el orden: Como los 3 puestos son equivalentes, el orden no importa => Combinaciones.',
+                'Paso 2: Identificar n = 8, r = 3.',
+                'Paso 3: Aplicar fórmula: C(8, 3) = 8! / [3! × (8-3)!] = 8! / (3! × 5!).',
+                'Paso 4: Simplificar: (8 × 7 × 6 × 5!) / (6 × 5!) = (8 × 7 × 6) / 6 = 56 formas.'
+              ],
+              solucionFinal: 'Existen exactamente 56 formas diferentes de conformar el equipo.'
+            }
+          },
+          ejercitacionYCierre: {
+            colaborativo: 'Resolver guía de 5 problemas de conteo clasificando entre permutaciones y combinaciones.',
+            tareaBarrial: 'Calcular cuántas combinaciones posibles de placas de vehículos existen en Medellín con 3 letras y 3 números.'
+          }
+        };
+      })
     }
   },
   '9°': {
@@ -753,6 +1086,170 @@ export const mallaCurricular: MallaDB = {
             }
           },
           ejercitacionYCierre: { colaborativo: 'Taller de Teorema de Tales en el patio escolar.', tareaBarrial: 'Medir la sombra de un árbol de su cuadra.' }
+        };
+      })
+    },
+    'Estadística': {
+      1: Array.from({ length: 13 }, (_, i) => {
+        const titulosE9P1 = [
+          'Fundamentos de la Estadística Inferencial: Del Muestreo a la Población General',
+          'Técnicas de Muestreo Aleatorio Simple, Estratificado y por Conglomerados',
+          'Tamaño de Muestra Representativa y Sesgos de Selección en Estudios Urbanos',
+          'Revisión Consolidada de Tendencia Central, Dispersión y Posición para Datos Agrupados',
+          'Puntuaciones Estandarizadas (Z-Scores) y Comparación de Observaciones Heterogéneas',
+          'Introducción a la Forma de las Distribuciones: Simetría, Curtosis y Curva Normal',
+          'Regla Empírica de Gauss (68-95-99.7) y Teorema de Chebyshev',
+          'Relación Bivariada entre Variables Cuantitativas: Covarianza Muestral',
+          'Coeficiente de Correlación Lineal de Pearson (r) e Interpretación de Intensidad',
+          'Regresión Lineal Simple: Método de Mínimos Cuadrados y Ecuación de la Recta',
+          'Recta de Regresión: Pronósticos y Estimaciones en Contextos Socioeconómicos',
+          'Coeficiente de Determinación (R²) y Bondad de Ajuste del Modelo Lineal',
+          'Repaso General y Evaluación Acumulativa P1 Estadística 9°'
+        ];
+        return {
+          semana: i + 1,
+          titulo: titulosE9P1[i],
+          tiempoEstimado: '60 minutos (1 hora académica semanal)',
+          pensamiento: 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 5: Modela relaciones bivariadas mediante diagramas de dispersión, coeficientes de correlación y rectas de regresión lineal.',
+          competencia: 'Interpretación, Modelación y Formulación de Hipótesis',
+          evidencia: 'Calcula el coeficiente de Pearson, halla la recta de mínimos cuadrados e interpreta pronósticos y coeficientes de correlación.',
+          dua: {
+            representacion: 'Modelación interactiva en GeoGebra/Calc de rectas de ajuste y nubes de puntos.',
+            expresion: 'Elaboración de informes econométricos sencillos con gráficos de dispersión.',
+            implicacion: 'Modelado de la relación entre horas de estudio y puntaje ICFES obtenido.'
+          },
+          exploracionMedellin: `Analizar la correlación entre la distancia a las estaciones del Metro y el valor del arriendo comercial en diferentes barrios de Medellín.`,
+          estructuracionTeorica: {
+            concepto: `Modelación lineal bivariada en '${titulosE9P1[i]}'. El análisis de correlación y regresión permite cuantificar la relación estadística entre dos fenómenos continuos.`,
+            formulas: [
+              'Puntuación Z: Z = (x - μ) / σ',
+              'Coeficiente de Pearson: r = Σ [(x_i - x̄)(y_i - ȳ)] / [√Σ(x_i - x̄)² × √Σ(y_i - ȳ)²]',
+              'Recta de Regresión: y = mx + b',
+              'Pendiente: m = r × (s_y / s_x)'
+            ],
+            ejemploPasoAPaso: {
+              enunciado: 'Se analiza la relación entre horas de repaso semanal (X) y calificación (Y, sobre 100). Si la recta obtenida es Y = 6X + 40, predecir la nota de un estudiante que repasa 8 horas semanales.',
+              pasos: [
+                'Paso 1: Identificar el modelo lineal estimado: Y = 6X + 40.',
+                'Paso 2: Sustituir el valor de la variable independiente: X = 8.',
+                'Paso 3: Calcular el valor esperado: Y = 6(8) + 40 = 48 + 40 = 88 puntos.'
+              ],
+              solucionFinal: 'La calificación esperada para 8 horas de repaso es de 88 puntos.'
+            }
+          },
+          ejercitacionYCierre: {
+            colaborativo: 'Taller en parejas: Graficar una nube de 10 puntos y trazar la recta de mejor ajuste en papel milimetrado.',
+            tareaBarrial: 'Recolectar datos de edad y estatura de 6 familiares y estimar el grado de correlación lineal.'
+          }
+        };
+      }),
+      2: Array.from({ length: 13 }, (_, i) => {
+        const titulosE9P2 = [
+          'Series de Tiempo y Datos Longitudinales: Tendencia, Estacionalidad y Variación',
+          'Números Índice Simples y Ponderados en la Economía Nacional',
+          'Índice de Precios al Consumidor (IPC), Inflación y Poder Adquisitivo en Colombia',
+          'Tablas de Contingencia Avanzadas y Prueba Intuitiva de Independencia',
+          'Diagramas de Mosaico y Representaciones Multivariadas en Políticas Públicas',
+          'Análisis de Datos Masivos (Big Data), Minería de Datos y Algoritmos en Redes',
+          'Ética de los Algoritmos, Protección de Datos y Privacidad Digital',
+          'Diseño de un Proyecto Estadístico de Investigación Institucional en la RUU',
+          'Prueba Piloto y Validación de Encuestas Digitales para la Comunidad Escolar',
+          'Recolección de Datos de Campo, Depuración y Limpieza de Bases de Datos',
+          'Análisis Estadístico Computarizado con Tablas y Gráficos Profesionales',
+          'Redacción del Informe Final con Conclusiones y Propuestas para Medellín',
+          'Evaluación Acumulativa P2 Estadística 9° y Sustentación de Proyectos'
+        ];
+        return {
+          semana: i + 14,
+          titulo: titulosE9P2[i],
+          tiempoEstimado: '60 minutos (1 hora académica semanal)',
+          pensamiento: 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 6: Diseña y ejecuta investigaciones estadísticas completas sobre fenómenos sociales, ambientales o económicos de su entorno.',
+          competencia: 'Formulación, Ejecución y Comunicación Científica',
+          evidencia: 'Formula problemas de investigación, recolecta y procesa datos multivariados y redacta informes técnicos con rigor ético.',
+          dua: {
+            representacion: 'Tableros de control (dashboards) interactivos con visualización de series temporales.',
+            expresion: 'Sustentación de proyectos de investigación en formato de póster científico escolar.',
+            implicacion: 'Propuestas de mejora urbana basadas en datos reales para la comunidad del barrio Robledo/Manrique.'
+          },
+          exploracionMedellin: 'Analizar la evolución del Índice de Precios al Consumidor (IPC) y la canasta familiar básica en Medellín en los últimos 5 años.',
+          estructuracionTeorica: {
+            concepto: `Metodología de la investigación estadística aplicada en '${titulosE9P2[i]}'. El análisis de series y números índice permite medir el cambio relativo en el tiempo.`,
+            formulas: [
+              'Índice Simple: I_t = (P_t / P_0) × 100',
+              'Tasa de Variación: %Δ = [(P_t - P_{t-1}) / P_{t-1}] × 100%'
+            ],
+            ejemploPasoAPaso: {
+              enunciado: 'El tiquete del Metro de Medellín costaba $2.550 COP en 2021 (año base) y $3.200 COP en 2024. Calcular el número índice relativo de 2024 respecto a 2021.',
+              pasos: [
+                'Paso 1: Identificar P_0 = $2.550 y P_t = $3.200.',
+                'Paso 2: Aplicar fórmula: I = ($3.200 / $2.550) × 100.',
+                'Paso 3: Calcular: I = 1,2549 × 100 = 125,5.',
+                'Paso 4: Interpretar: Representa un incremento acumulado del 25,5% en la tarifa.'
+              ],
+              solucionFinal: 'El índice relativo es 125,5 (incremento del 25,5%).'
+            }
+          },
+          ejercitacionYCierre: {
+            colaborativo: 'Estructurar en equipos de 4 el plan de recolección para el proyecto de investigación escolar.',
+            tareaBarrial: 'Comparar el precio actual de 3 productos básicos en la tienda de la esquina respecto al año anterior.'
+          }
+        };
+      }),
+      3: Array.from({ length: 14 }, (_, i) => {
+        const titulosE9P3 = [
+          'Espacios Muestrales Discretos y Continuos: Probabilidad Axiomática de Kolmogorov',
+          'Técnicas de Conteo Avanzadas: Permutaciones con Repetición y Circulares',
+          'Combinaciones con Repetición y Particiones de Conjuntos',
+          'Probabilidad Condicional Formal y Teorema de la Multiplicación: P(A ∩ B)',
+          'Partición de un Espacio Muestral y Teorema de la Probabilidad Total',
+          'Teorema de Bayes: Actualización de Probabilidades a Priori y a Posteriori',
+          'Aplicaciones del Teorema de Bayes en Diagnósticos Médicos y Filtros Digitales',
+          'Variables Aleatorias Discretas: Función de Probabilidad f(x) y Acumulada F(x)',
+          'Valor Esperado (Esperanza Matemática E[X]) en Juegos de Azar y Finanzas',
+          'Varianza y Desviación Estándar de una Variable Aleatoria Discreta',
+          'Introducción a la Distribución Binomial: Ensayos de Bernoulli y Parámetros (n, p)',
+          'Cálculo de Probabilidades Binomiales en Control de Calidad y Eventos Urbanos',
+          'Taller Integrador de Probabilidad Avanzada e Inferencia Tipo ICFES Saber 9°/11°',
+          'Repaso General y Evaluación Acumulativa Final P3 Estadística 9°'
+        ];
+        return {
+          semana: i + 27,
+          titulo: titulosE9P3[i],
+          tiempoEstimado: '60 minutos (1 hora académica semanal)',
+          pensamiento: 'Aleatorio y Sistemas de Datos',
+          dba: 'DBA 7: Aplica el Teorema de Bayes, distribuciones de probabilidad discretas y la noción de esperanza matemática para tomar decisiones bajo incertidumbre.',
+          competencia: 'Argumentación, Modelación y Toma de Decisiones Probabilísticas',
+          evidencia: 'Aplica el Teorema de Bayes, calcula la esperanza matemática de variables aleatorias y resuelve problemas con la distribución binomial.',
+          dua: {
+            representacion: 'Árboles bayesianos interactivos y simuladores de distribuciones discretas binomiales.',
+            expresion: 'Resolución analítica y justificación conceptual de problemas de probabilidad compuesta.',
+            implicacion: 'Análisis de confiabilidad de pruebas diagnósticas y decisiones financieras racionales.'
+          },
+          exploracionMedellin: 'Calcular el valor esperado de ganancia en una rifa benéfica organizada para mejorar las instalaciones deportivas de la institución.',
+          estructuracionTeorica: {
+            concepto: `Probabilidad avanzada, Teorema de Bayes y esperanza matemática en '${titulosE9P3[i]}'. Provee las herramientas analíticas para cuantificar la incertidumbre y optimizar decisiones.`,
+            formulas: [
+              'Teorema de Bayes: P(A_i|B) = [P(B|A_i) × P(A_i)] / [Σ P(B|A_k) × P(A_k)]',
+              'Esperanza Matemática: E[X] = Σ [x_i × P(X = x_i)]',
+              'Distribución Binomial: P(X = k) = C(n, k) × p^k × (1-p)^(n-k)'
+            ],
+            ejemploPasoAPaso: {
+              enunciado: 'Un juego cuesta $2.000 COP para participar. Si se gana, se reciben $10.000 COP con probabilidad de 1/10 (10%), y en caso contrario no se recibe nada. Calcular la esperanza matemática de la ganancia neta.',
+              pasos: [
+                'Paso 1: Ganancia neta si gana: +$8.000 COP (probabilidad 0,10).',
+                'Paso 2: Pérdida neta si pierde: -$2.000 COP (probabilidad 0,90).',
+                'Paso 3: Calcular E[X] = (8.000 × 0,10) + (-2.000 × 0,90) = 800 - 1.800 = -$1.000 COP.',
+                'Paso 4: Interpretar: En promedio, el jugador pierde $1.000 COP por cada partida (juego desfavorable).'
+              ],
+              solucionFinal: 'La esperanza matemática es -$1.000 COP (indica juego no equitativo y desfavorable para el apostador).'
+            }
+          },
+          ejercitacionYCierre: {
+            colaborativo: 'Taller grupal: Calcular e interpretar probabilidades a posteriori con el Teorema de Bayes en situaciones de diagnóstico.',
+            tareaBarrial: 'Analizar las probabilidades matemáticas y el valor esperado de los juegos de lotería más comunes en Medellín.'
+          }
         };
       })
     }

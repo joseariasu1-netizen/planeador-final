@@ -8,7 +8,7 @@ export function generarDocumentoOffline(
   periodo: PeriodoId,
   semana: number
 ): DocumentoEscolar {
-  const asigEfectiva: Asignatura = (grado === '10°' || grado === '11°') ? 'Matemáticas' : asignatura;
+  const asigEfectiva: Asignatura = ['1°', '2°', '3°', '4°', '5°', '10°', '11°'].includes(grado) ? 'Matemáticas' : asignatura;
   const plan = getPlanSemana(grado, asigEfectiva, periodo, semana);
 
   let titulo = '';

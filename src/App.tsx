@@ -35,9 +35,9 @@ export default function App() {
     }
   }, [periodo]);
 
-  // Regla de negocio: En 10° y 11°, Estadística se integra en Matemáticas
+  // Regla de negocio: En Primaria (1°-5°) y Media (10°-11°), Estadística se integra en Matemáticas
   useEffect(() => {
-    if ((grado === '10°' || grado === '11°') && asignatura === 'Estadística') {
+    if (['1°', '2°', '3°', '4°', '5°', '10°', '11°'].includes(grado) && asignatura === 'Estadística') {
       setAsignatura('Matemáticas');
     }
   }, [grado]);

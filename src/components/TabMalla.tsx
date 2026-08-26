@@ -16,7 +16,7 @@ export const TabMalla: React.FC<TabMallaProps> = ({
   periodo,
   onSelectSemanaForPlan
 }) => {
-  const asigEfectiva: Asignatura = (grado === '10°' || grado === '11°') ? 'Matemáticas' : asignatura;
+  const asigEfectiva: Asignatura = ['1°', '2°', '3°', '4°', '5°', '10°', '11°'].includes(grado) ? 'Matemáticas' : asignatura;
   const planesSemana = mallaCurricular[grado]?.[asigEfectiva]?.[periodo] || [];
 
   return (
@@ -32,7 +32,7 @@ export const TabMalla: React.FC<TabMallaProps> = ({
             {asigEfectiva} — Grado {grado} (Periodo {periodo})
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            Secuencia temática semanal alineada con DBA del Ministerio de Educación Nacional (MEN) y pruebas ICFES Saber.
+            Secuencia temática semanal priorizada con estándares curriculares del Ministerio de Educación Nacional (MEN) y pruebas ICFES Saber.
           </p>
         </div>
 
@@ -50,9 +50,8 @@ export const TabMalla: React.FC<TabMallaProps> = ({
               <tr>
                 <th className="px-4 py-3.5 text-center w-16">Sem</th>
                 <th className="px-4 py-3.5 min-w-[220px]">Secuencia Temática Priorizada</th>
-                <th className="px-4 py-3.5 min-w-[160px]">Pensamiento Matemático</th>
-                <th className="px-4 py-3.5 min-w-[200px]">Derecho Básico (DBA)</th>
-                <th className="px-4 py-3.5 min-w-[180px]">Competencia & Evidencia</th>
+                <th className="px-4 py-3.5 min-w-[180px]">Pensamiento Matemático</th>
+                <th className="px-4 py-3.5 min-w-[240px]">Competencia & Evidencia</th>
                 <th className="px-4 py-3.5 text-center w-28">Acción</th>
               </tr>
             </thead>
@@ -81,10 +80,6 @@ export const TabMalla: React.FC<TabMallaProps> = ({
                     <span className="inline-block px-2.5 py-1 bg-slate-950 border border-slate-800 rounded-md text-[11px] font-medium text-amber-200">
                       {plan.pensamiento}
                     </span>
-                  </td>
-
-                  <td className="px-4 py-3 text-slate-300 text-[11px] leading-relaxed">
-                    {plan.dba}
                   </td>
 
                   <td className="px-4 py-3 text-slate-300 text-[11px] space-y-1">

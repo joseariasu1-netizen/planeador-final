@@ -21,7 +21,7 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
   semanaActual,
   onOpenModal
 }) => {
-  const asigEfectiva: Asignatura = (grado === '10°' || grado === '11°') ? 'Matemáticas' : asignatura;
+  const asigEfectiva: Asignatura = ['1°', '2°', '3°', '4°', '5°', '10°', '11°'].includes(grado) ? 'Matemáticas' : asignatura;
 
   return (
     <div className="w-full space-y-6">
