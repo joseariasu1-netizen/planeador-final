@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Asignatura, Grado, PeriodoId } from '../types';
 import { mallaCurricular } from '../data/mallaCurricular';
-import { Table, Calendar, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Table, Calendar, ArrowRight, CheckCircle2, Download, FileText, Printer, Sparkles } from 'lucide-react';
+import { generarPDFMallasCompleto } from '../utils/exportarMallaPDF';
 
 interface TabMallaProps {
   grado: Grado;
@@ -16,13 +17,30 @@ export const TabMalla: React.FC<TabMallaProps> = ({
   periodo,
   onSelectSemanaForPlan
 }) => {
+  const [generandoPDF, setGenerandoPDF] = useState(false);
   const asigEfectiva: Asignatura = ['1°', '2°', '3°', '4°', '5°', '10°', '11°'].includes(grado) ? 'Matemáticas' : asignatura;
   const planesSemana = mallaCurricular[grado]?.[asigEfectiva]?.[periodo] || [];
 
+  const handleDescargarMallaPeriodo = () => {
+    setGenerandoPDF(true);
+    setTimeout(() => {
+      generarPDFMallasCompleto({ grado, periodo });
+      setGenerandoPDF(false);
+    }, 100);
+  };
+
+  const handleDescargarTodaLaMalla = () => {
+    setGenerandoPDF(true);
+    setTimeout(() => {
+      generarPDFMallasCompleto();
+      setGenerandoPDF(false);
+    }, 100);
+  };
+
   return (
     <div className="w-full space-y-6">
-      {/* Cabecera Informativa de la Malla */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+      {/* Cabecera Informativa de la Malla y Botones de Descarga de PDF */}
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
         <div>
           <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider mb-1">
             <Table className="w-4 h-4" />
@@ -31,14 +49,32 @@ export const TabMalla: React.FC<TabMallaProps> = ({
           <h2 className="text-xl sm:text-2xl font-black text-white">
             {asigEfectiva} — Grado {grado} (Periodo {periodo})
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
-            Secuencia temática semanal priorizada con estándares curriculares del Ministerio de Educación Nacional (MEN) y pruebas ICFES Saber.
+          <p className="text-xs text-slate-400 mt-1 max-w-2xl">
+            Secuencia temática semanal estructurada para los 11 grados (1° a 11°) acorde con la Malla Curricular 2025 de la I.E. Rafael Uribe Uribe (Núcleo 930 - Comuna 12).
           </p>
         </div>
 
-        <div className="bg-slate-950 px-4 py-2.5 rounded-xl border border-slate-800 text-right shrink-0">
-          <div className="text-xs text-slate-400 font-semibold">Total Semanas Periodo {periodo}</div>
-          <div className="text-lg font-black text-amber-400">{planesSemana.length} Semanas</div>
+        {/* Botones de Descarga PDF */}
+        <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+          <button
+            onClick={handleDescargarMallaPeriodo}
+            disabled={generandoPDF}
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold text-xs rounded-xl border border-slate-700 shadow-md transition hover:scale-102"
+            title={`Descargar en PDF la malla de Grado ${grado} Periodo ${periodo}`}
+          >
+            <Download className="w-4 h-4 text-amber-400" />
+            <span>PDF Grado {grado} (P{periodo})</span>
+          </button>
+
+          <button
+            onClick={handleDescargarTodaLaMalla}
+            disabled={generandoPDF}
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs rounded-xl shadow-lg shadow-amber-500/20 transition hover:scale-102"
+            title="Descargar en PDF la malla completa de 1° a 11° para todos los periodos y asignaturas"
+          >
+            <FileText className="w-4 h-4 text-slate-950" />
+            <span>{generandoPDF ? 'Generando PDF...' : 'Descargar Malla Completa (1° a 11°)'}</span>
+          </button>
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Key, Sparkles, School, Calendar, CheckCircle2 } from 'lucide-react';
+import { Key, Sparkles, School, Calendar, CheckCircle2, Download } from 'lucide-react';
 import { EscudoColegio } from './EscudoColegio';
+import { generarPDFMallasCompleto } from '../utils/exportarMallaPDF';
 
 interface HeaderProps {
   userApiKey: string;
@@ -41,6 +42,16 @@ export const Header: React.FC<HeaderProps> = ({ userApiKey, setUserApiKey }) => 
           </div>
 
           <div className="flex items-center gap-2">
+            {/* Botón Descargar Malla Completa PDF */}
+            <button
+              onClick={() => generarPDFMallasCompleto()}
+              className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs transition shadow-sm"
+              title="Descargar la Malla Curricular Oficial Completa de 1° a 11° en formato PDF"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Descargar Malla Completa (1° a 11° PDF)</span>
+            </button>
+
             <button
               onClick={() => setShowKeyInput(!showKeyInput)}
               className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-900 hover:bg-purple-800 text-purple-100 rounded text-xs transition border border-purple-700 shadow-sm"

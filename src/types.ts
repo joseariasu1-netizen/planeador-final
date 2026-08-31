@@ -31,7 +31,7 @@ export interface PlanSemana {
   semana: number;
   titulo: string;
   tiempoEstimado: string;
-  pensamiento: 'Numérico y Sistemas Numéricos' | 'Espacial y Sistemas Geométricos' | 'Métrico y Sistemas de Medida' | 'Aleatorio y Sistemas de Datos' | 'Variacional y Sistemas Algebraicos';
+  pensamiento: string;
   dba: string; // Derecho Básico de Aprendizaje
   competencia: string;
   evidencia: string;
