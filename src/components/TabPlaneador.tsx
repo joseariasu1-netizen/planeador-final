@@ -124,12 +124,23 @@ export const TabPlaneador: React.FC<TabPlaneadorProps> = ({
 Actúa como un Licenciado en Matemáticas/Estadística y Experto en Currículo Colombiano con enfoque DUA (Diseño Universal para el Aprendizaje).
 Genera una Planeación de Clase Explicita, Detallada e Inspiradora para la Institución Educativa Rafael Uribe Uribe (Medellín, Colombia).
 
-PARÁMETROS OBLIGATORIOS EN EL ENCABEZADO:
+PARÁMETROS OBLIGATORIOS DEL ENCABEZADO Y CURRÍCULO:
 - MATERIA: ${asigEfectiva}
-- TIEMPO: ${planActual.tiempoEstimado || '120 minutos'}
 - GRADO: ${grado}
-- OBJETIVO: ${planActual.evidencia || 'Apropiar de forma significativa los conceptos matemáticos a través del modelo DUA y el entorno real de Medellín.'}
-- ACCIÓN: Desarrolla un plan de clase detallado acompañado de ejemplos creativos centrado en ${asigEfectiva}, para estudiantes de ${grado}. Atendiendo a diferentes estilos de aprendizaje (discusiones interactivas, actividades prácticas y presentaciones multimedia/apoyos visuales).
+- PERIODO: ${periodo}
+- SEMANA: ${semana}
+- TEMA CURRICULAR OBLIGATORIO: "${planActual.titulo}"
+- PENSAMIENTO MATEMÁTICO: ${planActual.pensamiento}
+- TIEMPO ESTIMADO: ${planActual.tiempoEstimado || '120 minutos (2 sesiones)'}
+- DBA (Derecho Básico de Aprendizaje): ${planActual.dba}
+- COMPETENCIA: ${planActual.competencia}
+- EVIDENCIA DE APRENDIZAJE: ${planActual.evidencia || 'Apropiar de forma significativa los conceptos matemáticos a través del modelo DUA y el entorno real de Medellín.'}
+- CONCEPTOS Y PROPIEDADES TEÓRICAS: ${planActual.estructuracionTeorica.concepto}
+- FÓRMULAS OFICIALES: ${planActual.estructuracionTeorica.formulas.join(', ') || 'N/A'}
+- CONTEXTUALIZACIÓN MEDELLÍN BASE: ${planActual.exploracionMedellin}
+
+REGLA CRÍTICA DE COHERENCIA TEMÁTICA:
+La clase completa, la exploración, la teoría, el ejemplo modelado, los ejercicios prácticos y la tarea DEBEN SER ESTRICTAMENTE SOBRE EL TEMA "${planActual.titulo}". Queda terminantemente prohibido desviar la clase hacia otros temas no correspondientes a esta semana.
 
 ${reglaSaber1111}
 
@@ -137,30 +148,30 @@ ESTRUCTURA DE SECCIONES EXIGIDA (Sigue estrictamente estos títulos y contenido)
 
 1. TÍTULO: DUA
    - Mención explícita del Principio DUA seleccionado (ej. Principio I: Proporcionar múltiples formas de representación, Principio II: Proporcionar múltiples formas de acción y expresión, o Principio III: Proporcionar múltiples formas de implicación).
-   - Forma explícita y detallada de cómo se evidenciará en la clase el trabajo del DUA.
-   - Citas textuales directas según la página https://www.educadua.es/html/dua/pautasDUA/dua_principios.html (ej. "Proporcionar opciones para la percepción: ofrecer la información a través de diferentes modalidades...", "Proporcionar opciones para la comprensión: activar conocimientos previos y destacar características fundamentales...", "Proporcionar opciones para la expresión y comunicación...").
+   - Forma explícita y detallada de cómo se evidenciará en la clase el trabajo del DUA aplicado a "${planActual.titulo}".
+   - Citas textuales directas según las pautas DUA oficiales.
 
 2. TÍTULO: LA EXPLORACIÓN
-   - Actividad lúdica, interactiva y motivadora que despierte la curiosidad sobre ${asigEfectiva}.
-   - Contextualización amigable en Medellín (Metro de Medellín, Tranvía de Ayacucho, Parques Biblioteca, Comuna 12, EPM).
-   - Incluye preguntas problematizadoras que conecten con los saberes previos del estudiante.
+   - Actividad lúdica, interactiva y motivadora que despierte la curiosidad sobre "${planActual.titulo}".
+   - Contextualización amigable en Medellín (Metro de Medellín, Tranvía de Ayacucho, Parques Biblioteca, Comuna 12, EPM, etc.).
+   - Preguntas problematizadoras que conecten con los saberes previos del estudiante sobre "${planActual.titulo}".
 
 3. TÍTULO: ESTRUCTURACIÓN
-   - Desarrollo de la teoría necesaria para la apropiación del tema con rigor conceptual e intermedio.
-   - Recuadro de fórmulas y propiedades escritas en texto Unicode claro (SIN LaTeX, NO uses \\frac, \\sqrt, $, $$).
-   - Actividades y preguntas que involucren el pensamiento crítico y la resolución de problemas.
-   - Ayudas visuales explícitas: Descripción detallada de una infografía esquemática visual, diagramas de flujo y propuesta de video/recurso audiovisual interactivo para apoyar a los estudiantes visuales.
-   - Ejemplo modelado por el docente paso a paso con números concretos y solución comprobada.
+   - Desarrollo conceptual y formal de la teoría de "${planActual.titulo}".
+   - Recuadro de fórmulas y propiedades escritas en texto plano legible (SIN LaTeX, NO uses \\frac, \\sqrt, $, $$).
+   - Actividades y preguntas que involucren el pensamiento crítico.
+   - Ayudas visuales explícitas: Descripción detallada de una infografía esquemática visual, diagramas de flujo y propuesta de video/recurso audiovisual interactivo.
+   - Ejemplo modelado por el docente paso a paso con números concretos y solución comprobada para "${planActual.titulo}".
 
 4. TÍTULO: ACTIVIDADES PRÁCTICAS Y TRABAJO EN EQUIPO
-   - Propuesta de 3 ejercicios o situaciones prácticas graduadas (Fácil, Intermedio, Desafío) con pistas DUA y resolución paso a paso.
-   - Dinámica explícita de colaboración en grupo (roles: Líder de consulta, Verificador numérico, Expositor) para fomentar habilidades de trabajo en equipo.
+   - Batería de 3 ejercicios prácticos graduados (Fácil, Intermedio, Desafío) sobre "${planActual.titulo}" con pistas DUA, procedimiento paso a paso y solución comprobada.
+   - Dinámica explícita de colaboración en grupo (roles: Líder de consulta, Verificador numérico, Expositor).
 
 5. TÍTULO: TAREA Y PROYECTO APLICADO
-   - Concluye con una tarea motivadora que anime a los estudiantes a aplicar lo aprendido (un proyecto de investigación barrial o una presentación creativa sobre ${asigEfectiva} en su entorno de Medellín).
+   - Tarea motivadora contextualizada en el barrio o ciudad sobre "${planActual.titulo}".
 
 CONTEXTO Y TONO:
-- Tono amigable, cercano e inspirador.
+- Tono pedagógico, claro, cercano e inspirador.
 - Colegio: Institución Educativa Rafael Uribe Uribe de Medellín.
 - RESTRICCIONES: No omitir ni resumir de manera concisa la información. Entrega todos los elementos pedagógicos necesarios para el docente.
 

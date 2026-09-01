@@ -6,6 +6,7 @@ import {
 import { saveAs } from 'file-saver';
 import { EscudoColegio } from './EscudoColegio';
 import { callGemini } from '../lib/gemini';
+import { getPlanSemana, mallaCurricular } from '../data/mallaCurricular';
 
 interface ModalDocumentoProps {
   documento: DocumentoEscolar;
@@ -40,6 +41,13 @@ export const ModalDocumento: React.FC<ModalDocumentoProps> = ({
     setAiError(null);
 
     const esTaller = docActual.tipo === 'taller';
+    const plan = getPlanSemana(docActual.grado, docActual.asignatura, docActual.periodo, docActual.semanaRef || 1);
+    
+    // Obtener lista de temáticas si es examen
+    const semanasPeriodo = mallaCurricular[docActual.grado]?.[docActual.asignatura]?.[docActual.periodo] || mallaCurricular[docActual.grado]?.['Matemáticas']?.[docActual.periodo] || [];
+    const maxSem = docActual.tipo === 'evaluacion_seg1' ? 4 : (docActual.tipo === 'evaluacion_seg2' ? 8 : 40);
+    const semanasEval = semanasPeriodo.filter(s => s.semana <= maxSem);
+    const listaTemasTexto = semanasEval.map(s => `• Semana ${s.semana}: ${s.titulo} (Concepto: ${s.estructuracionTeorica.concepto.substring(0, 80)}...)`).join('\n');
 
     const promptText = esTaller
       ? `
@@ -51,32 +59,44 @@ Genera un TALLER FORMATIVO Y GUÍA PRÁCTICA DUA en JSON para la IE Rafael Uribe
 - Periodo: ${docActual.periodo}
 - Semana Ref: ${docActual.semanaRef || 1}
 
+*** TEMÁTICA OBLIGATORIA DEL TALLER ***
+- TÍTULO DEL TEMA: "${plan.titulo}"
+- PENSAMIENTO MATEMÁTICO: ${plan.pensamiento}
+- DBA: ${plan.dba}
+- COMPETENCIA: ${plan.competencia}
+- CONCEPTOS Y PROPIEDADES: ${plan.estructuracionTeorica.concepto}
+- FÓRMULAS OFICIALES: ${plan.estructuracionTeorica.formulas.join(', ') || 'N/A'}
+- CONTEXTO EN MEDELLÍN: ${plan.exploracionMedellin}
+- EJEMPLO MODELADO BASE: ${plan.estructuracionTeorica.ejemploPasoAPaso?.enunciado || 'N/A'}
+- EJERCICIOS BASE DEL CURRÍCULO: ${plan.estructuracionTeorica.ejerciciosPracticos.map(e => `[${e.nivel}] ${e.enunciado}`).join(' | ')}
+
 REGLAS OBLIGATORIAS:
-- NUNCA utilices notación o expresiones en LaTeX (NO utilices \\frac, \\sqrt, \\begin, $, $$).
-- Escribe todas las fórmulas e igualdades en texto plano comprensible para estudiantes de ${docActual.grado} usando caracteres estándar (ej. a / b, x², √x, ×, ÷, ±, π).
-- Diseña 8 ejercicios o actividades prácticas graduadas por nivel de dificultad (2 Fácil, 4 Intermedio, 2 Desafío) contextualizados en Medellín (Metro, Tranvía de Ayacucho, Comuna 12, EPM, Parques Biblioteca).
-- Incluye 6 preguntas de selección múltiple (A, B, C, D) y 2 de desarrollo abierto con procedimiento guiado.
+1. COHERENCIA TEMÁTICA TOTAL: TODOS Y CADA UNO DE LOS 8 EJERCICIOS Y PREGUNTAS DEL TALLER DEBEN TRATAR EXCLUSIVAMENTE SOBRE "${plan.titulo}". Queda terminantemente prohibido formular preguntas sobre temas diferentes.
+2. NUNCA utilices notación o expresiones en LaTeX (NO utilices \\frac, \\sqrt, \\begin, $, $$).
+3. Escribe todas las fórmulas e igualdades en texto plano comprensible para estudiantes de ${docActual.grado} usando caracteres estándar (ej. a / b, x², √x, ×, ÷, ±, π).
+4. Diseña 8 ejercicios o actividades prácticas graduadas por nivel de dificultad (2 Fácil, 4 Intermedio, 2 Desafío) contextualizados en Medellín (Metro, Tranvía de Ayacucho, Comuna 12, EPM, Parques Biblioteca).
+5. Incluye 6 preguntas de selección múltiple (A, B, C, D) y 2 de desarrollo abierto con procedimiento guiado paso a paso.
 
 Responde ÚNICAMENTE en JSON válido con la siguiente estructura:
 {
   "tipo": "taller",
-  "titulo": "TALLER GUÍA DE APRENDIZAJE DUA - ${docActual.asignatura} ${docActual.grado} (SEMANA ${docActual.semanaRef || 1})",
+  "titulo": "TALLER GUÍA DUA - SEMANA ${docActual.semanaRef || 1}: ${plan.titulo.toUpperCase()}",
   "asignatura": "${docActual.asignatura}",
   "grado": "${docActual.grado}",
   "periodo": ${docActual.periodo},
   "semanaRef": ${docActual.semanaRef || 1},
-  "porcentajeEvaluación": "Formativo (Guía de Ejercitación y Trabajo DUA)",
+  "porcentajeEvaluación": "Formativo (Guía de Ejercitación semanal)",
   "preguntas": [
     {
       "id": 1,
       "tipo": "seleccion_multiple",
-      "contexto": "Situación práctica real en Medellín...",
-      "enunciado": "Ejercicio o problema claro para ${docActual.grado}...",
+      "contexto": "Situación práctica real sobre ${plan.titulo} en Medellín...",
+      "enunciado": "Ejercicio o problema claro para ${docActual.grado} enfocado en ${plan.titulo}...",
       "opciones": [
-        {"key": "A", "texto": "Opción 1"},
-        {"key": "B", "texto": "Opción 2"},
-        {"key": "C", "texto": "Opción 3"},
-        {"key": "D", "texto": "Opción 4"}
+        {"key": "A", "texto": "Opción correcta"},
+        {"key": "B", "texto": "Distractor 1"},
+        {"key": "C", "texto": "Distractor 2"},
+        {"key": "D", "texto": "Distractor 3"}
       ],
       "respuestaCorrecta": "A",
       "justificacionPedagogica": "Paso a paso de la resolución...",
@@ -102,10 +122,14 @@ Genera una EVALUACIÓN PRUEBA TIPO ICFES SABER completa en JSON para la IE Rafae
 - Periodo: ${docActual.periodo}
 - Semana Ref: ${docActual.semanaRef || 1}
 
+*** TEMÁTICAS CURRICULARES IMPARTIDAS A EVALUAR ***
+${listaTemasTexto}
+
 REGLAS OBLIGATORIAS:
-- NUNCA utilices notación o expresiones en LaTeX (NO utilices \\frac, \\sqrt, \\begin, $, $$).
-- Escribe todas las fórmulas e igualdades en texto plano comprensible para estudiantes de ${docActual.grado} usando caracteres estándar (ej. a / b, x², √x, ×, ÷, ±, π).
-- Genera 10 preguntas (8 de selección múltiple tipo ICFES con 4 opciones A, B, C, D + 2 abiertas de desarrollo) contextualizadas en Medellín (Metro, EPM, Comuna 13, Parque Explora, Atanasio Girardot).
+1. COHERENCIA TEMÁTICA TOTAL: CADA UNA DE LAS 10 PREGUNTAS DEBE EVALUAR OBLIGATORIAMENTE UNA DE LAS TEMÁTICAS CURRICULARES LISTADAS ARRIBA. No incluyas temas que no hayan sido vistos en estas semanas.
+2. NUNCA utilices notación o expresiones en LaTeX (NO utilices \\frac, \\sqrt, \\begin, $, $$).
+3. Escribe todas las fórmulas e igualdades en texto plano comprensible para estudiantes de ${docActual.grado} usando caracteres estándar (ej. a / b, x², √x, ×, ÷, ±, π).
+4. Genera 10 preguntas (8 de selección múltiple tipo ICFES con 4 opciones A, B, C, D + 2 abiertas de desarrollo) contextualizadas en Medellín (Metro, EPM, Comuna 13, Parque Explora, Atanasio Girardot).
 
 Responde ÚNICAMENTE en JSON válido con el siguiente esquema:
 {
@@ -120,8 +144,8 @@ Responde ÚNICAMENTE en JSON válido con el siguiente esquema:
     {
       "id": 1,
       "tipo": "seleccion_multiple",
-      "contexto": "Texto breve de la situación en Medellín...",
-      "enunciado": "Pregunta clara...",
+      "contexto": "Texto breve de la situación sobre una de las temáticas del periodo...",
+      "enunciado": "Pregunta clara tipo ICFES...",
       "opciones": [
         {"key": "A", "texto": "Opción 1"},
         {"key": "B", "texto": "Opción 2"},
@@ -129,7 +153,7 @@ Responde ÚNICAMENTE en JSON válido con el siguiente esquema:
         {"key": "D", "texto": "Opción 4"}
       ],
       "respuestaCorrecta": "A",
-      "justificacionPedagogica": "Por qué es correcta la opción A...",
+      "justificacionPedagogica": "Por qué es correcta la opción A con procedimiento...",
       "competenciaICFES": "Interpretación y Representación",
       "procesoMatematico": "Resolución de Problemas",
       "nivelBloom": "Aplicación/Análisis"
