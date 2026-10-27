@@ -63,18 +63,18 @@ export const generarPDFMallasCompleto = (
         doc.setTextColor(100, 116, 139);
         doc.text(`Intensidad: ${['1°', '2°'].includes(grado) ? '4 h' : ['3°', '4°', '5°'].includes(grado) ? '3 h' : asignatura === 'Estadística' ? '1 h' : '4 h'} semanales | Formato Oficial Institucional`, 283, 32, { align: 'right' });
 
-        // Tabla de datos
+        // Tabla de datos enriquecida con fórmulas y ejemplo modelado del tema
         const tableBody = planes.map((p) => [
           p.semana.toString(),
-          p.titulo,
+          `${p.titulo}\n\nFórmulas: ${p.estructuracionTeorica.formulas.slice(0, 2).join(' | ')}`,
           p.pensamiento,
-          p.competencia + '\n' + p.dba,
-          p.evidencia
+          `${p.competencia}\n${p.dba}`,
+          `${p.evidencia}\n\nEjemplo Tema: ${p.estructuracionTeorica.ejemploPasoAPaso?.enunciado || ''}`
         ]);
 
         autoTable(doc, {
           startY: 35,
-          head: [['Sem', 'Secuencia Temática Priorizada', 'Pensamiento Matemático', 'Competencia Institucional & DBA', 'Indicadores de Desempeño (Saber / Hacer / Ser)']],
+          head: [['Sem', 'Secuencia Temática & Fórmulas Clave', 'Pensamiento Matemático', 'Competencia Institucional & DBA (MEN)', 'Indicadores de Desempeño & Ejemplo Aplicado']],
           body: tableBody,
           theme: 'grid',
           headStyles: {
@@ -86,11 +86,11 @@ export const generarPDFMallasCompleto = (
             valign: 'middle'
           },
           columnStyles: {
-            0: { cellWidth: 12, halign: 'center', fontStyle: 'bold', textColor: [180, 83, 9] },
-            1: { cellWidth: 65, fontStyle: 'bold', textColor: [15, 23, 42] },
-            2: { cellWidth: 42, textColor: [71, 85, 105] },
-            3: { cellWidth: 70, textColor: [30, 41, 59] },
-            4: { cellWidth: 80, textColor: [51, 65, 85] }
+            0: { cellWidth: 11, halign: 'center', fontStyle: 'bold', textColor: [180, 83, 9] },
+            1: { cellWidth: 66, fontStyle: 'bold', textColor: [15, 23, 42] },
+            2: { cellWidth: 38, textColor: [71, 85, 105] },
+            3: { cellWidth: 68, textColor: [30, 41, 59] },
+            4: { cellWidth: 86, textColor: [51, 65, 85] }
           },
           styles: {
             fontSize: 7,

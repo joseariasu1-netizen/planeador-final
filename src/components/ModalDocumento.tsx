@@ -43,11 +43,18 @@ export const ModalDocumento: React.FC<ModalDocumentoProps> = ({
     const esTaller = docActual.tipo === 'taller';
     const plan = getPlanSemana(docActual.grado, docActual.asignatura, docActual.periodo, docActual.semanaRef || 1);
     
-    // Obtener lista de temáticas si es examen
+    // Obtener lista de temáticas si es examen (respetando numeración acumulada de semanas: P1 1-13, P2 14-26, P3 27-40)
     const semanasPeriodo = mallaCurricular[docActual.grado]?.[docActual.asignatura]?.[docActual.periodo] || mallaCurricular[docActual.grado]?.['Matemáticas']?.[docActual.periodo] || [];
-    const maxSem = docActual.tipo === 'evaluacion_seg1' ? 4 : (docActual.tipo === 'evaluacion_seg2' ? 8 : 40);
+    const semInicio = semanasPeriodo.length > 0 ? semanasPeriodo[0].semana : (docActual.periodo === 1 ? 1 : docActual.periodo === 2 ? 14 : 27);
+    const maxSem = docActual.tipo === 'evaluacion_seg1'
+      ? semInicio + 3
+      : docActual.tipo === 'evaluacion_seg2'
+        ? semInicio + 7
+        : 40;
     const semanasEval = semanasPeriodo.filter(s => s.semana <= maxSem);
-    const listaTemasTexto = semanasEval.map(s => `• Semana ${s.semana}: ${s.titulo} (Concepto: ${s.estructuracionTeorica.concepto.substring(0, 80)}...)`).join('\n');
+    const listaTemasTexto = (semanasEval.length > 0 ? semanasEval : semanasPeriodo)
+      .map(s => `• Semana ${s.semana}: ${s.titulo} | Fórmulas: ${s.estructuracionTeorica.formulas.join(', ')} | Ejemplo oficial: ${s.estructuracionTeorica.ejemploPasoAPaso?.enunciado || ''}`)
+      .join('\n');
 
     const promptText = esTaller
       ? `
@@ -75,7 +82,7 @@ REGLAS OBLIGATORIAS:
 2. NUNCA utilices notación o expresiones en LaTeX (NO utilices \\frac, \\sqrt, \\begin, $, $$).
 3. Escribe todas las fórmulas e igualdades en texto plano comprensible para estudiantes de ${docActual.grado} usando caracteres estándar (ej. a / b, x², √x, ×, ÷, ±, π).
 4. Diseña 8 ejercicios o actividades prácticas graduadas por nivel de dificultad (2 Fácil, 4 Intermedio, 2 Desafío) contextualizados en Medellín (Metro, Tranvía de Ayacucho, Comuna 12, EPM, Parques Biblioteca).
-5. Incluye 6 preguntas de selección múltiple (A, B, C, D) y 2 de desarrollo abierto con procedimiento guiado paso a paso.
+5. Incluye 6 preguntas de selección múltiple (A, B, C, D) alternando la clave correcta entre A, B, C y D, y 2 de desarrollo abierto con procedimiento guiado paso a paso.
 
 Responde ÚNICAMENTE en JSON válido con la siguiente estructura:
 {
@@ -93,12 +100,12 @@ Responde ÚNICAMENTE en JSON válido con la siguiente estructura:
       "contexto": "Situación práctica real sobre ${plan.titulo} en Medellín...",
       "enunciado": "Ejercicio o problema claro para ${docActual.grado} enfocado en ${plan.titulo}...",
       "opciones": [
-        {"key": "A", "texto": "Opción correcta"},
-        {"key": "B", "texto": "Distractor 1"},
-        {"key": "C", "texto": "Distractor 2"},
-        {"key": "D", "texto": "Distractor 3"}
+        {"key": "A", "texto": "Opción A"},
+        {"key": "B", "texto": "Opción B"},
+        {"key": "C", "texto": "Opción C"},
+        {"key": "D", "texto": "Opción D"}
       ],
-      "respuestaCorrecta": "A",
+      "respuestaCorrecta": "B",
       "justificacionPedagogica": "Paso a paso de la resolución...",
       "competenciaICFES": "Interpretación y Representación",
       "procesoMatematico": "Resolución de Problemas",
@@ -122,14 +129,14 @@ Genera una EVALUACIÓN PRUEBA TIPO ICFES SABER completa en JSON para la IE Rafae
 - Periodo: ${docActual.periodo}
 - Semana Ref: ${docActual.semanaRef || 1}
 
-*** TEMÁTICAS CURRICULARES IMPARTIDAS A EVALUAR ***
+*** TEMÁTICAS CURRICULARES IMPARTIDAS A EVALUAR (Semanas ${semInicio} a ${maxSem}) ***
 ${listaTemasTexto}
 
 REGLAS OBLIGATORIAS:
 1. COHERENCIA TEMÁTICA TOTAL: CADA UNA DE LAS 10 PREGUNTAS DEBE EVALUAR OBLIGATORIAMENTE UNA DE LAS TEMÁTICAS CURRICULARES LISTADAS ARRIBA. No incluyas temas que no hayan sido vistos en estas semanas.
 2. NUNCA utilices notación o expresiones en LaTeX (NO utilices \\frac, \\sqrt, \\begin, $, $$).
 3. Escribe todas las fórmulas e igualdades en texto plano comprensible para estudiantes de ${docActual.grado} usando caracteres estándar (ej. a / b, x², √x, ×, ÷, ±, π).
-4. Genera 10 preguntas (8 de selección múltiple tipo ICFES con 4 opciones A, B, C, D + 2 abiertas de desarrollo) contextualizadas en Medellín (Metro, EPM, Comuna 13, Parque Explora, Atanasio Girardot).
+4. Genera 10 preguntas (8 de selección múltiple tipo ICFES con 4 opciones A, B, C, D alternando la opción correcta entre A, B, C y D + 2 abiertas de desarrollo) contextualizadas en Medellín (Metro, EPM, Comuna 12 La América, Parque Explora, Atanasio Girardot).
 
 Responde ÚNICAMENTE en JSON válido con el siguiente esquema:
 {
@@ -152,8 +159,8 @@ Responde ÚNICAMENTE en JSON válido con el siguiente esquema:
         {"key": "C", "texto": "Opción 3"},
         {"key": "D", "texto": "Opción 4"}
       ],
-      "respuestaCorrecta": "A",
-      "justificacionPedagogica": "Por qué es correcta la opción A con procedimiento...",
+      "respuestaCorrecta": "C",
+      "justificacionPedagogica": "Por qué es correcta la opción con procedimiento...",
       "competenciaICFES": "Interpretación y Representación",
       "procesoMatematico": "Resolución de Problemas",
       "nivelBloom": "Aplicación/Análisis"

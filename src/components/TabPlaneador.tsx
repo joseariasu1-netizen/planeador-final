@@ -308,11 +308,11 @@ Escribe la respuesta directamente en HTML limpio listo para renderizar usando cl
           </div>
 
           <div className="p-6 space-y-6">
-            {/* Fila 1: Competencias y Evidencias */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Fila 1: Pensamiento, DBA V2 (MEN) y Evidencias */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-slate-950/80 p-4 rounded-xl border border-slate-800">
                 <div className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                  <Compass className="w-4 h-4" /> Competencia & Pensamiento
+                  <Compass className="w-4 h-4" /> Pensamiento & Expedición Medellín
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
                   <strong className="text-slate-100">{planActual.pensamiento}</strong>. {planActual.competencia}
@@ -320,8 +320,17 @@ Escribe la respuesta directamente en HTML limpio listo para renderizar usando cl
               </div>
 
               <div className="bg-slate-950/80 p-4 rounded-xl border border-slate-800">
+                <div className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                  <BookOpen className="w-4 h-4" /> Derecho Básico de Aprendizaje (MEN V2)
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  {planActual.dba}
+                </p>
+              </div>
+
+              <div className="bg-slate-950/80 p-4 rounded-xl border border-slate-800">
                 <div className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4" /> Evidencia de Aprendizaje
+                  <CheckCircle className="w-4 h-4" /> Evidencia de Aprendizaje (SIEE)
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">
                   {planActual.evidencia}

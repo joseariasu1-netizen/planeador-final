@@ -12,7 +12,7 @@ export interface DUAConfig {
 
 export interface EjercicioPractico {
   numero: number;
-  nivel: 'Fácil' | 'Intermedio' | 'Desafío ICFES';
+  nivel: 'Fácil' | 'Intermedio' | 'Desafío ICFES' | 'Desafío Avanzado' | 'Profundización';
   enunciado: string;
   pistaDUA?: string;
   pasosExplicativos: string[];

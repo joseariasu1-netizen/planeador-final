@@ -315,8 +315,8 @@ export const mallaMedia10y11: {
           'Aplicaciones de la Derivada II: Concavidad, Puntos de Inflexión y Criterio de la Segunda Derivada (Semana 1)',
           'Optimización en Problemas Reales: Maximización de Utilidades y Minimización de Costos y Materiales en Medellín (Semana 2)',
           'Introducción al Cálculo Integral: Noción de Antiderivada e Integrales Indefinidas Inmediatas (Semana 1)',
-          'Probabilidad Condicional, Teorema de Bayes y Distribuciones de Probabilidad en la Toma de Decisiones (Semana 2)',
-          'Simulacro Final Intensivo Saber 11: Competencias de Matemáticas y Razonamiento Cuantitativo ICFES',
+          'Cálculo Integral: Integral Definida, Teorema Fundamental del Cálculo y Área Bajo la Curva (Semana 2)',
+          'Probabilidad Condicional, Teorema de Bayes y Distribuciones de Probabilidad en la Toma de Decisiones',
           'Evaluación Acumulativa Final P3 y Cierre Académico de la Educación Media'
         ];
         return {

@@ -22,6 +22,10 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
   onOpenModal
 }) => {
   const asigEfectiva: Asignatura = ['1°', '2°', '3°', '4°', '5°', '10°', '11°'].includes(grado) ? 'Matemáticas' : asignatura;
+  const semInicio = periodo === 1 ? 1 : periodo === 2 ? 14 : 27;
+  const semSeg1 = semInicio + 3;
+  const semSeg2 = semInicio + 7;
+  const semFin = periodo === 1 ? 13 : periodo === 2 ? 26 : 40;
 
   return (
     <div className="w-full space-y-6">
@@ -55,20 +59,20 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
               <span className="bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                 <Percent className="w-3.5 h-3.5" /> 35% del Periodo
               </span>
-              <span className="text-xs font-bold text-slate-400">Semanas 1 a 4</span>
+              <span className="text-xs font-bold text-slate-400">Semanas {semInicio} a {semSeg1}</span>
             </div>
 
             <h3 className="text-lg font-black text-white group-hover:text-amber-400 transition mb-2">
               Evaluación de Seguimiento 1
             </h3>
             <p className="text-xs text-slate-300 leading-relaxed mb-4">
-              Evalúa los conceptos fundamentales iniciales del Periodo {periodo} en {asigEfectiva} {grado}. Nivel de dificultad básico-intermedio.
+              Evalúa los conceptos fundamentales iniciales del Periodo {periodo} (Semanas {semInicio} a {semSeg1}) en {asigEfectiva} {grado}. Nivel de dificultad básico-intermedio.
             </p>
 
             <ul className="text-xs text-slate-400 space-y-2 mb-6">
               <li className="flex items-center gap-2">
                 <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>10 Preguntas de Selección Múltiple con Única Respuesta</span>
+                <span>8 Preguntas de Selección Múltiple + 2 de Desarrollo</span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
@@ -83,14 +87,14 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
 
           <div className="space-y-2">
             <button
-              onClick={() => onOpenModal('evaluacion_seg1', 4, true)}
+              onClick={() => onOpenModal('evaluacion_seg1', semSeg1, true)}
               className="w-full py-2.5 bg-purple-900 hover:bg-purple-800 text-purple-100 font-bold text-xs rounded-xl border border-purple-700 shadow-lg flex items-center justify-center gap-2 transition"
             >
               <Sparkles className="w-4 h-4 text-amber-400" />
               <span>✨ Generar con IA (Oficio/Word)</span>
             </button>
             <button
-              onClick={() => onOpenModal('evaluacion_seg1', 4, false)}
+              onClick={() => onOpenModal('evaluacion_seg1', semSeg1, false)}
               className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-2 transition"
             >
               <span>Ver Formato Oficio</span>
@@ -106,20 +110,20 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
               <span className="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                 <Percent className="w-3.5 h-3.5" /> 70% del Periodo
               </span>
-              <span className="text-xs font-bold text-slate-400">Semanas 1 a 8</span>
+              <span className="text-xs font-bold text-slate-400">Semanas {semInicio} a {semSeg2}</span>
             </div>
 
             <h3 className="text-lg font-black text-white group-hover:text-amber-400 transition mb-2">
               Evaluación de Seguimiento 2
             </h3>
             <p className="text-xs text-slate-300 leading-relaxed mb-4">
-              Examen acumulativo parcial hasta las dos terceras partes del Periodo {periodo}. Modela problemas contextualizados en Medellín.
+              Examen acumulativo parcial hasta la Semana {semSeg2} del Periodo {periodo}. Modela problemas contextualizados en Medellín.
             </p>
 
             <ul className="text-xs text-slate-400 space-y-2 mb-6">
               <li className="flex items-center gap-2">
                 <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>10 Preguntas Selección Múltiple + 2 de Desarrollo</span>
+                <span>8 Preguntas Selección Múltiple + 2 de Desarrollo</span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
@@ -134,14 +138,14 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
 
           <div className="space-y-2">
             <button
-              onClick={() => onOpenModal('evaluacion_seg2', 8, true)}
+              onClick={() => onOpenModal('evaluacion_seg2', semSeg2, true)}
               className="w-full py-2.5 bg-purple-900 hover:bg-purple-800 text-purple-100 font-bold text-xs rounded-xl border border-purple-700 shadow-lg flex items-center justify-center gap-2 transition"
             >
               <Sparkles className="w-4 h-4 text-amber-400" />
               <span>✨ Generar con IA (Oficio/Word)</span>
             </button>
             <button
-              onClick={() => onOpenModal('evaluacion_seg2', 8, false)}
+              onClick={() => onOpenModal('evaluacion_seg2', semSeg2, false)}
               className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-2 transition"
             >
               <span>Ver Formato Oficio</span>
@@ -161,20 +165,20 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
               <span className="bg-amber-500 text-slate-950 text-xs font-black px-3 py-1 rounded-full flex items-center gap-1 shadow">
                 <Award className="w-3.5 h-3.5" /> 100% Acumulativo
               </span>
-              <span className="text-xs font-bold text-amber-300">Periodo {periodo} Completo</span>
+              <span className="text-xs font-bold text-amber-300">Semanas {semInicio} a {semFin}</span>
             </div>
 
             <h3 className="text-lg font-black text-amber-400 group-hover:text-amber-300 transition mb-2">
               Prueba Final Tipo ICFES Saber
             </h3>
             <p className="text-xs text-slate-200 leading-relaxed mb-4">
-              Examen acumulativo integral del Periodo {periodo} diseñado strictly según los lineamientos de evaluación del ICFES Saber 11.
+              Examen acumulativo integral del Periodo {periodo} (Semanas {semInicio} a {semFin}) diseñado según los lineamientos de evaluación por competencias.
             </p>
 
             <ul className="text-xs text-slate-300 space-y-2 mb-6">
               <li className="flex items-center gap-2">
                 <CheckCircle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                <span>10 Preguntas ICFES + 2 Abiertas con Rúbrica</span>
+                <span>8 Preguntas ICFES + 2 Abiertas con Rúbrica</span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
@@ -189,14 +193,14 @@ export const TabEvaluaciones: React.FC<TabEvaluacionesProps> = ({
 
           <div className="space-y-2">
             <button
-              onClick={() => onOpenModal('evaluacion_final', 13, true)}
+              onClick={() => onOpenModal('evaluacion_final', semFin, true)}
               className="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs rounded-xl border border-amber-300 shadow-xl flex items-center justify-center gap-2 transition"
             >
               <Sparkles className="w-4 h-4 text-slate-950" />
               <span>✨ Generar Prueba Final con IA (Oficio/Word)</span>
             </button>
             <button
-              onClick={() => onOpenModal('evaluacion_final', 13, false)}
+              onClick={() => onOpenModal('evaluacion_final', semFin, false)}
               className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-2 transition"
             >
               <span>Ver Formato Oficio</span>
